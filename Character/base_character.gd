@@ -15,17 +15,19 @@ enum BendDirection {RightToLeft, LeftToRight}
 enum Arm { Right, Left, Both }
 
 # The physical direction the character is facing
-enum FacingDirection {Down, Up, Left, Right, DownLeft, DownRight, UpLeft, UpRight}
+enum FacingDirection {Down, Up, Left, Right, DownLeft, DownRight, UpLeft, UpRight, LastDirection}
 var current_facing_direction: FacingDirection = FacingDirection.Down
 
 func set_current_facing_direction(direction: FacingDirection):
-	
+	var last_direction = current_facing_direction
 	# We first set all bodies to be not visible
 	forward_body.visible = false
 	backward_body.visible = false
 	current_facing_direction = direction
 	# Then we enable the right body in the match
 	match current_facing_direction:
+		FacingDirection.LastDirection:
+			set_current_facing_direction(last_direction)
 		FacingDirection.Down:
 			forward_body.visible = true
 		FacingDirection.Up:

@@ -55,6 +55,35 @@ func _process(delta: float) -> void:
 		pass
 	else:
 		player_model.stop_moving()
+		var angle = aim_direction.angle()
+		angle = rad_to_deg(angle)
+		print(angle)
+		if angle == 0:
+			player_model.set_current_facing_direction(BaseCharacter.FacingDirection.LastDirection)
+		elif angle > -100 and angle < -60:
+			print("up")
+			player_model.set_current_facing_direction(BaseCharacter.FacingDirection.Up)
+		elif angle < 100 and angle > 60:
+			print("down")
+			player_model.set_current_facing_direction(BaseCharacter.FacingDirection.Down)
+		elif angle > -20 and angle < 20:
+			print("right")
+			player_model.set_current_facing_direction(BaseCharacter.FacingDirection.Right)
+		elif angle < -160 or angle > 160:
+			print("left")
+			player_model.set_current_facing_direction(BaseCharacter.FacingDirection.Left)
+		elif angle > -60 and angle < -20:
+			print("diagonal up right")
+			player_model.set_current_facing_direction(BaseCharacter.FacingDirection.UpRight)
+		elif angle > 20 and angle < 60:
+			print("diagonal down right")
+			player_model.set_current_facing_direction(BaseCharacter.FacingDirection.DownRight)
+		elif angle < -100 and angle > -160:
+			print("diagonal up left")
+			player_model.set_current_facing_direction(BaseCharacter.FacingDirection.UpLeft)
+		elif angle > 100 and angle < 160:
+			print("diagonal down left")
+			player_model.set_current_facing_direction(BaseCharacter.FacingDirection.DownLeft)
 	"""
 	if normalized_aim.dot(normalized_move) > 0.9:
 		walking_direction = BaseCharacter.WalkingDirection.Forwards
