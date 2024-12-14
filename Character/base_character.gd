@@ -1,9 +1,9 @@
-extends CharacterBody2D
+extends Node2D
 
 @onready
-var forward_body = $ForwardFacingTorso
+var forward_body = $ForwardFacing
 @onready
-var forward_skeleton = $ForwardFacingTorso/Skeleton2D
+var forward_skeleton = $ForwardFacing/Skeleton2D
 @onready
 var backward_body = $BackFacing
 @onready
@@ -109,6 +109,27 @@ func replace_texture_atlas(atlas: AtlasTexture):
 	$ForwardFacing/Arms/LeftArm/LeftForearm.texture.atlas = atlas
 	$ForwardFacing/Arms/LeftArm/LeftForearm/LeftForearmBody/LeftHandBody/LeftHand.texture.atlas = atlas
 
+
+enum WalkingDirection {Forwards, Backwards}
+
+func start_walking(direction: WalkingDirection):
+	match current_facing_direction:
+		FacingDirection.Down:
+			match direction:
+				WalkingDirection.Forwards:
+					$ForwardFacing/Movement.play("walk")
+
+func start_running(direction: WalkingDirection):
+	match current_facing_direction:
+		FacingDirection.Down:
+			match direction:
+				WalkingDirection.Forwards:
+					$ForwardFacing/Movement.play("walk", -1, 2.0)
+
+func stop_moving():
+	match current_facing_direction:
+		FacingDirection.Down:
+			$ForwardFacing/Movement.play("RESET")
 
 func _physics_process(delta: float) -> void:
 	pass

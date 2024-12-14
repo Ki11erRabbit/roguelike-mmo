@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://8giaiei6278o"]
+
+[ext_resource type="PackedScene" uid="uid://dlduuu0ugctql" path="res://Character/BaseCharacter.tscn" id="1_4q5lb"]
+[ext_resource type="Script" path="res://Character/player.gd" id="1_7y8et"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_psxoo"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_7y8et")
+
+[node name="BaseCharacter" parent="." instance=ExtResource("1_4q5lb")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 14)
+rotation = -1.5708
+scale = Vector2(0.4, 1)
+shape = SubResource("CircleShape2D_psxoo")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-38, -44)

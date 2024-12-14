@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://cm0wuadgobsag"]
+[gd_scene load_steps=21 format=3 uid="uid://cm0wuadgobsag"]
 
 [ext_resource type="Script" path="res://characterMovementTest.gd" id="1_sivaa"]
 [ext_resource type="Script" path="res://sword.gd" id="2_2mtle"]
 [ext_resource type="Texture2D" uid="uid://b3y41oi1yn6ar" path="res://diamond sword.png" id="2_pmcqa"]
 [ext_resource type="Script" path="res://reset.gd" id="3_mgdo7"]
 [ext_resource type="Script" path="res://stab.gd" id="4_5fauk"]
+[ext_resource type="PackedScene" uid="uid://8giaiei6278o" path="res://Character/Player.tscn" id="6_ovp7o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vj14g"]
 size = Vector2(146.286, 438.857)
@@ -403,8 +404,7 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CircleShape2D_0wm1p")
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-position = Vector2(-38, -44)
+[node name="Player" parent="." instance=ExtResource("6_ovp7o")]
 
 [connection signal="animation_finished" from="CharacterBody2D/Control/Sword/SpinAttackControl/Sprite2D/Swing" to="CharacterBody2D/Control/Sword/SpinAttackControl/Sprite2D/Reset" method="_on_swing_animation_finished"]
 [connection signal="animation_finished" from="CharacterBody2D/Control/Sword/SpinAttackControl/Sprite2D/Reset" to="CharacterBody2D" method="disable_attacking"]
