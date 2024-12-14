@@ -1,0 +1,117 @@
+extends CharacterBody2D
+
+@onready
+var forward_body = $ForwardFacingTorso
+@onready
+var forward_skeleton = $ForwardFacingTorso/Skeleton2D
+@onready
+var backward_body = $BackFacing
+@onready
+var backward_skeleton = $BackFacing/Skeleton2D
+
+# The direction is based on the body
+enum BendDirection {RightToLeft, LeftToRight}
+# Which arm to touch
+enum Arm { Right, Left, Both }
+
+# The physical direction the character is facing
+enum FacingDirection {Down, Up, Left, Right, DownLeft, DownRight, UpLeft, UpRight}
+var current_facing_direction: FacingDirection = FacingDirection.Down
+
+func set_current_facing_direction(direction: FacingDirection):
+	
+	# We first set all bodies to be not visible
+	forward_body.visible = false
+	backward_body.visible = false
+	current_facing_direction = direction
+	# Then we enable the right body in the match
+	match current_facing_direction:
+		FacingDirection.Down:
+			forward_body.visible = true
+		FacingDirection.Up:
+			backward_body.visible = true
+			
+			
+	
+
+func set_bend_direction(direction: BendDirection, arm: Arm):
+	match current_facing_direction:
+		FacingDirection.Down:
+			match direction:
+				BendDirection.RightToLeft:
+					match arm:
+						Arm.Right:
+							forward_skeleton.get_modification_stack().modifications[0].flip_bend_direction = true
+						Arm.Left:
+							forward_skeleton.get_modification_stack().modifications[1].flip_bend_direction = true
+						Arm.Both:
+							forward_skeleton.get_modification_stack().modifications[0].flip_bend_direction = true
+							forward_skeleton.get_modification_stack().modifications[1].flip_bend_direction = true
+				BendDirection.LeftToRight:
+					match arm:
+						Arm.Right:
+							forward_skeleton.get_modification_stack().modifications[0].flip_bend_direction = false
+						Arm.Left:
+							forward_skeleton.get_modification_stack().modifications[1].flip_bend_direction = false
+						Arm.Both:
+							forward_skeleton.get_modification_stack().modifications[0].flip_bend_direction = false
+							forward_skeleton.get_modification_stack().modifications[1].flip_bend_direction = false
+		FacingDirection.Up:
+			match direction:
+				BendDirection.RightToLeft:
+					match arm:
+						Arm.Right:
+							forward_skeleton.get_modification_stack().modifications[0].flip_bend_direction = false
+						Arm.Left:
+							forward_skeleton.get_modification_stack().modifications[1].flip_bend_direction = false
+						Arm.Both:
+							forward_skeleton.get_modification_stack().modifications[0].flip_bend_direction = false
+							forward_skeleton.get_modification_stack().modifications[1].flip_bend_direction = false
+				BendDirection.LeftToRight:
+					match arm:
+						Arm.Right:
+							forward_skeleton.get_modification_stack().modifications[0].flip_bend_direction = true
+						Arm.Left:
+							forward_skeleton.get_modification_stack().modifications[1].flip_bend_direction = true
+						Arm.Both:
+							forward_skeleton.get_modification_stack().modifications[0].flip_bend_direction = true
+							forward_skeleton.get_modification_stack().modifications[1].flip_bend_direction = true
+
+func replace_texture_atlas(atlas: AtlasTexture):
+	$ForwardFacing/Head.texture.atlas = atlas
+	$ForwardFacing/Torso.texture.atlas = atlas
+	$ForwardFacing/Arms/RightArm.texture.atlas = atlas
+	$ForwardFacing/Arms/RightArm/RightForearm.texture.atlas = atlas
+	$ForwardFacing/Arms/RightArm/RightForearm/RightForearmBody/RightHandBody/RightHand.texture.atlas = atlas
+	$ForwardFacing/Arms/LeftArm.texture.atlas = atlas
+	$ForwardFacing/Arms/LeftArm/LeftForearm.texture.atlas = atlas
+	$ForwardFacing/Arms/LeftArm/LeftForearm/LeftForearmBody/LeftHandBody/LeftHand.texture.atlas = atlas
+	$ForwardFacing/Legs/RightLeg/Thigh/Sprite2D.texture.atlas = atlas
+	$ForwardFacing/Legs/RightLeg/Knee/Sprite2D.texture.atlas = atlas
+	$ForwardFacing/Legs/RightLeg/LowerLeg/Sprite2D.texture.atlas = atlas
+	$ForwardFacing/Legs/RightLeg/Foot/Sprite2D.texture.atlas = atlas
+	$ForwardFacing/Legs/RightLeg/FootBottom/WholeBottom.texture.atlas = atlas
+	$ForwardFacing/Legs/RightLeg/FootBottom/HalfBottom.texture.atlas = atlas
+	$ForwardFacing/Legs/LeftLeg/Thigh/Sprite2D.texture.atlas = atlas
+	$ForwardFacing/Legs/LeftLeg/Knee/Sprite2D.texture.atlas = atlas
+	$ForwardFacing/Legs/LeftLeg/LowerLeg/Sprite2D.texture.atlas = atlas
+	$ForwardFacing/Legs/LeftLeg/Foot/Sprite2D.texture.atlas = atlas
+	$ForwardFacing/Legs/LeftLeg/FootBottom/WholeBottom.texture.atlas = atlas
+	$ForwardFacing/Legs/LeftLeg/FootBottom/HalfBottom.texture.atlas = atlas
+	
+	
+	$BackFacing/Head.texture.atlas = atlas
+	$BackFacing/Torso.texture.atlas = atlas
+	$ForwardFacing/Arms/RightArm.texture.atlas = atlas
+	$ForwardFacing/Arms/RightArm/RightForearm.texture.atlas = atlas
+	$ForwardFacing/Arms/RightArm/RightForearm/RightForearmBody/RightHandBody/RightHand.texture.atlas = atlas
+	$ForwardFacing/Arms/LeftArm.texture.atlas = atlas
+	$ForwardFacing/Arms/LeftArm/LeftForearm.texture.atlas = atlas
+	$ForwardFacing/Arms/LeftArm/LeftForearm/LeftForearmBody/LeftHandBody/LeftHand.texture.atlas = atlas
+
+
+func _physics_process(delta: float) -> void:
+	pass
+
+
+	
