@@ -5,9 +5,9 @@ var forward_body = $ForwardFacing
 @onready
 var forward_skeleton = $ForwardFacing/Skeleton2D
 @onready
-var backward_body = $BackFacing
+var backward_body = $BackwardFacing
 @onready
-var backward_skeleton = $BackFacing/Skeleton2D
+var backward_skeleton = $BackwardFacing/Skeleton2D
 
 # The direction is based on the body
 enum BendDirection {RightToLeft, LeftToRight}
@@ -108,6 +108,16 @@ func replace_texture_atlas(atlas: AtlasTexture):
 	$ForwardFacing/Arms/LeftArm.texture.atlas = atlas
 	$ForwardFacing/Arms/LeftArm/LeftForearm.texture.atlas = atlas
 	$ForwardFacing/Arms/LeftArm/LeftForearm/LeftForearmBody/LeftHandBody/LeftHand.texture.atlas = atlas
+	$ForwardFacing/Legs/RightLeg/Thigh/Sprite2D.texture.atlas = atlas
+	$ForwardFacing/Legs/RightLeg/LowerLeg/Sprite2D.texture.atlas = atlas
+	$ForwardFacing/Legs/RightLeg/Foot/Sprite2D.texture.atlas = atlas
+	$ForwardFacing/Legs/RightLeg/FootBottom/WholeBottom.texture.atlas = atlas
+	$ForwardFacing/Legs/RightLeg/FootBottom/HalfBottom.texture.atlas = atlas
+	$ForwardFacing/Legs/LeftLeg/Thigh/Sprite2D.texture.atlas = atlas
+	$ForwardFacing/Legs/LeftLeg/LowerLeg/Sprite2D.texture.atlas = atlas
+	$ForwardFacing/Legs/LeftLeg/Foot/Sprite2D.texture.atlas = atlas
+	$ForwardFacing/Legs/LeftLeg/FootBottom/WholeBottom.texture.atlas = atlas
+	$ForwardFacing/Legs/LeftLeg/FootBottom/HalfBottom.texture.atlas = atlas
 
 
 enum WalkingDirection {Forwards, Backwards}
@@ -118,6 +128,14 @@ func start_walking(direction: WalkingDirection):
 			match direction:
 				WalkingDirection.Forwards:
 					$ForwardFacing/Movement.play("walk")
+				WalkingDirection.Backwards:
+					$ForwardFacing/Movement.play("backstep")
+		FacingDirection.Up:
+			match direction:
+				WalkingDirection.Forwards:
+					$BackwardFacing/Movement.play("walk")
+				WalkingDirection.Backwards:
+					$BackwardFacing/Movement.play("backstep")
 
 func start_running(direction: WalkingDirection):
 	match current_facing_direction:
@@ -125,11 +143,25 @@ func start_running(direction: WalkingDirection):
 			match direction:
 				WalkingDirection.Forwards:
 					$ForwardFacing/Movement.play("walk", -1, 2.0)
+				WalkingDirection.Backwards:
+					$ForwardFacing/Movement.play("backstep", -1, 2.0)
+		FacingDirection.Up:
+			match direction:
+				WalkingDirection.Forwards:
+					$BackwardFacing/Movement.play("walk", -1, 2.0)
+				WalkingDirection.Backwards:
+					$BackwardFacing/Movement.play("backstep", -1, 2.0)
 
 func stop_moving():
 	match current_facing_direction:
 		FacingDirection.Down:
 			$ForwardFacing/Movement.play("RESET")
+		FacingDirection.Up:
+			$BackwardFacing/Movement.play("RESET")
+
+func _ready() -> void:
+	forward_body.visible = true
+	backward_body.visible = false
 
 func _physics_process(delta: float) -> void:
 	pass
