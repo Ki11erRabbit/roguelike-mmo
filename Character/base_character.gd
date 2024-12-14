@@ -8,6 +8,8 @@ var forward_skeleton = $ForwardFacing/Skeleton2D
 var backward_body = $BackwardFacing
 @onready
 var backward_skeleton = $BackwardFacing/Skeleton2D
+@onready
+var right_body = $RightFacing
 
 # The direction is based on the body
 enum BendDirection {RightToLeft, LeftToRight}
@@ -23,6 +25,7 @@ func set_current_facing_direction(direction: FacingDirection):
 	# We first set all bodies to be not visible
 	forward_body.visible = false
 	backward_body.visible = false
+	right_body.visible = false
 	current_facing_direction = direction
 	# Then we enable the right body in the match
 	match current_facing_direction:
@@ -32,6 +35,8 @@ func set_current_facing_direction(direction: FacingDirection):
 			forward_body.visible = true
 		FacingDirection.Up:
 			backward_body.visible = true
+		FacingDirection.Right:
+			right_body.visible = true
 			
 			
 	
@@ -138,6 +143,12 @@ func start_walking(direction: WalkingDirection):
 					$BackwardFacing/Movement.play("walk")
 				WalkingDirection.Backwards:
 					$BackwardFacing/Movement.play("backstep")
+		FacingDirection.Right:
+			match direction:
+				WalkingDirection.Forwards:
+					$RightFacing/Movement.play("walk")
+				WalkingDirection.Backwards:
+					$RightFacing/Movement.play("backstep")
 
 func start_running(direction: WalkingDirection):
 	match current_facing_direction:
@@ -153,6 +164,12 @@ func start_running(direction: WalkingDirection):
 					$BackwardFacing/Movement.play("walk", -1, 2.0)
 				WalkingDirection.Backwards:
 					$BackwardFacing/Movement.play("backstep", -1, 2.0)
+		FacingDirection.Right:
+			match direction:
+				WalkingDirection.Forwards:
+					$RightFacing/Movement.play("walk", -1, 2.0)
+				WalkingDirection.Backwards:
+					$RightFacing/Movement.play("backstep", -1, 2.0)
 
 func stop_moving():
 	match current_facing_direction:
@@ -160,6 +177,8 @@ func stop_moving():
 			$ForwardFacing/Movement.play("RESET")
 		FacingDirection.Up:
 			$BackwardFacing/Movement.play("RESET")
+		FacingDirection.Right:
+			$RightFacing/Movement.play("RESET")
 
 func _ready() -> void:
 	forward_body.visible = true

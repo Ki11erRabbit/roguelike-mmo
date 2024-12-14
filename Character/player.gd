@@ -32,6 +32,24 @@ func _process(delta: float) -> void:
 			walking_direction = BaseCharacter.WalkingDirection.Backwards
 			player_model.set_current_facing_direction(BaseCharacter.FacingDirection.Up)
 			print("backwards")
+	elif normalized_move.x > 0 and (normalized_move.y < 0.4 and normalized_move.y > -0.4):
+		if normalized_aim.dot(normalized_move) > 0.9:
+			walking_direction = BaseCharacter.WalkingDirection.Forwards
+			player_model.set_current_facing_direction(BaseCharacter.FacingDirection.Right)
+			print("forwards")
+		elif normalized_aim.dot(normalized_move) < 0.9:
+			walking_direction = BaseCharacter.WalkingDirection.Backwards
+			player_model.set_current_facing_direction(BaseCharacter.FacingDirection.Left)
+			print("backwards")
+	elif normalized_move.x < 0 and (normalized_move.y < 0.4 and normalized_move.y > -0.4):
+		if normalized_aim.dot(normalized_move) > 0.9:
+			walking_direction = BaseCharacter.WalkingDirection.Forwards
+			player_model.set_current_facing_direction(BaseCharacter.FacingDirection.Left)
+			print("forwards")
+		elif normalized_aim.dot(normalized_move) < 0.9:
+			walking_direction = BaseCharacter.WalkingDirection.Backwards
+			player_model.set_current_facing_direction(BaseCharacter.FacingDirection.Right)
+			print("backwards")
 	elif normalized_move.y > 0 and normalized_move.x >= 0.4:
 		print("diagonal")
 		pass
