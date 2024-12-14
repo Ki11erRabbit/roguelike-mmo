@@ -10,6 +10,8 @@ var backward_body = $BackwardFacing
 var backward_skeleton = $BackwardFacing/Skeleton2D
 @onready
 var right_body = $RightFacing
+@onready
+var left_body = $LeftFacing
 
 # The direction is based on the body
 enum BendDirection {RightToLeft, LeftToRight}
@@ -26,6 +28,7 @@ func set_current_facing_direction(direction: FacingDirection):
 	forward_body.visible = false
 	backward_body.visible = false
 	right_body.visible = false
+	left_body.visible = false
 	current_facing_direction = direction
 	# Then we enable the right body in the match
 	match current_facing_direction:
@@ -37,6 +40,8 @@ func set_current_facing_direction(direction: FacingDirection):
 			backward_body.visible = true
 		FacingDirection.Right:
 			right_body.visible = true
+		FacingDirection.Left:
+			left_body.visible = true
 			
 			
 	
@@ -148,7 +153,13 @@ func start_walking(direction: WalkingDirection):
 				WalkingDirection.Forwards:
 					$RightFacing/Movement.play("walk")
 				WalkingDirection.Backwards:
-					$RightFacing/Movement.play("backstep")
+					$RightFacing/Movement.play("walk")
+		FacingDirection.Left:
+			match direction:
+				WalkingDirection.Forwards:
+					$LeftFacing/Movement.play("walk")
+				WalkingDirection.Backwards:
+					$LeftFacing/Movement.play("walk")
 
 func start_running(direction: WalkingDirection):
 	match current_facing_direction:
@@ -169,7 +180,13 @@ func start_running(direction: WalkingDirection):
 				WalkingDirection.Forwards:
 					$RightFacing/Movement.play("walk", -1, 2.0)
 				WalkingDirection.Backwards:
-					$RightFacing/Movement.play("backstep", -1, 2.0)
+					$RightFacing/Movement.play("walk", -1, 2.0)
+		FacingDirection.Left:
+			match direction:
+				WalkingDirection.Forwards:
+					$LeftFacing/Movement.play("walk", -1, 2.0)
+				WalkingDirection.Backwards:
+					$LeftFacing/Movement.play("walk", -1, 2.0)
 
 func stop_moving():
 	match current_facing_direction:
@@ -179,10 +196,14 @@ func stop_moving():
 			$BackwardFacing/Movement.play("RESET")
 		FacingDirection.Right:
 			$RightFacing/Movement.play("RESET")
+		FacingDirection.Left:
+			$LeftFacing/Movement.play("RESET")
 
 func _ready() -> void:
 	forward_body.visible = true
 	backward_body.visible = false
+	right_body.visible = false
+	left_body.visible = false
 
 func _physics_process(delta: float) -> void:
 	pass
