@@ -4001,7 +4001,7 @@ libraries = {
 [node name="DownLeft" type="Node2D" parent="."]
 
 [node name="RightArm" type="Sprite2D" parent="DownLeft"]
-position = Vector2(-5, -3)
+position = Vector2(-4.5, -3)
 scale = Vector2(0.999992, 0.999992)
 texture = SubResource("AtlasTexture_v886r")
 offset = Vector2(0, 1.5)
@@ -4024,7 +4024,7 @@ offset = Vector2(0, 1.5)
 
 [node name="Shin" type="Sprite2D" parent="DownLeft/RightLeg"]
 position = Vector2(0, 3)
-scale = Vector2(0.99999, 0.99999)
+scale = Vector2(0.999984, 0.999984)
 texture = SubResource("AtlasTexture_dhh7r")
 offset = Vector2(0, 1.5)
 
@@ -4048,7 +4048,7 @@ offset = Vector2(0, 2)
 
 [node name="Shin" type="Sprite2D" parent="DownLeft/LeftLeg"]
 position = Vector2(0, 4)
-scale = Vector2(0.99999, 0.99999)
+scale = Vector2(0.999984, 0.999984)
 texture = SubResource("AtlasTexture_68g68")
 offset = Vector2(0, 2)
 
@@ -4057,7 +4057,7 @@ position = Vector2(-1, 6)
 texture = SubResource("AtlasTexture_6upc3")
 
 [node name="LeftArm" type="Sprite2D" parent="DownLeft"]
-position = Vector2(5, -2)
+position = Vector2(4.5, -2)
 scale = Vector2(0.999992, 0.999992)
 texture = SubResource("AtlasTexture_yc378")
 offset = Vector2(0, 2.5)
@@ -4085,7 +4085,7 @@ position = Vector2(0, -7)
 rest = Transform2D(1, 0, 0, 1, 0, -7)
 
 [node name="LeftArm" type="Bone2D" parent="DownLeft/Skeleton2D/Torso/Shoulder"]
-position = Vector2(5, -1)
+position = Vector2(4.5, -1)
 scale = Vector2(0.999992, 0.999992)
 rest = Transform2D(1, 0, 0, 1, 5, -1)
 
@@ -4102,7 +4102,7 @@ position = Vector2(0, -7)
 remote_path = NodePath("../../../../../../LeftArm/Forearm")
 
 [node name="RightArm" type="Bone2D" parent="DownLeft/Skeleton2D/Torso/Shoulder"]
-position = Vector2(-5, -2)
+position = Vector2(-4.5, -2)
 scale = Vector2(0.999992, 0.999992)
 rest = Transform2D(1, 0, 0, 1, -5, -2)
 
@@ -4127,7 +4127,7 @@ remote_path = NodePath("../../../../LeftLeg")
 
 [node name="Shin" type="Bone2D" parent="DownLeft/Skeleton2D/Torso/LeftThigh"]
 position = Vector2(0, 4)
-scale = Vector2(0.99999, 0.99999)
+scale = Vector2(0.999984, 0.999984)
 rest = Transform2D(1, 0, 0, 1, 0, 4)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="DownLeft/Skeleton2D/Torso/LeftThigh/Shin"]
@@ -4143,7 +4143,7 @@ remote_path = NodePath("../../../../RightLeg")
 
 [node name="Shin" type="Bone2D" parent="DownLeft/Skeleton2D/Torso/RightThigh"]
 position = Vector2(0, 3)
-scale = Vector2(0.99999, 0.99999)
+scale = Vector2(0.999984, 0.999984)
 rest = Transform2D(1, 0, 0, 1, 0, 3)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="DownLeft/Skeleton2D/Torso/RightThigh/Shin"]
