@@ -1,4 +1,4 @@
-[gd_scene load_steps=170 format=3 uid="uid://dlduuu0ugctql"]
+[gd_scene load_steps=184 format=3 uid="uid://dlduuu0ugctql"]
 
 [ext_resource type="Script" path="res://Character/base_character.gd" id="1_oofh4"]
 [ext_resource type="Texture2D" uid="uid://fcmcijeh46em" path="res://Character/BaseSheet.png" id="1_xcqu6"]
@@ -8,70 +8,60 @@ atlas = ExtResource("1_xcqu6")
 region = Rect2(0, 45, 16, 19)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o2rky"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n87iu"]
 atlas = SubResource("CompressedTexture2D_o2rky")
 region = Rect2(16, 21, 6, 4)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lyh53"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dsngj"]
 atlas = SubResource("CompressedTexture2D_lyh53")
 region = Rect2(16, 25, 6, 3)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ybdhf"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jpwfn"]
 atlas = SubResource("CompressedTexture2D_ybdhf")
 region = Rect2(16, 27, 6, 3)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_aw2st"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cpexi"]
 atlas = SubResource("CompressedTexture2D_aw2st")
 region = Rect2(16, 32, 6, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_korcv"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ivge"]
 atlas = SubResource("CompressedTexture2D_korcv")
 region = Rect2(16, 29, 6, 3)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_64ftx"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hvtw8"]
 atlas = SubResource("CompressedTexture2D_64ftx")
 region = Rect2(25, 21, 6, 4)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ep7hi"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wtcu0"]
 atlas = SubResource("CompressedTexture2D_ep7hi")
 region = Rect2(25, 25, 6, 3)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m6j5n"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8a38x"]
 atlas = SubResource("CompressedTexture2D_m6j5n")
 region = Rect2(25, 27, 6, 3)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wh4go"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aceqw"]
 atlas = SubResource("CompressedTexture2D_wh4go")
 region = Rect2(25, 32, 6, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v3cxo"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lso6k"]
 atlas = SubResource("CompressedTexture2D_v3cxo")
@@ -90,21 +80,18 @@ atlas = ExtResource("1_xcqu6")
 region = Rect2(21, 12, 5, 4)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bxq2p"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bqusk"]
 atlas = SubResource("CompressedTexture2D_bxq2p")
 region = Rect2(17, 4, 3, 4)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2qbo7"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ctu06"]
 atlas = SubResource("CompressedTexture2D_2qbo7")
 region = Rect2(17, 8, 3, 4)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rvkjx"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3v5pf"]
 atlas = SubResource("CompressedTexture2D_rvkjx")
@@ -1088,63 +1075,54 @@ _data = {
 }
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qtw2w"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydjyc"]
 atlas = SubResource("CompressedTexture2D_qtw2w")
 region = Rect2(0, 45, 16, 19)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ba2ox"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a6k3r"]
 atlas = SubResource("CompressedTexture2D_ba2ox")
 region = Rect2(16, 53, 6, 4)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gd5m7"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7mebe"]
 atlas = SubResource("CompressedTexture2D_gd5m7")
 region = Rect2(16, 59, 6, 3)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2jqu6"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4j04n"]
 atlas = SubResource("CompressedTexture2D_2jqu6")
 region = Rect2(16, 64, 6, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mk45g"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mhxw0"]
 atlas = SubResource("CompressedTexture2D_mk45g")
 region = Rect2(16, 61, 6, 3)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_53jnx"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0fqjo"]
 atlas = SubResource("CompressedTexture2D_53jnx")
 region = Rect2(25, 53, 6, 4)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e1p3g"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qp4a5"]
 atlas = SubResource("CompressedTexture2D_e1p3g")
 region = Rect2(25, 59, 6, 3)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_uj80f"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mbrdp"]
 atlas = SubResource("CompressedTexture2D_uj80f")
 region = Rect2(25, 64, 6, 1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pbukp"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ti2ya"]
 atlas = SubResource("CompressedTexture2D_pbukp")
@@ -1167,14 +1145,12 @@ atlas = ExtResource("1_xcqu6")
 region = Rect2(17, 36, 3, 4)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m6q88"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vlug3"]
 atlas = SubResource("CompressedTexture2D_m6q88")
 region = Rect2(17, 39, 3, 4)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wjyej"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5anin"]
 atlas = SubResource("CompressedTexture2D_wjyej")
@@ -2038,98 +2014,84 @@ _data = {
 }
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4muuv"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n64ob"]
 atlas = SubResource("CompressedTexture2D_4muuv")
 region = Rect2(17, 68, 3, 5)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_irayb"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5x8ep"]
 atlas = SubResource("CompressedTexture2D_irayb")
 region = Rect2(17, 72, 3, 5)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2uqrg"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_np42f"]
 atlas = SubResource("CompressedTexture2D_2uqrg")
 region = Rect2(16, 76, 5, 4)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ibig5"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_88dfw"]
 atlas = SubResource("CompressedTexture2D_ibig5")
 region = Rect2(16, 83, 7, 6)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_t5437"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2q5qn"]
 atlas = SubResource("CompressedTexture2D_t5437")
 region = Rect2(16, 88, 7, 5)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w3lmt"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lsenr"]
 atlas = SubResource("CompressedTexture2D_w3lmt")
 region = Rect2(16, 92, 7, 4)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nxfej"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n0una"]
 atlas = SubResource("CompressedTexture2D_nxfej")
 region = Rect2(0, 77, 16, 19)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dvt8e"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cdlhc"]
 atlas = SubResource("CompressedTexture2D_dvt8e")
 region = Rect2(0, 64, 16, 13)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pug5i"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oe8cd"]
 atlas = SubResource("CompressedTexture2D_pug5i")
 region = Rect2(23, 83, 8, 6)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yq77u"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u17do"]
 atlas = SubResource("CompressedTexture2D_yq77u")
 region = Rect2(16, 88, 7, 5)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ilsee"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i7icy"]
 atlas = SubResource("CompressedTexture2D_ilsee")
 region = Rect2(23, 92, 7, 4)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5qqey"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pu1t2"]
 atlas = SubResource("CompressedTexture2D_5qqey")
 region = Rect2(22, 68, 3, 5)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_aahf7"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c8uxb"]
 atlas = SubResource("CompressedTexture2D_aahf7")
 region = Rect2(22, 72, 3, 5)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6svba"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_02wuf"]
 atlas = SubResource("CompressedTexture2D_6svba")
@@ -2171,106 +2133,6 @@ modifications/0 = SubResource("SkeletonModification2DTwoBoneIK_8d3e5")
 modifications/1 = SubResource("SkeletonModification2DTwoBoneIK_uay21")
 modifications/2 = SubResource("SkeletonModification2DTwoBoneIK_cvghh")
 modifications/3 = SubResource("SkeletonModification2DTwoBoneIK_lf48c")
-
-[sub_resource type="Animation" id="Animation_fqjdq"]
-resource_name = "walk"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Skeleton2D/Torso/RightLeg:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, -0.558505, -0.558505, -0.558505, -0.558505, 0.0, 0.558505, 0.558505, 0.558505, 0.558505, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Skeleton2D/Torso/LeftLeg/Shin:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.0, 0.279253, 0.279253, 0.0, 0.0, 0.0, 0.279253, 0.279253, 0.0, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Skeleton2D/Torso/LeftLeg:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.558505, 0.558505, 0.558505, 0.558505, 0.0, -0.558505, -0.558505, -0.558505, 0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Skeleton2D/Torso/Shoulder/RightArm:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.558505, 0.558505, 0.558505, 0.558505, 0.0, -0.558505, -0.558505, 0.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Skeleton2D/Torso/Shoulder/LeftArm/LeftForearm:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 0.8, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.0, -0.279253, -0.279253, 0.0, 0.0, -0.279253, -0.279253, 0.0, 0.0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Skeleton2D/Torso/Shoulder/LeftArm:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, -0.558505, -0.558505, -0.558505, -0.558505, 0.0, 0.558505, 0.558505, 0.0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Skeleton2D/Torso/Shoulder/RightArm/RightForearm:rotation")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 0.8, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, -0.279253, -0.279253, 0.0, 0.0, -0.279253, -0.279253, 0.0, 0.0]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Skeleton2D/Torso/RightLeg/Shin:rotation")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [2.98029e-08, 0.279253, 0.279253, 0.0, 4.25756e-09, 8.51512e-09, 0.279253, 0.279253, 0.0, 1.49015e-08]
-}
 
 [sub_resource type="Animation" id="Animation_2cr88"]
 length = 0.001
@@ -2543,6 +2405,106 @@ tracks/10/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_fqjdq"]
+resource_name = "walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton2D/Torso/RightLeg:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.558505, -0.558505, -0.558505, -0.558505, 0.0, 0.558505, 0.558505, 0.558505, 0.558505, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton2D/Torso/LeftLeg/Shin:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.279253, 0.279253, 0.0, 0.0, 0.0, 0.279253, 0.279253, 0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton2D/Torso/LeftLeg:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.558505, 0.558505, 0.558505, 0.558505, 0.0, -0.558505, -0.558505, -0.558505, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skeleton2D/Torso/Shoulder/RightArm:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.558505, 0.558505, 0.558505, 0.558505, 0.0, -0.558505, -0.558505, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skeleton2D/Torso/Shoulder/LeftArm/LeftForearm:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, -0.279253, -0.279253, 0.0, 0.0, -0.279253, -0.279253, 0.0, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Skeleton2D/Torso/Shoulder/LeftArm:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.558505, -0.558505, -0.558505, -0.558505, 0.0, 0.558505, 0.558505, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Skeleton2D/Torso/Shoulder/RightArm/RightForearm:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.279253, -0.279253, 0.0, 0.0, -0.279253, -0.279253, 0.0, 0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Skeleton2D/Torso/RightLeg/Shin:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [2.98029e-08, 0.279253, 0.279253, 0.0, 4.25756e-09, 8.51512e-09, 0.279253, 0.279253, 0.0, 1.49015e-08]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yu8d2"]
 _data = {
 "RESET": SubResource("Animation_2cr88"),
@@ -2551,98 +2513,84 @@ _data = {
 }
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gpmsa"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r3e7s"]
 atlas = SubResource("CompressedTexture2D_gpmsa")
 region = Rect2(22, 100, 3, 5)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sa4xg"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ate5s"]
 atlas = SubResource("CompressedTexture2D_sa4xg")
 region = Rect2(22, 104, 3, 5)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_etk1w"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y53nq"]
 atlas = SubResource("CompressedTexture2D_etk1w")
 region = Rect2(21, 108, 5, 4)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vb6ie"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_70d7i"]
 atlas = SubResource("CompressedTexture2D_vb6ie")
 region = Rect2(23, 115, 7, 6)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ai8vb"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mksng"]
 atlas = SubResource("CompressedTexture2D_ai8vb")
 region = Rect2(23, 119, 7, 6)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dn5kg"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xtpoh"]
 atlas = SubResource("CompressedTexture2D_dn5kg")
 region = Rect2(23, 124, 7, 4)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tljfo"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1itag"]
 atlas = SubResource("CompressedTexture2D_tljfo")
 region = Rect2(0, 109, 16, 19)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cghh8"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w2cho"]
 atlas = SubResource("CompressedTexture2D_cghh8")
 region = Rect2(0, 96, 16, 13)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2hfk1"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pl30u"]
 atlas = SubResource("CompressedTexture2D_2hfk1")
 region = Rect2(16, 115, 7, 6)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6jkq6"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_js5bp"]
 atlas = SubResource("CompressedTexture2D_6jkq6")
 region = Rect2(16, 120, 7, 5)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lrovn"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e4ejr"]
 atlas = SubResource("CompressedTexture2D_lrovn")
 region = Rect2(16, 124, 7, 4)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v5tx8"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pexec"]
 atlas = SubResource("CompressedTexture2D_v5tx8")
 region = Rect2(17, 100, 3, 5)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4g310"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ar28n"]
 atlas = SubResource("CompressedTexture2D_4g310")
 region = Rect2(17, 104, 3, 5)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4ghts"]
-load_path = "res://.godot/imported/BaseSheet.png-3a08e88417d8e2e3a95f86de6fae7e48.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ch4ue"]
 atlas = SubResource("CompressedTexture2D_4ghts")
@@ -2684,6 +2632,129 @@ modifications/0 = SubResource("SkeletonModification2DTwoBoneIK_a0gss")
 modifications/1 = SubResource("SkeletonModification2DTwoBoneIK_1g6ay")
 modifications/2 = SubResource("SkeletonModification2DTwoBoneIK_xode6")
 modifications/3 = SubResource("SkeletonModification2DTwoBoneIK_4267l")
+
+[sub_resource type="Animation" id="Animation_a1rf4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton2D/Torso/LeftLeg/Shin:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.98029e-08]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton2D/Torso/LeftLeg:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton2D/Torso/RightLeg/Shin:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skeleton2D/Torso/RightLeg:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skeleton2D/Torso/Shoulder/LeftArm/LeftForearm:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Skeleton2D/Torso/Shoulder/LeftArm:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Skeleton2D/Torso/Shoulder/RightArm/RightForearm:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Skeleton2D/Torso/Shoulder/RightArm:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("LeftLeg/Shin/ShinBody/FootBody:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("RightLeg/Shin/ShinBody/FootBody:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_xkva3"]
 resource_name = "walk"
@@ -2809,129 +2880,6 @@ tracks/9/keys = {
 "values": [0.0]
 }
 
-[sub_resource type="Animation" id="Animation_a1rf4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Skeleton2D/Torso/LeftLeg/Shin:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [2.98029e-08]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Skeleton2D/Torso/LeftLeg:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Skeleton2D/Torso/RightLeg/Shin:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Skeleton2D/Torso/RightLeg:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Skeleton2D/Torso/Shoulder/LeftArm/LeftForearm:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Skeleton2D/Torso/Shoulder/LeftArm:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Skeleton2D/Torso/Shoulder/RightArm/RightForearm:rotation")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Skeleton2D/Torso/Shoulder/RightArm:rotation")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("LeftLeg/Shin/ShinBody/FootBody:rotation")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("RightLeg/Shin/ShinBody/FootBody:rotation")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i5ruf"]
 _data = {
 "RESET": SubResource("Animation_a1rf4"),
@@ -3028,6 +2976,105 @@ modifications/0 = SubResource("SkeletonModification2DTwoBoneIK_kmkdx")
 modifications/1 = SubResource("SkeletonModification2DTwoBoneIK_xcaiv")
 modifications/2 = SubResource("SkeletonModification2DTwoBoneIK_rotqi")
 modifications/3 = SubResource("SkeletonModification2DTwoBoneIK_43sgn")
+
+[sub_resource type="Animation" id="Animation_5qbv6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton2D/Torso/Shoulder/LeftArm:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton2D/Torso/Shoulder/LeftArm/Forearm:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton2D/Torso/Shoulder/RightArm:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skeleton2D/Torso/Shoulder/RightArm/Forearm:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skeleton2D/Torso/LeftThigh:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Skeleton2D/Torso/LeftThigh/Shin:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Skeleton2D/Torso/RightThigh:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Skeleton2D/Torso/RightThigh/Shin:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_jlhex"]
 resource_name = "walk"
@@ -3129,110 +3176,67 @@ tracks/7/keys = {
 "values": [0.0, 0.0, -0.0349066, -0.0349066, 0.0, 0.0, 0.0, -0.0872665, -0.0872665, 0.0, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_5qbv6"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Skeleton2D/Torso/Shoulder/LeftArm:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Skeleton2D/Torso/Shoulder/LeftArm/Forearm:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Skeleton2D/Torso/Shoulder/RightArm:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Skeleton2D/Torso/Shoulder/RightArm/Forearm:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Skeleton2D/Torso/LeftThigh:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Skeleton2D/Torso/LeftThigh/Shin:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Skeleton2D/Torso/RightThigh:rotation")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Skeleton2D/Torso/RightThigh/Shin:rotation")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3o8h1"]
 _data = {
 "RESET": SubResource("Animation_5qbv6"),
 "walk": SubResource("Animation_jlhex")
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l67ih"]
+atlas = ExtResource("1_xcqu6")
+region = Rect2(112, 96, 16, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qhdj"]
+atlas = ExtResource("1_xcqu6")
+region = Rect2(112, 109, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xcfa"]
+atlas = ExtResource("1_xcqu6")
+region = Rect2(107, 96, 3, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5o7p"]
+atlas = ExtResource("1_xcqu6")
+region = Rect2(107, 101, 3, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jehke"]
+atlas = ExtResource("1_xcqu6")
+region = Rect2(106, 106, 5, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lw20f"]
+atlas = ExtResource("1_xcqu6")
+region = Rect2(102, 96, 3, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8bwe"]
+atlas = ExtResource("1_xcqu6")
+region = Rect2(102, 100, 3, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3p8e"]
+atlas = ExtResource("1_xcqu6")
+region = Rect2(101, 104, 5, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqwug"]
+atlas = ExtResource("1_xcqu6")
+region = Rect2(100, 113, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ar4th"]
+atlas = ExtResource("1_xcqu6")
+region = Rect2(100, 118, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6p2qi"]
+atlas = ExtResource("1_xcqu6")
+region = Rect2(100, 120, 6, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8su7g"]
+atlas = ExtResource("1_xcqu6")
+region = Rect2(106, 115, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_af7qe"]
+atlas = ExtResource("1_xcqu6")
+region = Rect2(106, 118, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2ion"]
+atlas = ExtResource("1_xcqu6")
+region = Rect2(106, 120, 6, 6)
 
 [node name="BaseCharacter" type="Node2D"]
 script = ExtResource("1_oofh4")
@@ -3999,6 +4003,7 @@ libraries = {
 }
 
 [node name="DownLeft" type="Node2D" parent="."]
+visible = false
 
 [node name="RightArm" type="Sprite2D" parent="DownLeft"]
 position = Vector2(-4.5, -3)
@@ -4161,3 +4166,154 @@ remote_path = NodePath("../../../../../RightLeg/Shin")
 libraries = {
 "": SubResource("AnimationLibrary_3o8h1")
 }
+
+[node name="DownRight" type="Node2D" parent="."]
+
+[node name="Head" type="Sprite2D" parent="DownRight"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -10)
+texture = SubResource("AtlasTexture_l67ih")
+
+[node name="Torso" type="Sprite2D" parent="DownRight"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, 2.5)
+texture = SubResource("AtlasTexture_4qhdj")
+
+[node name="Arms" type="Node2D" parent="DownRight"]
+
+[node name="RightArm" type="Sprite2D" parent="DownRight/Arms"]
+z_index = 3
+y_sort_enabled = true
+position = Vector2(-4.5, -2)
+texture = SubResource("AtlasTexture_7xcfa")
+offset = Vector2(0, 2.5)
+
+[node name="RightForearm" type="Sprite2D" parent="DownRight/Arms/RightArm"]
+position = Vector2(0, 5)
+texture = SubResource("AtlasTexture_e5o7p")
+offset = Vector2(0, 2.5)
+
+[node name="RightHand" type="Sprite2D" parent="DownRight/Arms/RightArm/RightForearm"]
+position = Vector2(0, 6.5)
+texture = SubResource("AtlasTexture_jehke")
+
+[node name="LeftArm" type="Sprite2D" parent="DownRight/Arms"]
+z_index = -1
+y_sort_enabled = true
+position = Vector2(4.5, -4)
+texture = SubResource("AtlasTexture_lw20f")
+offset = Vector2(0, 2)
+
+[node name="LeftForearm" type="Sprite2D" parent="DownRight/Arms/LeftArm"]
+position = Vector2(0, 4)
+texture = SubResource("AtlasTexture_b8bwe")
+offset = Vector2(0, 2)
+
+[node name="LeftHand" type="Sprite2D" parent="DownRight/Arms/LeftArm/LeftForearm"]
+position = Vector2(0, 5.5)
+texture = SubResource("AtlasTexture_o3p8e")
+
+[node name="Legs" type="Node2D" parent="DownRight"]
+
+[node name="RightThigh" type="Sprite2D" parent="DownRight/Legs"]
+z_index = 2
+y_sort_enabled = true
+position = Vector2(-4, 5)
+texture = SubResource("AtlasTexture_yqwug")
+offset = Vector2(0, 1.5)
+
+[node name="RightShin" type="Sprite2D" parent="DownRight/Legs/RightThigh"]
+position = Vector2(0, 3)
+texture = SubResource("AtlasTexture_ar4th")
+offset = Vector2(0, 1.5)
+
+[node name="RightFoot" type="Sprite2D" parent="DownRight/Legs/RightThigh/RightShin"]
+position = Vector2(1, 6.5)
+texture = SubResource("AtlasTexture_6p2qi")
+
+[node name="LeftThigh" type="Sprite2D" parent="DownRight/Legs"]
+y_sort_enabled = true
+position = Vector2(4, 5)
+texture = SubResource("AtlasTexture_8su7g")
+offset = Vector2(0, 1.5)
+
+[node name="LeftShin" type="Sprite2D" parent="DownRight/Legs/LeftThigh"]
+position = Vector2(0, 3)
+texture = SubResource("AtlasTexture_af7qe")
+offset = Vector2(0, 1.5)
+
+[node name="LeftFoot" type="Sprite2D" parent="DownRight/Legs/LeftThigh/LeftShin"]
+z_index = 2
+y_sort_enabled = true
+position = Vector2(1, 5.5)
+texture = SubResource("AtlasTexture_a2ion")
+
+[node name="Skeleton2D" type="Skeleton2D" parent="DownRight"]
+visible = false
+
+[node name="Torso" type="Bone2D" parent="DownRight/Skeleton2D"]
+position = Vector2(1, 7)
+rest = Transform2D(1, 0, 0, 1, 1, 7)
+
+[node name="Shoulder" type="Bone2D" parent="DownRight/Skeleton2D/Torso"]
+position = Vector2(0, -10)
+rest = Transform2D(1, 0, 0, 1, 0, -10)
+
+[node name="RightArm" type="Bone2D" parent="DownRight/Skeleton2D/Torso/Shoulder"]
+position = Vector2(-5.5, 1)
+rest = Transform2D(1, 0, 0, 1, -5.5, 1)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="DownRight/Skeleton2D/Torso/Shoulder/RightArm"]
+remote_path = NodePath("../../../../../Arms/RightArm")
+
+[node name="RightForearm" type="Bone2D" parent="DownRight/Skeleton2D/Torso/Shoulder/RightArm"]
+position = Vector2(0, 5)
+rest = Transform2D(1, 0, 0, 1, 0, 5)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="DownRight/Skeleton2D/Torso/Shoulder/RightArm/RightForearm"]
+remote_path = NodePath("../../../../../../Arms/RightArm/RightForearm")
+
+[node name="LeftArm" type="Bone2D" parent="DownRight/Skeleton2D/Torso/Shoulder"]
+position = Vector2(3.5, -1)
+rest = Transform2D(1, 0, 0, 1, 3.5, -1)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="DownRight/Skeleton2D/Torso/Shoulder/LeftArm"]
+remote_path = NodePath("../../../../../Arms/LeftArm")
+
+[node name="LeftForearm" type="Bone2D" parent="DownRight/Skeleton2D/Torso/Shoulder/LeftArm"]
+position = Vector2(0, 4)
+rest = Transform2D(1, 0, 0, 1, 0, 4)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="DownRight/Skeleton2D/Torso/Shoulder/LeftArm/LeftForearm"]
+remote_path = NodePath("../../../../../../Arms/LeftArm/LeftForearm")
+
+[node name="RightThigh" type="Bone2D" parent="DownRight/Skeleton2D/Torso"]
+position = Vector2(-5, -2)
+rest = Transform2D(1, 0, 0, 1, -5, -2)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="DownRight/Skeleton2D/Torso/RightThigh"]
+remote_path = NodePath("../../../../Legs/RightThigh")
+
+[node name="RightShin" type="Bone2D" parent="DownRight/Skeleton2D/Torso/RightThigh"]
+position = Vector2(0, 4)
+rest = Transform2D(1, 0, 0, 1, 0, 4)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="DownRight/Skeleton2D/Torso/RightThigh/RightShin"]
+position = Vector2(0, -1)
+remote_path = NodePath("../../../../../Legs/RightThigh/RightShin")
+
+[node name="LeftThigh" type="Bone2D" parent="DownRight/Skeleton2D/Torso"]
+position = Vector2(3, -2)
+rest = Transform2D(1, 0, 0, 1, 3, -2)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="DownRight/Skeleton2D/Torso/LeftThigh"]
+remote_path = NodePath("../../../../Legs/LeftThigh")
+
+[node name="LeftShin" type="Bone2D" parent="DownRight/Skeleton2D/Torso/LeftThigh"]
+position = Vector2(0, 3)
+rest = Transform2D(1, 0, 0, 1, 0, 3)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="DownRight/Skeleton2D/Torso/LeftThigh/LeftShin"]
+remote_path = NodePath("../../../../../Legs/LeftThigh/LeftShin")
