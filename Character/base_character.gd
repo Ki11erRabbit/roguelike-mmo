@@ -12,6 +12,8 @@ var backward_skeleton = $BackwardFacing/Skeleton2D
 var right_body = $RightFacing
 @onready
 var left_body = $LeftFacing
+@onready
+var down_left_body = $DownLeft
 
 # The direction is based on the body
 enum BendDirection {RightToLeft, LeftToRight}
@@ -29,6 +31,7 @@ func set_current_facing_direction(direction: FacingDirection):
 	backward_body.visible = false
 	right_body.visible = false
 	left_body.visible = false
+	down_left_body.visible = false
 	current_facing_direction = direction
 	# Then we enable the right body in the match
 	match current_facing_direction:
@@ -42,6 +45,8 @@ func set_current_facing_direction(direction: FacingDirection):
 			right_body.visible = true
 		FacingDirection.Left:
 			left_body.visible = true
+		FacingDirection.DownLeft:
+			down_left_body.visible = true
 			
 			
 	
@@ -160,6 +165,12 @@ func start_walking(direction: WalkingDirection):
 					$LeftFacing/Movement.play("walk")
 				WalkingDirection.Backwards:
 					$LeftFacing/Movement.play("walk")
+		FacingDirection.DownLeft:
+			match direction:
+				WalkingDirection.Forwards:
+					$DownLeft/Movement.play("walk")
+				WalkingDirection.Backwards:
+					$DownLeft/Movement.play("walk")
 
 func start_running(direction: WalkingDirection):
 	match current_facing_direction:
@@ -187,6 +198,12 @@ func start_running(direction: WalkingDirection):
 					$LeftFacing/Movement.play("walk", -1, 2.0)
 				WalkingDirection.Backwards:
 					$LeftFacing/Movement.play("walk", -1, 2.0)
+		FacingDirection.DownLeft:
+			match direction:
+				WalkingDirection.Forwards:
+					$DownLeft/Movement.play("walk", -1, 2.0)
+				WalkingDirection.Backwards:
+					$DownLeft/Movement.play("walk", -1, 2.0)
 
 func stop_moving():
 	match current_facing_direction:
@@ -198,12 +215,15 @@ func stop_moving():
 			$RightFacing/Movement.play("RESET")
 		FacingDirection.Left:
 			$LeftFacing/Movement.play("RESET")
+		FacingDirection.DownLeft:
+			$DownLeft/Movement.play("RESET")
 
 func _ready() -> void:
 	forward_body.visible = true
 	backward_body.visible = false
 	right_body.visible = false
 	left_body.visible = false
+	down_left_body.visible = false
 
 func _physics_process(delta: float) -> void:
 	pass
