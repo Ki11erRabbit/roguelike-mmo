@@ -1,0 +1,114 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkpongygktk1t"]
+
+[ext_resource type="PackedScene" uid="uid://w80u3w614qwu" path="res://Character/BaseCharacter.blend" id="1_ng6ka"]
+
+[node name="BaseCharacter" instance=ExtResource("1_ng6ka")]
+
+[node name="UpperArm L" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="1"]
+root_bone = &"Upper Arm L"
+tip_bone = &"Lower Arm L"
+target_node = NodePath("../../../UpperArmTarget L")
+
+[node name="LowerArm L" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="2"]
+root_bone = &"Lower Arm L"
+tip_bone = &"Wrist L"
+target_node = NodePath("../../../UpperArmTarget L/LowerArmTarget L")
+
+[node name="Hand L" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="3"]
+root_bone = &"Wrist L"
+tip_bone = &"Palm L"
+target_node = NodePath("../../../UpperArmTarget L/LowerArmTarget L/HandTarget L")
+
+[node name="Fingers L" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="4"]
+root_bone = &"Palm L"
+tip_bone = &"Fingers L"
+target_node = NodePath("../../../UpperArmTarget L/LowerArmTarget L/HandTarget L/FingersTarget L")
+
+[node name="Thumb 1 L" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="5"]
+root_bone = &"Palm L"
+tip_bone = &"Thumb L"
+target_node = NodePath("../../../UpperArmTarget L/LowerArmTarget L/HandTarget L/ThumbTarget1 L")
+
+[node name="Thumb 2 L" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="6"]
+root_bone = &"Thumb L"
+tip_bone = &"Thumb 2 L"
+target_node = NodePath("../../../UpperArmTarget L/LowerArmTarget L/HandTarget L/ThumbTarget1 L/ThumbTarget2 L")
+
+[node name="UpperArm R" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="7"]
+root_bone = &"Upper Arm R"
+tip_bone = &"Lower Arm R"
+target_node = NodePath("../../../UpperArmTarget R")
+
+[node name="LowerArm R" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="8"]
+root_bone = &"Lower Arm R"
+tip_bone = &"Wrist R"
+target_node = NodePath("../../../UpperArmTarget R/LowerArmTarget R")
+
+[node name="Hand R" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="9"]
+root_bone = &"Wrist R"
+tip_bone = &"Palm R"
+target_node = NodePath("../../../UpperArmTarget R/LowerArmTarget R/HandTarget R")
+
+[node name="Fingers R" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="10"]
+root_bone = &"Palm R"
+tip_bone = &"Fingers R"
+target_node = NodePath("../../../UpperArmTarget R/LowerArmTarget R/HandTarget R/FingersTarget R")
+
+[node name="Thumb1 R" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="11"]
+root_bone = &"Palm R"
+tip_bone = &"Thumb R"
+target_node = NodePath("../../../UpperArmTarget R/LowerArmTarget R/HandTarget R/ThumbTarget1 R")
+
+[node name="Thumb2 R" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="12"]
+root_bone = &"Thumb R"
+tip_bone = &"Thumb 2 R"
+target_node = NodePath("../../../UpperArmTarget R/LowerArmTarget R/HandTarget R/ThumbTarget1 R/ThumbTarget2 R")
+
+[node name="Head" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="13"]
+root_bone = &"Neck"
+tip_bone = &"Head"
+target_node = NodePath("../../../Neck/HeadTarget")
+
+[node name="Neck" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="14"]
+root_bone = &"Neck 2"
+tip_bone = &"Neck"
+target_node = NodePath("../../../Neck")
+
+[node name="UpperArmTarget L" type="Node3D" parent="." index="1"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 4, 2, 0)
+
+[node name="LowerArmTarget L" type="Node3D" parent="UpperArmTarget L" index="0"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="HandTarget L" type="Node3D" parent="UpperArmTarget L/LowerArmTarget L" index="0"]
+
+[node name="FingersTarget L" type="Node3D" parent="UpperArmTarget L/LowerArmTarget L/HandTarget L" index="0"]
+
+[node name="ThumbTarget1 L" type="Node3D" parent="UpperArmTarget L/LowerArmTarget L/HandTarget L" index="1"]
+transform = Transform3D(0.974495, 0.145313, 0.17101, 0.116978, 0.321394, -0.939693, -0.191511, 0.93573, 0.296198, 0, 0, 0)
+
+[node name="ThumbTarget2 L" type="Node3D" parent="UpperArmTarget L/LowerArmTarget L/HandTarget L/ThumbTarget1 L" index="0"]
+transform = Transform3D(0.993099, 0.0637904, -0.0984102, 0.0246777, 0.706676, 0.707107, 0.114651, -0.704656, 0.700225, 0, 4, 1)
+
+[node name="UpperArmTarget R" type="Node3D" parent="." index="2"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -4, 2, 0)
+
+[node name="LowerArmTarget R" type="Node3D" parent="UpperArmTarget R" index="0"]
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="HandTarget R" type="Node3D" parent="UpperArmTarget R/LowerArmTarget R" index="0"]
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="FingersTarget R" type="Node3D" parent="UpperArmTarget R/LowerArmTarget R/HandTarget R" index="0"]
+
+[node name="ThumbTarget1 R" type="Node3D" parent="UpperArmTarget R/LowerArmTarget R/HandTarget R" index="1"]
+transform = Transform3D(0.974495, 0.145313, 0.17101, 0.116978, 0.321394, -0.939693, -0.191511, 0.93573, 0.296198, 0, 0, 0)
+
+[node name="ThumbTarget2 R" type="Node3D" parent="UpperArmTarget R/LowerArmTarget R/HandTarget R/ThumbTarget1 R" index="0"]
+transform = Transform3D(0.993099, 0.0637904, -0.0984102, 0.0246777, 0.706676, 0.707107, 0.114651, -0.704656, 0.700225, 0, 4, 1)
+
+[node name="Neck" type="Node3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 4, 0)
+
+[node name="HeadTarget" type="Node3D" parent="Neck" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642787, 0, -0.642787, 0.766044, 0, -1, 0)
