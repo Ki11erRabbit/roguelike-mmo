@@ -1,9 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://ce62qkml11bgf"]
 
-[sub_resource type="GDScript" id="GDScript_mo0ey"]
-script/source = "extends CharacterBody2D
+[ext_resource type="PackedScene" uid="uid://u10wuqaym4wq" path="res://Character/BaseCharacter.glb" id="1_uwdjx"]
 
-var BaseCharacter = preload(\"res://Character/BaseCharacter.tscn\").instantiate()
+[sub_resource type="GDScript" id="GDScript_mo0ey"]
+script/source = "extends CharacterBody3D
+
 
 const SPEED = 300.0
 const DIRECTION_RESTRICT = 0.8
@@ -191,16 +192,7 @@ func _process(delta: float) -> void:
 	move_and_slide()
 "
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_psxoo"]
-
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody3D"]
 script = SubResource("GDScript_mo0ey")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 14)
-rotation = -1.5708
-scale = Vector2(0.4, 1)
-shape = SubResource("CircleShape2D_psxoo")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-38, -44)
+[node name="BaseCharacter" parent="." instance=ExtResource("1_uwdjx")]
