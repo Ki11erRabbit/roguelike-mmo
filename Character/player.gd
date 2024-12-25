@@ -1,25 +1,31 @@
 extends CharacterBody3D
 
+const Actions = preload("res://InputManager/actions.gd")
+
 @onready
 var model = $BaseCharacter
 
 const SPEED = 5.0
 #const SPEED = 300.0
-const DIRECTION_RESTRICT = 0.8
+const DIRECTION_RESTRICT = 0.9
 const LOOK_RESTRICT = 0.8
+# Determines the angle that allows for playing the rotation animation
+const ROTATION_ANGLE_LIMIT: float = 10
 const JUMP_VELOCITY = 4.5
 
 var last_aim: Vector2 = Vector2(0, 0)
 
 
 func _physics_process(delta: float) -> void:
-	var move_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var move_direction = InputManager.get_stick_vector(Actions.PlayerActionSticks.Movement)
 	var normalized_move = move_direction.normalized()
-	var aim_direction = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")
+	var aim_direction = InputManager.get_stick_vector(Actions.PlayerActionSticks.Aim)
 	var normalized_aim = aim_direction.normalized()
 	
 	var rotating: bool = false
-	var clockwise_rotation = is_rotating_clockwise(aim_direction.angle(), last_aim.angle())
+	var clockwise_rotation: bool = is_rotating_clockwise(aim_direction.angle(), last_aim.angle())
+	var aim_direction_was_zero: bool = (aim_direction.x == 0 and aim_direction.y == 0)
+	
 	
 	if aim_direction.x == 0 and aim_direction.y == 0:
 		aim_direction = last_aim
@@ -28,12 +34,10 @@ func _physics_process(delta: float) -> void:
 	#current_aim_angle = lerp_angle(last_aim_angle, current_aim_angle, 0.1)
 	model.rotation.y = atan2(aim_direction.x, aim_direction.y)
 	
-	# TODO: come up with better condition for checking for roatation
-	if true:
-		last_aim = aim_direction
-		pass
-	else:
+	
+	if (not aim_direction_was_zero) and rad_to_deg(abs(aim_direction.angle() - last_aim.angle())) < ROTATION_ANGLE_LIMIT:
 		rotating = true
+	last_aim = aim_direction
 	
 	var moving: bool = false
 	
