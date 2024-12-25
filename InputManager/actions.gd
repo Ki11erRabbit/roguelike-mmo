@@ -19,9 +19,10 @@ enum MenuActionButtons {
 	Up, Down, Left, Right,
 	Search,
 	ContextMenu,
+	Menu, Map
 }
 enum MenuActionSticks {
-	Movement,
+	
 }
 
 enum MainMenuActionButtons {
@@ -29,7 +30,7 @@ enum MainMenuActionButtons {
 	Accept, Reject
 }
 enum MainMenuActionSticks {
-	Movement,
+	
 }
 
 

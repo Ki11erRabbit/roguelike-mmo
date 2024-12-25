@@ -20,9 +20,26 @@ var map: Dictionary = {
 	"player_menu": "start",
 	"player_map": "select",
 	"player_emote_window": "l3",
-	"player_quick_chat": "r3"
+	"player_quick_chat": "r3",
+	# Menu Actions
+	"menu_accept": "east",
+	"menu_reject": "south",
+	"menu_up": ["d_pad_up", "left_stick_up"],
+	"menu_down": ["d_pad_down", "left_stick_down"],
+	"menu_left": ["d_pad_left", "left_stick_left"],
+	"menu_right": ["d_pad_right", "left_stick_right"],
+	"menu_search": "north",
+	"menu_context_menu": "west",
+	"menu_menu": "start",
+	"menu_map": "select",
+	# Main Menu Actions
+	"main_menu_up": ["d_pad_up", "left_stick_up"],
+	"main_menu_down": ["d_pad_down", "left_stick_down"],
+	"main_menu_left": ["d_pad_left", "left_stick_left"],
+	"main_menu_right": ["d_pad_right", "left_stick_right"],
+	"main_menu_accept": "east",
+	"main_menu_reject": "south",
 }
-
 
 
 func get_stick_vector(stick: String) -> Vector2:
@@ -35,19 +52,19 @@ func get_stick_vector(stick: String) -> Vector2:
 	return output
 	
 func is_action_pressed(action: String) -> bool:
+	var item = map[action]
+	if is_instance_of(item, "Array"):
+		return item.map(is_action_pressed).any(func(x): x)
 	return Input.is_action_pressed(map[action])
 
 func is_action_just_pressed(action: String) -> bool:
+	var item = map[action]
+	if is_instance_of(item, "Array"):
+		return item.map(is_action_just_pressed).any(func(x): x)
 	return Input.is_action_just_pressed(map[action])
 
 func is_action_just_released(action: String) -> bool:
+	var item = map[action]
+	if is_instance_of(item, "Array"):
+		return item.map(is_action_just_released).any(func(x): x)
 	return Input.is_action_just_released(map[action])
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

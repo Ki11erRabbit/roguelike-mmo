@@ -1,11 +1,61 @@
-extends "res://InputManager/InputProcessor/input_processor.gd"
+class MainMenuInput extends "res://InputManager/InputProcessor/input_processor.gd":
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	const Actions = preload("res://InputManager/actions.gd")
+	
+	func get_stick_vector(stick) -> Vector2:
+		assert(false, "There are no stick actions for MainMenuInput")
+		return Vector2(0,0)
+	
+	func is_action_pressed(action) -> bool:
+		match action:
+			Actions.MainMenuActionButtons.Accept:
+				return InputManager.is_action_pressed("main_menu_accept")
+			Actions.MainMenuActionButtons.Reject:
+				return InputManager.is_action_pressed("main_menu_reject")
+			Actions.MainMenuActionButtons.Up:
+				return InputManager.is_action_pressed("main_menu_up")
+			Actions.MainMenuActionButtons.Down:
+				return InputManager.is_action_pressed("main_menu_down")
+			Actions.MainMenuActionButtons.Left:
+				return InputManager.is_action_pressed("main_menu_left")
+			Actions.MainMenuActionButtons.Right:
+				return InputManager.is_action_pressed("main_menu_right")
+			_:
+				assert(false, "Invalid button for MainMenuInput {0}".format([action]))
+				return false
+	
+	func is_action_just_pressed(action) -> bool:
+		match action:
+			Actions.MainMenuActionButtons.Accept:
+				return InputManager.is_action_just_pressed("main_menu_accept")
+			Actions.MainMenuActionButtons.Reject:
+				return InputManager.is_action_just_pressed("main_menu_reject")
+			Actions.MainMenuActionButtons.Up:
+				return InputManager.is_action_just_pressed("main_menu_up")
+			Actions.MainMenuActionButtons.Down:
+				return InputManager.is_action_just_pressed("main_menu_down")
+			Actions.MainMenuActionButtons.Left:
+				return InputManager.is_action_just_pressed("main_menu_left")
+			Actions.MainMenuActionButtons.Right:
+				return InputManager.is_action_just_pressed("main_menu_right")
+			_:
+				assert(false, "Invalid button for MainMenuInput {0}".format([action]))
+				return false
+	
+	func is_action_just_released(action) -> bool:
+		match action:
+			Actions.MainMenuActionButtons.Accept:
+				return InputManager.is_action_just_pressed("main_menu_accept")
+			Actions.MainMenuActionButtons.Reject:
+				return InputManager.is_action_just_released("main_menu_reject")
+			Actions.MainMenuActionButtons.Up:
+				return InputManager.is_action_just_released("main_menu_up")
+			Actions.MainMenuActionButtons.Down:
+				return InputManager.is_action_just_released("main_menu_down")
+			Actions.MainMenuActionButtons.Left:
+				return InputManager.is_action_just_released("main_menu_left")
+			Actions.MainMenuActionButtons.Right:
+				return InputManager.is_action_just_released("main_menu_right")
+			_:
+				assert(false, "Invalid button for MainMenuInput {0}".format([action]))
+				return false
