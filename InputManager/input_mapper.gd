@@ -41,6 +41,21 @@ var map: Dictionary = {
 	"main_menu_reject": "south",
 }
 
+func change_binding(binding_name: String, binding: String, index = 0):
+	assert(binding_name in map, "Keybinding is not in map")
+	
+	if index == 0 and map[binding_name] is String:
+		map[binding_name] = binding
+		return
+	
+	if map[binding_name] is String:
+		map[binding_name] = [map[binding_name]]
+	while index > map[binding_name].size():
+		map[binding_name].append()
+	
+	map[binding_name][index] = binding
+	
+
 
 func get_stick_vector(stick: String) -> Vector2:
 	var output = Vector2(0,0)
@@ -68,3 +83,6 @@ func is_action_just_released(action: String) -> bool:
 	if is_instance_of(item, "Array"):
 		return item.map(is_action_just_released).any(func(x): x)
 	return Input.is_action_just_released(map[action])
+
+func _ready() -> void:
+	print(JSON.parse_string(JSON.stringify(map)))

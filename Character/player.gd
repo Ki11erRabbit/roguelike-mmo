@@ -47,45 +47,48 @@ func _physics_process(delta: float) -> void:
 	if (movement_vec.y > 50 or movement_vec.y < -50) or (movement_vec.x > 50 or movement_vec.x < -50):
 		model.start_running()
 		moving = true
-		print("running")
+		#print("running")
 	elif movement_vec.x != 0 or movement_vec.y != 0:
 		model.start_walking()
 		moving = true
-		print("walking")
+		#print("walking")
 	else:
 		model.start_standing()
 		moving = false
-		print("standing")
+		#print("standing")
 	
 	# Moving Downwards
 	if Vector2.DOWN.normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
-		print("Down")
+		#print("Down")
 		if normalized_aim.x == 0 and normalized_aim.y == 0:
 			pass
 		elif normalized_aim.dot(normalized_move) >= LOOK_RESTRICT:
-			print("forwards")
+			pass
+			#print("forwards")
 		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
-			print("backwards")
+			#print("backwards")
 			model.start_backstepping()
 	# Moving Upwards
 	elif Vector2.UP.normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
-		print("Up")
+		#print("Up")
 		if normalized_aim.x == 0 and normalized_aim.y == 0:
 			pass
 		elif normalized_aim.dot(normalized_move) >= LOOK_RESTRICT:
-			print("forwards")
+			pass
+			#print("forwards")
 		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
-			print("backwards")
+			#print("backwards")
 			model.start_backstepping()
 	# Moving to the Right
 	elif Vector2.RIGHT.normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
-		print("Right")
+		#print("Right")
 		if normalized_aim.x == 0 and normalized_aim.y == 0:
 			pass
 		elif normalized_aim.dot(normalized_move) >= LOOK_RESTRICT:
-			print("forwards")
+			pass
+			#print("forwards")
 		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
-			print("backwards")
+			#print("backwards")
 			model.start_backstepping()
 	# Moving to the Left
 	elif Vector2.LEFT.normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
@@ -93,49 +96,55 @@ func _physics_process(delta: float) -> void:
 		if normalized_aim.x == 0 and normalized_aim.y == 0:
 			pass
 		elif normalized_aim.dot(normalized_move) >= LOOK_RESTRICT:
-			print("forwards")
+			pass
+			#print("forwards")
 		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
-			print("backwards")
+			#print("backwards")
 			model.start_backstepping()
 	# Moving to the Top Right
 	elif Vector2.RIGHT.rotated(deg_to_rad(-45)).normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
-		print("Top Right")
+		#print("Top Right")
 		if normalized_aim.x == 0 and normalized_aim.y == 0:
 			pass
 		elif normalized_aim.dot(normalized_move) >= LOOK_RESTRICT:
-			print("forwards")
+			pass
+			#print("forwards")
 		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
-			print("backwards")
+			#print("backwards")
 			model.start_backstepping()
 	# Moving to the Bottom Right
 	elif Vector2.RIGHT.rotated(deg_to_rad(45)).normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
-		print("Bottom Right")
+		#print("Bottom Right")
 		if normalized_aim.x == 0 and normalized_aim.y == 0:
 			pass
 		elif normalized_aim.dot(normalized_move) >= LOOK_RESTRICT:
-			print("forwards")
+			pass
+			#print("forwards")
 		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
-			print("backwards")
+			#print("backwards")
 			model.start_backstepping()
 	# Moving to the Top Left
 	elif Vector2.LEFT.rotated(deg_to_rad(45)).normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
-		print("Top Left")
+		#print("Top Left")
 		if normalized_aim.x == 0 and normalized_aim.y == 0:
 			pass
 		elif normalized_aim.dot(normalized_move) >= LOOK_RESTRICT:
-			print("forwards")
+			pass
+			#print("forwards")
 		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
-			print("backwards")
+			#print("backwards")
 			model.start_backstepping()
 	# Moving to the Bottom Left
 	elif Vector2.LEFT.rotated(deg_to_rad(-45)).normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
-		print("Bottom Left")
+		#print("Bottom Left")
 		if normalized_aim.x == 0 and normalized_aim.y == 0:
 			pass
 		elif normalized_aim.dot(normalized_move) >= LOOK_RESTRICT:
-			print("forwards")
+			pass
+			#print("forwards")
 		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
-			print("backwards")
+			pass
+			#print("backwards")
 	else:
 		model.start_standing()
 		if rotating and not moving:
