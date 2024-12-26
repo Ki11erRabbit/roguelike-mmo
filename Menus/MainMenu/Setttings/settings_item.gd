@@ -1,4 +1,4 @@
-extends Control
+class_name SettingsItem extends Control
 
 @export
 var header: String = "":
@@ -10,7 +10,7 @@ var description: String = "":
 		return description
 
 @export
-var items: Array[Control] = []
+var items: Array = []
 @export
 var skip_items: Dictionary = {}
 
@@ -18,6 +18,12 @@ var skip_items: Dictionary = {}
 var container = $HBoxContainer
 
 var current_item: int = -1
+
+func initialize(header: String, description: String, items: Array, skip_items: Dictionary):
+	self.header = header
+	self.description = description
+	self.items = items
+	self.skip_items = skip_items
 
 func select_next_item():
 	if current_item < 0:

@@ -42,7 +42,7 @@ var map: Dictionary = {
 }
 
 func change_binding(binding_name: String, binding: String, index = 0):
-	assert(binding_name in map, "Keybinding is not in map")
+	assert(binding_name in map, "Keybinding is not in map: {0}".format([binding_name]))
 	
 	if index == 0 and map[binding_name] is String:
 		map[binding_name] = binding
@@ -54,8 +54,10 @@ func change_binding(binding_name: String, binding: String, index = 0):
 		map[binding_name].append()
 	
 	map[binding_name][index] = binding
-	
 
+func get_binding(binding: String):
+	return map[binding]
+	
 
 func get_stick_vector(stick: String) -> Vector2:
 	var output = Vector2(0,0)

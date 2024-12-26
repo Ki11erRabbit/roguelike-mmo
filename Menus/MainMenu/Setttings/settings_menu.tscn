@@ -25,9 +25,9 @@ offset_top = 114.0
 offset_right = 1600.0
 offset_bottom = 180.0
 
-[node name="BoxContainer" type="BoxContainer" parent="."]
-layout_mode = 0
+[node name="CardSlot" type="Control" parent="."]
+anchors_preset = 0
 offset_left = 320.0
 offset_top = 180.0
-offset_right = 1600.0
-offset_bottom = 900.0
+offset_right = 320.0
+offset_bottom = 180.0

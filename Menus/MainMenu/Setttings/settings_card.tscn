@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3is7p4tbe3rw"]
+[gd_scene load_steps=2 format=3 uid="uid://b3is7p4tbe3rw"]
 
 [ext_resource type="Script" path="res://Menus/MainMenu/Setttings/settings_card.gd" id="1_0tx8k"]
-[ext_resource type="PackedScene" uid="uid://cdw1dp4xovi1i" path="res://Menus/MainMenu/Setttings/settings_item.tscn" id="2_uqgj6"]
 
 [node name="SettingsCard" type="Control"]
 layout_mode = 3
@@ -27,13 +26,6 @@ offset_bottom = 716.0
 
 [node name="ItemContainer" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
-
-[node name="settings_item" parent="ScrollContainer/ItemContainer" instance=ExtResource("2_uqgj6")]
-layout_mode = 2
-header = null
-description = null
-items_start = null
-items_end = null
 
 [node name="Header" type="HBoxContainer" parent="."]
 layout_mode = 0
