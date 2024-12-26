@@ -15,6 +15,8 @@ const JUMP_VELOCITY = 4.5
 
 var last_aim: Vector2 = Vector2(0, 0)
 
+func _ready() -> void:
+	InputManager.start_game()
 
 func _physics_process(delta: float) -> void:
 	var move_direction = InputManager.get_stick_vector(Actions.PlayerActionSticks.Movement)
@@ -92,7 +94,7 @@ func _physics_process(delta: float) -> void:
 			model.start_backstepping()
 	# Moving to the Left
 	elif Vector2.LEFT.normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
-		print("Left")
+		#print("Left")
 		if normalized_aim.x == 0 and normalized_aim.y == 0:
 			pass
 		elif normalized_aim.dot(normalized_move) >= LOOK_RESTRICT:

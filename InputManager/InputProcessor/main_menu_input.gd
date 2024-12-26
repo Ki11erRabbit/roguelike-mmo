@@ -9,17 +9,17 @@ class MainMenuInput extends "res://InputManager/InputProcessor/input_processor.g
 	func is_action_pressed(action) -> bool:
 		match action:
 			Actions.MainMenuActionButtons.Accept:
-				return InputManager.is_action_pressed("main_menu_accept")
+				return InputMapper.is_action_pressed("main_menu_accept")
 			Actions.MainMenuActionButtons.Reject:
-				return InputManager.is_action_pressed("main_menu_reject")
+				return InputMapper.is_action_pressed("main_menu_reject")
 			Actions.MainMenuActionButtons.Up:
-				return InputManager.is_action_pressed("main_menu_up")
+				return InputMapper.is_action_pressed("main_menu_up")
 			Actions.MainMenuActionButtons.Down:
-				return InputManager.is_action_pressed("main_menu_down")
+				return InputMapper.is_action_pressed("main_menu_down")
 			Actions.MainMenuActionButtons.Left:
-				return InputManager.is_action_pressed("main_menu_left")
+				return InputMapper.is_action_pressed("main_menu_left")
 			Actions.MainMenuActionButtons.Right:
-				return InputManager.is_action_pressed("main_menu_right")
+				return InputMapper.is_action_pressed("main_menu_right")
 			_:
 				assert(false, "Invalid button for MainMenuInput {0}".format([action]))
 				return false
@@ -27,17 +27,17 @@ class MainMenuInput extends "res://InputManager/InputProcessor/input_processor.g
 	func is_action_just_pressed(action) -> bool:
 		match action:
 			Actions.MainMenuActionButtons.Accept:
-				return InputManager.is_action_just_pressed("main_menu_accept")
+				return InputMapper.is_action_just_pressed("main_menu_accept")
 			Actions.MainMenuActionButtons.Reject:
-				return InputManager.is_action_just_pressed("main_menu_reject")
+				return InputMapper.is_action_just_pressed("main_menu_reject")
 			Actions.MainMenuActionButtons.Up:
-				return InputManager.is_action_just_pressed("main_menu_up")
+				return InputMapper.is_action_just_pressed("main_menu_up")
 			Actions.MainMenuActionButtons.Down:
-				return InputManager.is_action_just_pressed("main_menu_down")
+				return InputMapper.is_action_just_pressed("main_menu_down")
 			Actions.MainMenuActionButtons.Left:
-				return InputManager.is_action_just_pressed("main_menu_left")
+				return InputMapper.is_action_just_pressed("main_menu_left")
 			Actions.MainMenuActionButtons.Right:
-				return InputManager.is_action_just_pressed("main_menu_right")
+				return InputMapper.is_action_just_pressed("main_menu_right")
 			_:
 				assert(false, "Invalid button for MainMenuInput {0}".format([action]))
 				return false
@@ -45,17 +45,17 @@ class MainMenuInput extends "res://InputManager/InputProcessor/input_processor.g
 	func is_action_just_released(action) -> bool:
 		match action:
 			Actions.MainMenuActionButtons.Accept:
-				return InputManager.is_action_just_pressed("main_menu_accept")
+				return InputMapper.is_action_just_pressed("main_menu_accept")
 			Actions.MainMenuActionButtons.Reject:
-				return InputManager.is_action_just_released("main_menu_reject")
+				return InputMapper.is_action_just_released("main_menu_reject")
 			Actions.MainMenuActionButtons.Up:
-				return InputManager.is_action_just_released("main_menu_up")
+				return InputMapper.is_action_just_released("main_menu_up")
 			Actions.MainMenuActionButtons.Down:
-				return InputManager.is_action_just_released("main_menu_down")
+				return InputMapper.is_action_just_released("main_menu_down")
 			Actions.MainMenuActionButtons.Left:
-				return InputManager.is_action_just_released("main_menu_left")
+				return InputMapper.is_action_just_released("main_menu_left")
 			Actions.MainMenuActionButtons.Right:
-				return InputManager.is_action_just_released("main_menu_right")
+				return InputMapper.is_action_just_released("main_menu_right")
 			_:
 				assert(false, "Invalid button for MainMenuInput {0}".format([action]))
 				return false

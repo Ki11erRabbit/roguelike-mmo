@@ -68,21 +68,27 @@ func get_stick_vector(stick: String) -> Vector2:
 	
 func is_action_pressed(action: String) -> bool:
 	var item = map[action]
-	if is_instance_of(item, "Array"):
-		return item.map(is_action_pressed).any(func(x): x)
-	return Input.is_action_pressed(map[action])
+	if item is Array:
+		return item.map(is_action_pressed_helper).any(func(x): return x)
+	return is_action_pressed_helper(map[action])
+
+func is_action_pressed_helper(action: String):
+	return Input.is_action_pressed(action)
 
 func is_action_just_pressed(action: String) -> bool:
 	var item = map[action]
-	if is_instance_of(item, "Array"):
-		return item.map(is_action_just_pressed).any(func(x): x)
-	return Input.is_action_just_pressed(map[action])
+	if item is Array:
+		return item.map(is_action_just_pressed_helper).any(func(x): return x)
+	return is_action_just_pressed_helper(map[action])
+
+func is_action_just_pressed_helper(action: String):
+	return Input.is_action_just_pressed(action)
 
 func is_action_just_released(action: String) -> bool:
 	var item = map[action]
-	if is_instance_of(item, "Array"):
-		return item.map(is_action_just_released).any(func(x): x)
-	return Input.is_action_just_released(map[action])
-
-func _ready() -> void:
-	print(JSON.parse_string(JSON.stringify(map)))
+	if item is Array:
+		return item.map(is_action_just_released_helper).any(func(x): return x)
+	return is_action_just_released_helper(map[action])
+	
+func is_action_just_released_helper(action: String) -> bool:
+	return Input.is_action_just_released(action)

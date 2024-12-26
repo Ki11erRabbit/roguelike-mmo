@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdw1dp4xovi1i"]
+
+[ext_resource type="Script" path="res://Menus/MainMenu/Setttings/settings_item.gd" id="1_y5ms7"]
+
+[node name="settings_item" type="Control"]
+custom_minimum_size = Vector2(632, 90)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_y5ms7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+offset_top = 5.0
+offset_right = 632.0
+offset_bottom = 85.0
+color = Color(0.138638, 0.138637, 0.138637, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 628.0
+offset_bottom = 76.0
