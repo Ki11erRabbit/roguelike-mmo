@@ -25,21 +25,27 @@ func initialize(header: String, description: String, items: Array, skip_items: D
 	self.items = items
 	self.skip_items = skip_items
 
-func select_next_item():
+func select_next_item() -> int:
 	if current_item < 0:
 		current_item = container.get_children().size() - 1
 	else:
 		current_item = (current_item + 1) % container.get_children().size()
 	skip_to_next_item(1)
 	container.get_child(current_item).grab_focus()
-	
+	return current_item
 
-func select_previous_item():
+func select_previous_item() -> int:
 	if current_item < 0:
 		current_item = 0
 	else:
 		current_item = (current_item - 1) % container.get_children().size()
 	skip_to_next_item(-1)
+	container.get_child(current_item).grab_focus()
+	return current_item
+
+func select_particular_item(index: int):
+	current_item = index % container.get_child_count()
+	skip_to_next_item(1)
 	container.get_child(current_item).grab_focus()
 
 func skip_to_next_item(right: bool):
