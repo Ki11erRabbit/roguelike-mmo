@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="roguelike-mmo"
-run/main_scene="res://MovementTest.tscn"
+run/main_scene="res://Menus/MainMenu/title_screen.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 

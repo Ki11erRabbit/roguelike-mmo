@@ -5,8 +5,8 @@ const Actions = preload("res://InputManager/actions.gd")
 @onready
 var model = $BaseCharacter
 
-const SPEED = 5.0
-#const SPEED = 300.0
+#const SPEED = 5.0
+const SPEED = 0.5
 const DIRECTION_RESTRICT = 0.9
 const LOOK_RESTRICT = 0.8
 # Determines the angle that allows for playing the rotation animation
@@ -27,6 +27,8 @@ func _physics_process(delta: float) -> void:
 	var rotating: bool = false
 	var clockwise_rotation: bool = is_rotating_clockwise(aim_direction.angle(), last_aim.angle())
 	var aim_direction_was_zero: bool = (aim_direction.x == 0 and aim_direction.y == 0)
+	var backstepping: bool = false
+	var running: bool = false
 	
 	
 	if aim_direction.x == 0 and aim_direction.y == 0:
@@ -34,8 +36,11 @@ func _physics_process(delta: float) -> void:
 		normalized_aim = last_aim.normalized()
 	
 	#current_aim_angle = lerp_angle(last_aim_angle, current_aim_angle, 0.1)
+	model.rotation.x = 0
+	model.rotation.z = 0
 	model.rotation.y = atan2(aim_direction.x, aim_direction.y)
-	
+	#$CollisionShape3D.rotate_y(model.rotation.y)
+	model.rotate_x(deg_to_rad(-30))
 	
 	if (not aim_direction_was_zero) and rad_to_deg(abs(aim_direction.angle() - last_aim.angle())) < ROTATION_ANGLE_LIMIT:
 		rotating = true
@@ -49,6 +54,7 @@ func _physics_process(delta: float) -> void:
 	if (movement_vec.y > 50 or movement_vec.y < -50) or (movement_vec.x > 50 or movement_vec.x < -50):
 		model.start_running()
 		moving = true
+		running = true
 		#print("running")
 	elif movement_vec.x != 0 or movement_vec.y != 0:
 		model.start_walking()
@@ -160,15 +166,29 @@ func _physics_process(delta: float) -> void:
 		
 	
 
+	if backstepping:
+		movement_vec = movement_vec * (SPEED / 2)
+		velocity.x = movement_vec.x
+		velocity.z = movement_vec.y
+	else:
+		movement_vec = movement_vec * SPEED
+		velocity.x = movement_vec.x
+		velocity.z = movement_vec.y
+		
+	# Add the gravity.
+	if not is_on_floor():
+		print("not on floor")
+		print(get_gravity())
+		velocity += get_gravity() * delta
+	else:
+		print("on floor")
 	
-	
+	move_and_slide()
 	
 	
 	return
 	
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+	
 
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
@@ -185,7 +205,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
-	move_and_slide()
 
 func is_rotating_clockwise(current, last) -> bool:
 	current = rad_to_deg(current)
