@@ -18,6 +18,7 @@ func select_next_item():
 		return
 	
 	current_item = (current_item + 1) % item_container.get_children().size()
+	item_container.get_children()[current_item].select_previous_item()
 
 func select_previous_item():
 	if current_item < 0:
@@ -25,6 +26,7 @@ func select_previous_item():
 		return
 	
 	current_item = (current_item - 1) % item_container.get_children().size()
+	item_container.get_children()[current_item].select_next_item()
 
 func select_current_items_next_item():
 	item_container.get_children()[current_item].select_next_item()
@@ -32,6 +34,9 @@ func select_current_items_next_item():
 
 func select_current_items_previous_item():
 	item_container.get_children()[current_item].select_previous_item()
+
+func activate_current_item():
+	item_container.get_children()[current_item].activate_current_item()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

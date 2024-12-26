@@ -50,8 +50,8 @@ func change_binding(binding_name: String, binding: String, index = 0):
 	
 	if map[binding_name] is String:
 		map[binding_name] = [map[binding_name]]
-	while index > map[binding_name].size():
-		map[binding_name].append()
+	while index >= map[binding_name].size():
+		map[binding_name].append(null)
 	
 	map[binding_name][index] = binding
 

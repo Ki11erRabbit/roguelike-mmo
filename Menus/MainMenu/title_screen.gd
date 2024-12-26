@@ -1,6 +1,7 @@
 extends Control
 
 const Actions = preload("res://InputManager/actions.gd")
+const SettingsMenu = preload("res://Menus/MainMenu/Setttings/settings_menu.tscn")
 
 enum SelectedButton { None, Start, Settings, Quit }
 @onready
@@ -13,6 +14,10 @@ var quit_button: BaseButton = $CenterContainer/VBoxContainer/Quit
 var current_selected_button: SelectedButton = SelectedButton.None
 
 const COOLDOWN = 0.2
+const WAIT_TIME: float = 2
+var pressed_time: float = 0.0
+
+var block_input: bool = false
 
 func deselect_buttons():
 	current_selected_button = SelectedButton.None
@@ -23,6 +28,8 @@ func select_start_button():
 	start_button.grab_focus()
 
 func activate_start_button():
+	start_button.button_pressed = true
+	pressed_time = WAIT_TIME
 	pass
 
 func select_settings_button():
@@ -30,15 +37,25 @@ func select_settings_button():
 	settings_button.grab_focus()
 
 func activate_settings_button():
-	pass
+	settings_button.button_pressed = true
+	pressed_time = WAIT_TIME
+	start_blocking_input()
+	add_child(SettingsMenu.instantiate())
 
 func select_quit_button():
 	current_selected_button = SelectedButton.Quit
 	quit_button.grab_focus()
 
 func activate_quit_button():
+	quit_button.button_pressed = true
+	pressed_time = WAIT_TIME
 	get_tree().quit()
 
+func start_blocking_input():
+	block_input = true
+
+func stop_blocking_input():
+	block_input = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -48,6 +65,13 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
+	if pressed_time > 0:
+		pressed_time -= delta
+	elif pressed_time <= 0.0:
+		pressed_time = 0
+		
+	if block_input:
+		return
 		
 	if InputManager.is_action_pressed(Actions.MainMenuActionButtons.Up, COOLDOWN):
 		match current_selected_button:

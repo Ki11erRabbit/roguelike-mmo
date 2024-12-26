@@ -30,8 +30,8 @@ func select_next_item():
 		current_item = container.get_children().size() - 1
 	else:
 		current_item = (current_item + 1) % container.get_children().size()
-	container.get_child(current_item).grab_focus()
 	skip_to_next_item(1)
+	container.get_child(current_item).grab_focus()
 	
 
 func select_previous_item():
@@ -39,8 +39,8 @@ func select_previous_item():
 		current_item = 0
 	else:
 		current_item = (current_item - 1) % container.get_children().size()
-	container.get_child(current_item).grab_focus()
 	skip_to_next_item(-1)
+	container.get_child(current_item).grab_focus()
 
 func skip_to_next_item(right: bool):
 	var direction: int = 0
@@ -53,6 +53,9 @@ func skip_to_next_item(right: bool):
 	
 	while skip_items.get(current_item) != null:
 		current_item += direction
+
+func activate_current_item():
+	container.get_child(current_item).activate_item()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

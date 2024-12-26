@@ -57,18 +57,24 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if InputManager.is_action_pressed(Actions.MainMenuActionButtons.Up, COOLDOWN):
-		pass
+		$CardSlot.get_child(0).select_previous_item()
 	elif InputManager.is_action_pressed(Actions.MainMenuActionButtons.Down, COOLDOWN):
-		pass
+		$CardSlot.get_child(0).select_next_item()
+	elif InputManager.is_action_pressed(Actions.MainMenuActionButtons.Right, COOLDOWN):
+		$CardSlot.get_child(0).select_current_items_next_item()
+	elif InputManager.is_action_pressed(Actions.MainMenuActionButtons.Left, COOLDOWN):
+		$CardSlot.get_child(0).select_current_items_previous_item()
 	elif InputManager.is_action_pressed(Actions.MainMenuActionButtons.Accept, COOLDOWN):
-		pass
+		$CardSlot.get_child(0).activate_current_item()
 	elif InputManager.is_action_pressed(Actions.MainMenuActionButtons.Reject, COOLDOWN):
-		pass
+		get_parent().stop_blocking_input()
+		self.queue_free()
 
 func create_setting_item(binding: String, header: String, description: String):
 	var bindings = InputMapper.get_binding(binding)
 	var label = Label.new()
 	label.text = binding
+	label.custom_minimum_size.x = 200
 	var items = [label]
 	if bindings is String:
 		var item = KeybindButton.instantiate()

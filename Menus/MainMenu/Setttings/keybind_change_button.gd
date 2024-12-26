@@ -7,6 +7,10 @@ var binding: String = ""
 @export
 var variant: int = 0
 var accepting_input: bool = false
+var begin_accepting_input: bool = false
+
+const WAIT_TIME: float = 2
+var pressed_time: float = 0
 
 func initialize(button_name: String, binding: String, variant: int):
 	self.button_to_change = button_name
@@ -20,6 +24,10 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if not accepting_input:
+		return
+	
+	if accepting_input and not begin_accepting_input:
+		begin_accepting_input = true
 		return
 	
 	var set_input: bool = false
@@ -52,6 +60,7 @@ func _process(delta: float) -> void:
 	if set_input:
 		accepting_input = false
 		InputManager.enable_input()
+		self.button_pressed = false
 
 func check_key(key: String) -> bool:
 	if Input.is_action_just_pressed(key):
@@ -60,6 +69,10 @@ func check_key(key: String) -> bool:
 		text = key
 		return true
 	return false
+
+func activate_item():
+	self.button_pressed = true
+	emit_signal("pressed")
 
 func _on_pressed() -> void:
 	text = "Waiting on button press"
