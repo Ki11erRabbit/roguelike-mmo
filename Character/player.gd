@@ -4,6 +4,10 @@ const Actions = preload("res://InputManager/actions.gd")
 
 @onready
 var model = $BaseCharacter
+@onready
+var hitbox = $CollisionShape3D
+
+const X_ROTATION_AMOUNT: float = -40
 
 #const SPEED = 5.0
 const SPEED = 0.5
@@ -11,7 +15,10 @@ const DIRECTION_RESTRICT = 0.9
 const LOOK_RESTRICT = 0.8
 # Determines the angle that allows for playing the rotation animation
 const ROTATION_ANGLE_LIMIT: float = 10
-const JUMP_VELOCITY = 4.5
+
+var jump_pressed_time: float = 0.0
+var jumping: bool = false
+const JUMP_VELOCITY = 8
 
 var last_aim: Vector2 = Vector2(0, 0)
 
@@ -19,6 +26,15 @@ func _ready() -> void:
 	InputManager.start_game()
 
 func _physics_process(delta: float) -> void:
+	
+	handle_ground_movement()
+	handle_movement_input(delta)
+	
+	handle_gravity(delta)
+	
+	move_and_slide()
+
+func handle_ground_movement():
 	var move_direction = InputManager.get_stick_vector(Actions.PlayerActionSticks.Movement)
 	var normalized_move = move_direction.normalized()
 	var aim_direction = InputManager.get_stick_vector(Actions.PlayerActionSticks.Aim)
@@ -37,10 +53,13 @@ func _physics_process(delta: float) -> void:
 	
 	#current_aim_angle = lerp_angle(last_aim_angle, current_aim_angle, 0.1)
 	model.rotation.x = 0
+	hitbox.rotation.x = 0
 	model.rotation.z = 0
+	hitbox.rotation.z = 0
 	model.rotation.y = atan2(aim_direction.x, aim_direction.y)
-	#$CollisionShape3D.rotate_y(model.rotation.y)
-	model.rotate_x(deg_to_rad(-30))
+	hitbox.rotation.y = model.rotation.y
+	hitbox.rotate_x(deg_to_rad(X_ROTATION_AMOUNT))
+	model.rotate_x(deg_to_rad(X_ROTATION_AMOUNT))
 	
 	if (not aim_direction_was_zero) and rad_to_deg(abs(aim_direction.angle() - last_aim.angle())) < ROTATION_ANGLE_LIMIT:
 		rotating = true
@@ -174,38 +193,21 @@ func _physics_process(delta: float) -> void:
 		movement_vec = movement_vec * SPEED
 		velocity.x = movement_vec.x
 		velocity.z = movement_vec.y
-		
+
+func handle_movement_input(delta: float):
+	
+	if InputManager.is_action_just_released(Actions.PlayerActionButtons.Jump) and is_on_floor():
+		velocity.y += JUMP_VELOCITY
+		pass
+	elif InputManager.is_action_pressed(Actions.PlayerActionButtons.Jump):
+		pass
+
+func handle_gravity(delta: float):
 	# Add the gravity.
 	if not is_on_floor():
-		print("not on floor")
-		print(get_gravity())
 		velocity += get_gravity() * delta
-	else:
-		print("on floor")
-	
-	move_and_slide()
-	
-	
-	return
-	
-	
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-
-
+	
 func is_rotating_clockwise(current, last) -> bool:
 	current = rad_to_deg(current)
 	last = rad_to_deg(last)

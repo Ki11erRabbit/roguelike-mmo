@@ -3,20 +3,21 @@
 [ext_resource type="PackedScene" uid="uid://duwxd5krrsolr" path="res://Character/player.tscn" id="1_fa1y0"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1xx45"]
-size = Vector2(100, 100)
+size = Vector2(1000, 1000)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8w3hl"]
-data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_w0yk4"]
+data = PackedVector3Array(500, 0, 500, -500, 0, 500, 500, 0, -500, -500, 0, 500, -500, 0, -500, 500, 0, -500)
 
 [node name="TestLevel" type="Node"]
 
 [node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("PlaneMesh_1xx45")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_8w3hl")
+shape = SubResource("ConcavePolygonShape3D_w0yk4")
 
 [node name="Player" parent="." instance=ExtResource("1_fa1y0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
