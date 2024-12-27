@@ -18,7 +18,7 @@ const ROTATION_ANGLE_LIMIT: float = 10
 
 var jump_pressed_time: float = 0.0
 var jumping: bool = false
-const JUMP_VELOCITY = 45
+const JUMP_VELOCITY = 100
 var fall_time: float = 0.0
 var falling: bool = false
 
@@ -31,11 +31,9 @@ func _physics_process(delta: float) -> void:
 	
 	handle_movement_input(delta)
 	
-	handle_gravity(delta)
-	
 	handle_ground_movement()
 	
-	
+	handle_gravity(delta)
 	move_and_slide()
 
 func handle_ground_movement():
@@ -75,12 +73,14 @@ func handle_ground_movement():
 	#print(movement_vec)
 	
 	if (movement_vec.y > 50 or movement_vec.y < -50) or (movement_vec.x > 50 or movement_vec.x < -50):
-		model.start_running()
+		if not falling and not jumping:
+			model.start_running()
+			running = true
 		moving = true
-		running = true
 		#print("running")
 	elif movement_vec.x != 0 or movement_vec.y != 0:
-		model.start_walking()
+		if not falling and not jumping:
+			model.start_walking()
 		moving = true
 		#print("walking")
 	elif not jumping and not falling:
@@ -98,7 +98,8 @@ func handle_ground_movement():
 			#print("forwards")
 		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
 			#print("backwards")
-			model.start_backstepping()
+			if not falling and not jumping:
+				model.start_backstepping()
 	# Moving Upwards
 	elif Vector2.UP.normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
 		#print("Up")
@@ -109,7 +110,8 @@ func handle_ground_movement():
 			#print("forwards")
 		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
 			#print("backwards")
-			model.start_backstepping()
+			if not falling and not jumping:
+				model.start_backstepping()
 	# Moving to the Right
 	elif Vector2.RIGHT.normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
 		#print("Right")
@@ -120,7 +122,8 @@ func handle_ground_movement():
 			#print("forwards")
 		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
 			#print("backwards")
-			model.start_backstepping()
+			if not falling and not jumping:
+				model.start_backstepping()
 	# Moving to the Left
 	elif Vector2.LEFT.normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
 		#print("Left")
@@ -131,7 +134,8 @@ func handle_ground_movement():
 			#print("forwards")
 		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
 			#print("backwards")
-			model.start_backstepping()
+			if not falling and not jumping:
+				model.start_backstepping()
 	# Moving to the Top Right
 	elif Vector2.RIGHT.rotated(deg_to_rad(-45)).normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
 		#print("Top Right")
@@ -142,7 +146,8 @@ func handle_ground_movement():
 			#print("forwards")
 		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
 			#print("backwards")
-			model.start_backstepping()
+			if not falling and not jumping:
+				model.start_backstepping()
 	# Moving to the Bottom Right
 	elif Vector2.RIGHT.rotated(deg_to_rad(45)).normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
 		#print("Bottom Right")
@@ -153,7 +158,8 @@ func handle_ground_movement():
 			#print("forwards")
 		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
 			#print("backwards")
-			model.start_backstepping()
+			if not falling and not jumping:
+				model.start_backstepping()
 	# Moving to the Top Left
 	elif Vector2.LEFT.rotated(deg_to_rad(45)).normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
 		#print("Top Left")
@@ -164,7 +170,8 @@ func handle_ground_movement():
 			#print("forwards")
 		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
 			#print("backwards")
-			model.start_backstepping()
+			if not falling and not jumping:
+				model.start_backstepping()
 	# Moving to the Bottom Left
 	elif Vector2.LEFT.rotated(deg_to_rad(-45)).normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
 		#print("Bottom Left")
@@ -175,7 +182,8 @@ func handle_ground_movement():
 			#print("forwards")
 		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
 			#print("backwards")
-			model.start_backstepping()
+			if not falling and not jumping:
+				model.start_backstepping()
 	else:
 		if rotating and not moving and not jumping and not falling:
 			if clockwise_rotation:
@@ -210,17 +218,21 @@ func handle_gravity(delta: float):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-		if velocity.y <= 0.0:
+		if velocity.y < 0.0:
 			fall_time += delta
-			falling = true
-			jumping = false
-			model.start_falling()
-		else:
-			fall_time = 0
-	elif falling:
-		if fall_time < 8:
+			if not falling:
+				model.start_falling()
+				falling = true
+				jumping = false
+	elif falling and is_on_floor():
+		print(fall_time)
+		print(velocity)
+		if fall_time < 8 and fall_time > 0:
 			model.short_fall_landing()
+		elif fall_time >= 8 and fall_time < 20:
+			model.medium_fall_landing()
 		falling = false
+		fall_time = 0
 
 	
 func is_rotating_clockwise(current, last) -> bool:

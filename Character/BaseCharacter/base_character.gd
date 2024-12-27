@@ -30,11 +30,18 @@ func start_backstepping():
 func jump():
 	state_machine.travel("jump")
 
+
 func start_falling():
 	state_machine.travel("falling")
 
+func start_long_falling():
+	state_machine.travel("long_falling")
+
 func short_fall_landing():
 	state_machine.travel("short_fall_landing")
+
+func medium_fall_landing():
+	state_machine.travel("medium_fall_landing")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

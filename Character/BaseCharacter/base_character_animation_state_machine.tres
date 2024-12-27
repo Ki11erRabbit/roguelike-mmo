@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=40 format=3 uid="uid://br0f58s21xwg6"]
+[gd_resource type="AnimationNodeStateMachine" load_steps=45 format=3 uid="uid://br0f58s21xwg6"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2enoo"]
 animation = &"idle"
@@ -14,6 +14,12 @@ animation = &"jump"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d6dei"]
 animation = &"jumping"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j78wp"]
+animation = &"long_falling"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_aclol"]
+animation = &"medium_fall_landing"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hh546"]
 animation = &"post_jump"
@@ -112,12 +118,21 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yhmau"]
 xfade_time = 0.1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d0wk6"]
-xfade_time = 0.1
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hauux"]
 switch_mode = 2
 advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3tj3f"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hgp7g"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q3dl7"]
+priority = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_viwe0"]
 
 [resource]
 states/End/position = Vector2(1285.5, -49.5)
@@ -127,22 +142,26 @@ states/Start/position = Vector2(196.5, 121.5)
 states/backstep/node = SubResource("AnimationNodeAnimation_mxoot")
 states/backstep/position = Vector2(1175, 325.5)
 states/falling/node = SubResource("AnimationNodeAnimation_3oxak")
-states/falling/position = Vector2(595.5, 658.5)
+states/falling/position = Vector2(548.5, 691.5)
 states/jump/node = SubResource("AnimationNodeAnimation_waxmr")
 states/jump/position = Vector2(701, 385)
 states/jumping/node = SubResource("AnimationNodeAnimation_d6dei")
 states/jumping/position = Vector2(787.5, 657.5)
+states/long_falling/node = SubResource("AnimationNodeAnimation_j78wp")
+states/long_falling/position = Vector2(216.5, 737)
+states/medium_fall_landing/node = SubResource("AnimationNodeAnimation_aclol")
+states/medium_fall_landing/position = Vector2(192.5, 549)
 states/post_jump/node = SubResource("AnimationNodeAnimation_hh546")
 states/post_jump/position = Vector2(905, 530.5)
 states/rotate_left/node = SubResource("AnimationNodeAnimation_ok1yd")
 states/rotate_left/position = Vector2(373, -188.5)
 states/rotate_right/node = SubResource("AnimationNodeAnimation_3lnjs")
-states/rotate_right/position = Vector2(320.5, 292.5)
+states/rotate_right/position = Vector2(40, 318.5)
 states/run/node = SubResource("AnimationNodeAnimation_6fcj3")
 states/run/position = Vector2(1163.5, 34.5)
 states/short_fall_landing/node = SubResource("AnimationNodeAnimation_fyuqo")
-states/short_fall_landing/position = Vector2(414.5, 560.25)
+states/short_fall_landing/position = Vector2(429.5, 537.75)
 states/walk/node = SubResource("AnimationNodeAnimation_u2tfy")
 states/walk/position = Vector2(628.5, -49.25)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ksc0d"), "Idle", "rotate_left", SubResource("AnimationNodeStateMachineTransition_g0xu8"), "Idle", "rotate_right", SubResource("AnimationNodeStateMachineTransition_7bk81"), "rotate_left", "Idle", SubResource("AnimationNodeStateMachineTransition_w2f7y"), "rotate_right", "Idle", SubResource("AnimationNodeStateMachineTransition_yj5t7"), "Idle", "walk", SubResource("AnimationNodeStateMachineTransition_6kp1b"), "walk", "Idle", SubResource("AnimationNodeStateMachineTransition_w4sa0"), "backstep", "Idle", SubResource("AnimationNodeStateMachineTransition_a3h6l"), "Idle", "backstep", SubResource("AnimationNodeStateMachineTransition_8n4vu"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_dlfti"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_khjqx"), "walk", "backstep", SubResource("AnimationNodeStateMachineTransition_yejm1"), "backstep", "walk", SubResource("AnimationNodeStateMachineTransition_l8gt4"), "backstep", "run", SubResource("AnimationNodeStateMachineTransition_gqxe2"), "run", "backstep", SubResource("AnimationNodeStateMachineTransition_ivc33"), "Idle", "run", SubResource("AnimationNodeStateMachineTransition_papew"), "run", "Idle", SubResource("AnimationNodeStateMachineTransition_4840u"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_aqhr7"), "backstep", "jump", SubResource("AnimationNodeStateMachineTransition_ojtrs"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_s30ng"), "rotate_right", "jump", SubResource("AnimationNodeStateMachineTransition_eofp0"), "rotate_left", "jump", SubResource("AnimationNodeStateMachineTransition_a2shm"), "jump", "post_jump", SubResource("AnimationNodeStateMachineTransition_8a3lr"), "short_fall_landing", "Idle", SubResource("AnimationNodeStateMachineTransition_d13g0"), "Idle", "jump", SubResource("AnimationNodeStateMachineTransition_bfas8"), "jumping", "falling", SubResource("AnimationNodeStateMachineTransition_yhmau"), "falling", "short_fall_landing", SubResource("AnimationNodeStateMachineTransition_d0wk6"), "post_jump", "jumping", SubResource("AnimationNodeStateMachineTransition_hauux")]
-graph_offset = Vector2(-52, 15)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ksc0d"), "Idle", "rotate_left", SubResource("AnimationNodeStateMachineTransition_g0xu8"), "Idle", "rotate_right", SubResource("AnimationNodeStateMachineTransition_7bk81"), "rotate_left", "Idle", SubResource("AnimationNodeStateMachineTransition_w2f7y"), "rotate_right", "Idle", SubResource("AnimationNodeStateMachineTransition_yj5t7"), "Idle", "walk", SubResource("AnimationNodeStateMachineTransition_6kp1b"), "walk", "Idle", SubResource("AnimationNodeStateMachineTransition_w4sa0"), "backstep", "Idle", SubResource("AnimationNodeStateMachineTransition_a3h6l"), "Idle", "backstep", SubResource("AnimationNodeStateMachineTransition_8n4vu"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_dlfti"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_khjqx"), "walk", "backstep", SubResource("AnimationNodeStateMachineTransition_yejm1"), "backstep", "walk", SubResource("AnimationNodeStateMachineTransition_l8gt4"), "backstep", "run", SubResource("AnimationNodeStateMachineTransition_gqxe2"), "run", "backstep", SubResource("AnimationNodeStateMachineTransition_ivc33"), "Idle", "run", SubResource("AnimationNodeStateMachineTransition_papew"), "run", "Idle", SubResource("AnimationNodeStateMachineTransition_4840u"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_aqhr7"), "backstep", "jump", SubResource("AnimationNodeStateMachineTransition_ojtrs"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_s30ng"), "rotate_right", "jump", SubResource("AnimationNodeStateMachineTransition_eofp0"), "rotate_left", "jump", SubResource("AnimationNodeStateMachineTransition_a2shm"), "jump", "post_jump", SubResource("AnimationNodeStateMachineTransition_8a3lr"), "short_fall_landing", "Idle", SubResource("AnimationNodeStateMachineTransition_d13g0"), "Idle", "jump", SubResource("AnimationNodeStateMachineTransition_bfas8"), "jumping", "falling", SubResource("AnimationNodeStateMachineTransition_yhmau"), "post_jump", "jumping", SubResource("AnimationNodeStateMachineTransition_hauux"), "falling", "long_falling", SubResource("AnimationNodeStateMachineTransition_3tj3f"), "medium_fall_landing", "Idle", SubResource("AnimationNodeStateMachineTransition_hgp7g"), "falling", "short_fall_landing", SubResource("AnimationNodeStateMachineTransition_q3dl7"), "falling", "medium_fall_landing", SubResource("AnimationNodeStateMachineTransition_viwe0")]
+graph_offset = Vector2(-314, 318)
