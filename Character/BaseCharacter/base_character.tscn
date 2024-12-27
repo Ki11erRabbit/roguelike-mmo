@@ -1,92 +1,8 @@
-[gd_scene load_steps=27 format=3 uid="uid://heyuc5y56gf8"]
+[gd_scene load_steps=4 format=3 uid="uid://heyuc5y56gf8"]
 
 [ext_resource type="PackedScene" uid="uid://u10wuqaym4wq" path="res://Character/BaseCharacter/BaseCharacter.glb" id="1_84i06"]
 [ext_resource type="Script" path="res://Character/BaseCharacter/base_character.gd" id="2_uy0i3"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2enoo"]
-animation = &"default"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mxoot"]
-animation = &"backstep"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ok1yd"]
-animation = &"rotate_left"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3lnjs"]
-animation = &"rotate_right"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6fcj3"]
-animation = &"run"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u2tfy"]
-animation = &"walk"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ksc0d"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g0xu8"]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7bk81"]
-xfade_time = 1.0
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w2f7y"]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yj5t7"]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6kp1b"]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w4sa0"]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a3h6l"]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8n4vu"]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dlfti"]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_khjqx"]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yejm1"]
-xfade_time = 1.0
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l8gt4"]
-xfade_time = 1.0
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gqxe2"]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ivc33"]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_papew"]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4840u"]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ehkwr"]
-states/Idle/node = SubResource("AnimationNodeAnimation_2enoo")
-states/Idle/position = Vector2(371.5, 120.75)
-states/Start/position = Vector2(196.5, 121.5)
-states/backstep/node = SubResource("AnimationNodeAnimation_mxoot")
-states/backstep/position = Vector2(601.5, 220)
-states/rotate_left/node = SubResource("AnimationNodeAnimation_ok1yd")
-states/rotate_left/position = Vector2(365.5, -32)
-states/rotate_right/node = SubResource("AnimationNodeAnimation_3lnjs")
-states/rotate_right/position = Vector2(349, 253.5)
-states/run/node = SubResource("AnimationNodeAnimation_6fcj3")
-states/run/position = Vector2(761, 140)
-states/walk/node = SubResource("AnimationNodeAnimation_u2tfy")
-states/walk/position = Vector2(625.5, 42)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ksc0d"), "Idle", "rotate_left", SubResource("AnimationNodeStateMachineTransition_g0xu8"), "Idle", "rotate_right", SubResource("AnimationNodeStateMachineTransition_7bk81"), "rotate_left", "Idle", SubResource("AnimationNodeStateMachineTransition_w2f7y"), "rotate_right", "Idle", SubResource("AnimationNodeStateMachineTransition_yj5t7"), "Idle", "walk", SubResource("AnimationNodeStateMachineTransition_6kp1b"), "walk", "Idle", SubResource("AnimationNodeStateMachineTransition_w4sa0"), "backstep", "Idle", SubResource("AnimationNodeStateMachineTransition_a3h6l"), "Idle", "backstep", SubResource("AnimationNodeStateMachineTransition_8n4vu"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_dlfti"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_khjqx"), "walk", "backstep", SubResource("AnimationNodeStateMachineTransition_yejm1"), "backstep", "walk", SubResource("AnimationNodeStateMachineTransition_l8gt4"), "backstep", "run", SubResource("AnimationNodeStateMachineTransition_gqxe2"), "run", "backstep", SubResource("AnimationNodeStateMachineTransition_ivc33"), "Idle", "run", SubResource("AnimationNodeStateMachineTransition_papew"), "run", "Idle", SubResource("AnimationNodeStateMachineTransition_4840u")]
-graph_offset = Vector2(-174, -124)
+[ext_resource type="AnimationNodeStateMachine" uid="uid://br0f58s21xwg6" path="res://Character/BaseCharacter/base_character_animation_state_machine.tres" id="3_tye06"]
 
 [node name="BaseCharacter" instance=ExtResource("1_84i06")]
 script = ExtResource("2_uy0i3")
@@ -131,5 +47,5 @@ bones/30/rotation = Quaternion(-0.798235, 3.62744e-08, 4.7298e-08, 0.602346)
 bones/31/rotation = Quaternion(0.012926, -2.66891e-14, -1.05361e-14, 0.999916)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
-tree_root = SubResource("AnimationNodeStateMachine_ehkwr")
+tree_root = ExtResource("3_tye06")
 anim_player = NodePath("../AnimationPlayer")

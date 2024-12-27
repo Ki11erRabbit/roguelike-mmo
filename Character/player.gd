@@ -18,7 +18,9 @@ const ROTATION_ANGLE_LIMIT: float = 10
 
 var jump_pressed_time: float = 0.0
 var jumping: bool = false
-const JUMP_VELOCITY = 8
+const JUMP_VELOCITY = 45
+var fall_time: float = 0.0
+var falling: bool = false
 
 var last_aim: Vector2 = Vector2(0, 0)
 
@@ -27,10 +29,12 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	
-	handle_ground_movement()
 	handle_movement_input(delta)
 	
 	handle_gravity(delta)
+	
+	handle_ground_movement()
+	
 	
 	move_and_slide()
 
@@ -79,8 +83,8 @@ func handle_ground_movement():
 		model.start_walking()
 		moving = true
 		#print("walking")
-	else:
-		model.start_standing()
+	elif not jumping and not falling:
+		#model.start_standing()
 		moving = false
 		#print("standing")
 	
@@ -170,17 +174,15 @@ func handle_ground_movement():
 			pass
 			#print("forwards")
 		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
-			pass
 			#print("backwards")
+			model.start_backstepping()
 	else:
-		model.start_standing()
-		if rotating and not moving:
+		if rotating and not moving and not jumping and not falling:
 			if clockwise_rotation:
 				model.rotate_right()
 			else:
 				model.rotate_left()
-		else:
-			model.stop_rotating()
+		elif not jumping and not falling and not moving:
 			model.start_standing()
 		
 	
@@ -198,6 +200,8 @@ func handle_movement_input(delta: float):
 	
 	if InputManager.is_action_just_released(Actions.PlayerActionButtons.Jump) and is_on_floor():
 		velocity.y += JUMP_VELOCITY
+		model.jump()
+		jumping = true
 		pass
 	elif InputManager.is_action_pressed(Actions.PlayerActionButtons.Jump):
 		pass
@@ -206,6 +210,17 @@ func handle_gravity(delta: float):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		if velocity.y <= 0.0:
+			fall_time += delta
+			falling = true
+			jumping = false
+			model.start_falling()
+		else:
+			fall_time = 0
+	elif falling:
+		if fall_time < 8:
+			model.short_fall_landing()
+		falling = false
 
 	
 func is_rotating_clockwise(current, last) -> bool:

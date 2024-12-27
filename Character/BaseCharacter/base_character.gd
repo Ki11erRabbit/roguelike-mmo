@@ -9,13 +9,14 @@ func rotate_left():
 
 func rotate_right():
 	state_machine.travel("rotate_right")
-	
-func stop_rotating():
-	state_machine.travel("Idle")
 
-
+var standing_counter = 0
 func start_standing():
-	state_machine.travel("Idle")
+	if state_machine.get_current_node() != "Idle":
+		standing_counter += 1
+		if standing_counter > 1:
+			return
+		state_machine.travel("Idle")
 
 func start_walking():
 	state_machine.travel("walk")
@@ -26,6 +27,14 @@ func start_running():
 func start_backstepping():
 	state_machine.travel("backstep")
 
+func jump():
+	state_machine.travel("jump")
+
+func start_falling():
+	state_machine.travel("falling")
+
+func short_fall_landing():
+	state_machine.travel("short_fall_landing")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,4 +43,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	#print(state_machine.get_current_node())
+	standing_counter = 0
 	pass
