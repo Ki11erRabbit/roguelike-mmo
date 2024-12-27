@@ -7,7 +7,7 @@ var model = $BaseCharacter
 @onready
 var hitbox = $CollisionShape3D
 
-const X_ROTATION_AMOUNT: float = -40
+const X_ROTATION_AMOUNT: float = -15
 
 #const SPEED = 5.0
 const SPEED = 0.5

@@ -4,6 +4,16 @@ extends Node3D
 @onready
 var state_machine: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/playback"]
 
+
+
+func unequip():
+	state_machine.travel("weaponless")
+
+func equip_right_haned_sword():
+	state_machine.travel("sword_right_hand")
+	
+
+
 func rotate_left():
 	state_machine.travel("rotate_left")
 
@@ -12,11 +22,11 @@ func rotate_right():
 
 var standing_counter = 0
 func start_standing():
-	if state_machine.get_current_node() != "Idle":
+	if state_machine.get_current_node() != "idle":
 		standing_counter += 1
 		if standing_counter > 1:
 			return
-		state_machine.travel("Idle")
+		state_machine.travel("idle")
 
 func start_walking():
 	state_machine.travel("walk")
