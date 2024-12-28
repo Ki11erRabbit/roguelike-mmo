@@ -1,6 +1,8 @@
 extends Node3D
 
 
+signal animation_finished(anim_name: StringName)
+
 @onready
 var body_state_machine: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/Body/playback"]
 #@onready
@@ -95,3 +97,7 @@ func _process(delta: float) -> void:
 	#print(state_machine.get_current_node())
 	standing_counter = 0
 	pass
+
+
+func emit_animation_finished(anim_name: StringName) -> void:
+	emit_signal("animation_finished", anim_name)
