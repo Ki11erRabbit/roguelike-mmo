@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://crrmxxear2ixe"]
+
+[ext_resource type="PackedScene" uid="uid://dbgiq25575sro" path="res://Weapons/test_sword.glb" id="1_k7p6s"]
+
+[node name="test_sword" instance=ExtResource("1_k7p6s")]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0, 0, 0)

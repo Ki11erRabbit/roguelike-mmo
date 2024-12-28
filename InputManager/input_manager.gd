@@ -9,6 +9,9 @@ var cool_down: Dictionary = {}
 
 var input_state = MainMenuInput.MainMenuInput.new()
 
+func add_cooldown(action, cooldown):
+	cool_down[action] = cooldown
+
 func get_stick_vector(stick, cooldown = 0.0) -> Vector2:
 	if stick not in cool_down:
 		cool_down[stick] = 0
