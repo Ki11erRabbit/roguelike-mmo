@@ -213,6 +213,11 @@ func handle_movement_input(delta: float):
 		pass
 	elif InputManager.is_action_pressed(Actions.PlayerActionButtons.Jump):
 		pass
+	
+	if InputManager.is_action_just_pressed(Actions.PlayerActionButtons.RightAttack):
+		model.equip_right_handed_sword()
+	if InputManager.is_action_just_pressed(Actions.PlayerActionButtons.Interact):
+		model.unequip()
 
 func handle_gravity(delta: float):
 	# Add the gravity.
