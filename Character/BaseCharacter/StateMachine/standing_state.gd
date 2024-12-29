@@ -1,6 +1,5 @@
 class_name StandingState extends "res://Character/BaseCharacter/StateMachine/character_movement_state.gd"
 
-const MovingState = preload("res://Character/BaseCharacter/StateMachine/moving_state.gd")
 
 func initialize(character: Player, current_last_aim: Vector2, additional = null):
 	super(character, current_last_aim)

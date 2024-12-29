@@ -8,6 +8,7 @@ var model = $BaseCharacter
 var hitbox = $CollisionShape3D
 
 var movement_state: CharacterMovementState = StandingState.new()
+var weapon_state_machine: WeaponStateMachine = WeaponStateMachine.new()
 
 const X_ROTATION_AMOUNT: float = -15
 
@@ -32,54 +33,32 @@ var slash_delta: float = 0.0
 
 func _ready() -> void:
 	movement_state.initialize(self, Vector2(0,0))
+	weapon_state_machine.initialize(self, WeaponStateMachine.HandedNess.Right, SwordRightHandedIdleState.new())
 	InputManager.start_game()
 
 func _physics_process(delta: float) -> void:
 	
 	movement_state.apply_current_state(delta)
+	weapon_state_machine.process_input(delta)
+	
+	if InputManager.is_action_just_pressed(Actions.PlayerActionButtons.RightAttack):
+		if not equipped_sword:
+			equipped_sword = true
+			model.equip_right_handed_sword()
+			var sword_container = get_children().pop_back()
+			remove_child(sword_container)
+			sword_container.visible = true
+			model.equip_right_hand(sword_container)
+	if InputManager.is_action_just_pressed(Actions.PlayerActionButtons.Interact):
+		if equipped_sword:
+			model.unequip()
+			equipped_sword = false
+			var sword_container = model.unequip_right_hand()
+			sword_container.visible = false
+			add_child(sword_container)
 	#handle_movement_input(delta)
 	#
 	#handle_ground_movement()
 	#
 	#handle_gravity(delta)
 	move_and_slide()
-
-
-func handle_movement_input(delta: float):
-	
-	if InputManager.is_action_just_released(Actions.PlayerActionButtons.Jump) and is_on_floor():
-		velocity.y += JUMP_VELOCITY
-		model.jump()
-		jumping = true
-		can_move = false
-		pass
-	elif InputManager.is_action_pressed(Actions.PlayerActionButtons.Jump):
-		pass
-	
-	if slash_count > 0:
-		slash_delta += delta
-	if slash_delta > 0.5:
-		slash_count = 0
-		slash_delta = 0.0
-		model.right_hand_reset()
-		
-	
-	if InputManager.is_action_just_pressed(Actions.PlayerActionButtons.RightAttack):
-		if not equipped_sword:
-			equipped_sword = true
-			model.equip_right_handed_sword()
-		else:
-			InputManager.add_cooldown(Actions.PlayerActionButtons.RightAttack, 0.2)
-			slash_count += 1
-			if slash_count == 1:
-				model.right_hand_slash1()
-				slash_delta = 0.0
-			elif slash_count == 2 and slash_delta <= 0.5:
-				model.right_hand_slash2()
-				slash_count = 0
-				slash_delta = 0.0
-	if InputManager.is_action_just_pressed(Actions.PlayerActionButtons.Interact):
-		model.unequip()
-		equipped_sword = false
-		slash_delta = 0.0
-	

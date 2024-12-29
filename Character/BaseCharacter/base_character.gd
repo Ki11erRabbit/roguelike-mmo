@@ -12,7 +12,24 @@ var left_arm_state_machine: AnimationNodeStateMachinePlayback = $AnimationTree["
 @onready
 var right_arm_state_machine: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/RightArm/playback"]
 
+@onready
+var right_hand_container: Node3D = $Skeleton/Skeleton3D/RightHandAttachment/RightHandContainer
+@onready
+var left_hand_container: Node3D = $Skeleton/Skeleton3D/LeftHandAttachment/LeftHandContainer
 
+func equip_right_hand(weapon_container: Node3D):
+	right_hand_container.add_child(weapon_container)
+func unequip_right_hand() -> Node3D:
+	var sword_container = right_hand_container.get_children().pop_back()
+	right_hand_container.remove_child(sword_container)
+	return sword_container
+
+func equip_left_hand(weapon_container: Node3D):
+	left_hand_container.add_child(weapon_container)
+func unequip_left_hand() -> Node3D:
+	var sword_container = left_hand_container.get_children().pop_back()
+	left_hand_container.remove_child(sword_container)
+	return sword_container
 
 
 func unequip():
@@ -94,7 +111,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	#print(state_machine.get_current_node())
+	print(right_arm_state_machine.get_current_node())
 	standing_counter = 0
 	pass
 

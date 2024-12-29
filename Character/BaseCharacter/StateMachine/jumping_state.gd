@@ -1,7 +1,5 @@
 class_name JumpingState extends "res://Character/BaseCharacter/StateMachine/character_movement_state.gd"
 
-const FallingState = preload("res://Character/BaseCharacter/StateMachine/falling_state.gd")
-
 var current_delta = 0.0
 
 func initialize(character: Player, current_last_aim: Vector2, additional = null):

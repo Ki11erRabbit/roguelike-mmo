@@ -1,7 +1,6 @@
 class_name CharacterMovementState extends Node
 
 const Actions = preload("res://InputManager/actions.gd")
-const JumpState = preload("res://Character/BaseCharacter/StateMachine/jump_state.gd")
 var character: Player
 
 var last_aim: Vector2

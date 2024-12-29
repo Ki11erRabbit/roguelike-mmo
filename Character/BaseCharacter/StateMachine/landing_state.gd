@@ -1,6 +1,5 @@
 class_name LandingState extends "res://Character/BaseCharacter/StateMachine/character_movement_state.gd"
 
-enum FallingType { Short, Medium, Long }
 
 func initialize(character: Player, current_last_aim: Vector2, fall_time = null):
 	super(character, current_last_aim)
