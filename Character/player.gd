@@ -49,6 +49,7 @@ func _physics_process(delta: float) -> void:
 			remove_child(sword_container)
 			sword_container.visible = true
 			model.equip_right_hand(sword_container)
+			weapon_state_machine.enabled = true
 	if InputManager.is_action_just_pressed(Actions.PlayerActionButtons.Interact):
 		if equipped_sword:
 			model.unequip()
@@ -56,6 +57,7 @@ func _physics_process(delta: float) -> void:
 			var sword_container = model.unequip_right_hand()
 			sword_container.visible = false
 			add_child(sword_container)
+			weapon_state_machine.enabled = false
 	#handle_movement_input(delta)
 	#
 	#handle_ground_movement()

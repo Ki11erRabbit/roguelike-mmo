@@ -1,6 +1,6 @@
 class_name SwordRightHandedSwing1State extends "res://Character/WeaponStateMachine/SwordRightHanded/sword_right_handed_state.gd"
 
-const GRACE_TIME: float = 1
+const GRACE_TIME: float = 0.5
 var grace_period: float = GRACE_TIME
 
 var attacks_enabled: bool = false
