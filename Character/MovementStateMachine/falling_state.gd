@@ -1,12 +1,12 @@
-class_name FallingState extends "res://Character/BaseCharacter/StateMachine/character_movement_state.gd"
+class_name FallingState extends "res://Character/MovementStateMachine/character_movement_state.gd"
 
 
 var fall_time: float
 
-func initialize(character: Player, current_last_aim: Vector2, initial_delta = null):
+func initialize(character: Character, current_last_aim: Vector2, initial_delta = null):
 	super(character, current_last_aim)
 	fall_time = initial_delta
-	character.model.start_falling()
+	character.play_body_animation("falling")
 
 
 func apply_current_state(delta: float):
@@ -25,6 +25,7 @@ func on_ground(delta: float):
 func landing():
 	character.movement_state = LandingState.new()
 	character.movement_state.initialize(character, last_aim, fall_time)
+	character.land()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -1,4 +1,4 @@
-extends Node3D
+class_name BaseCharacter extends Node3D
 
 
 signal animation_finished(anim_name: StringName)
@@ -11,11 +11,14 @@ var body_state_machine: AnimationNodeStateMachinePlayback = $AnimationTree["para
 var left_arm_state_machine: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/LeftArm/playback"]
 @onready
 var right_arm_state_machine: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/RightArm/playback"]
+@onready
+var both_arm_state_machine: AnimationNodeStateMachinePlayback = $AnimationTree["parameters/BothArm/playback"]
 
 @onready
 var right_hand_container: Node3D = $Skeleton/Skeleton3D/RightHandAttachment/RightHandContainer
 @onready
 var left_hand_container: Node3D = $Skeleton/Skeleton3D/LeftHandAttachment/LeftHandContainer
+
 
 func equip_right_hand(weapon_container: Node3D):
 	right_hand_container.add_child(weapon_container)
@@ -35,6 +38,7 @@ func unequip_left_hand() -> Node3D:
 func unequip():
 	$AnimationTree["parameters/LeftArmOneShot/request"] = 2
 	$AnimationTree["parameters/RightArmOneShot/request"] = 2
+	$AnimationTree["parameters/BothArmOneShot/request"] = 2
 
 func equip_right_handed_sword():
 	$AnimationTree["parameters/RightArmOneShot/request"]= 1
@@ -102,6 +106,8 @@ func medium_fall_landing():
 	
 	body_travel("medium_fall_landing")
 	#state_machine.travel("medium_fall_landing")
+
+	
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

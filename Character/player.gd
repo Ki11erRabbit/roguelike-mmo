@@ -32,35 +32,36 @@ var slash_count: int = 0
 var slash_delta: float = 0.0
 
 func _ready() -> void:
-	movement_state.initialize(self, Vector2(0,0))
-	weapon_state_machine.initialize(self, WeaponStateMachine.HandedNess.Right, SwordRightHandedIdleState.new())
-	InputManager.start_game()
+	pass
+	#movement_state.initialize(self, Vector2(0,0))
+	#weapon_state_machine.initialize(self, WeaponStateMachine.HandedNess.Right, SwordRightHandedIdleState.new())
+	#InputManager.start_game()
 
 func _physics_process(delta: float) -> void:
-	
-	movement_state.apply_current_state(delta)
-	weapon_state_machine.process_input(delta)
-	
-	if InputManager.is_action_just_pressed(Actions.PlayerActionButtons.RightAttack):
-		if not equipped_sword:
-			equipped_sword = true
-			model.equip_right_handed_sword()
-			var sword_container = get_children().pop_back()
-			remove_child(sword_container)
-			sword_container.visible = true
-			model.equip_right_hand(sword_container)
-			weapon_state_machine.enabled = true
-	if InputManager.is_action_just_pressed(Actions.PlayerActionButtons.Interact):
-		if equipped_sword:
-			model.unequip()
-			equipped_sword = false
-			var sword_container = model.unequip_right_hand()
-			sword_container.visible = false
-			add_child(sword_container)
-			weapon_state_machine.enabled = false
-	#handle_movement_input(delta)
+	pass
+	#movement_state.apply_current_state(delta)
+	#weapon_state_machine.process_input(delta)
 	#
-	#handle_ground_movement()
-	#
-	#handle_gravity(delta)
-	move_and_slide()
+	#if InputManager.is_action_just_pressed(Actions.PlayerActionButtons.RightAttack):
+		#if not equipped_sword:
+			#equipped_sword = true
+			#model.equip_right_handed_sword()
+			#var sword_container = get_children().pop_back()
+			#remove_child(sword_container)
+			#sword_container.visible = true
+			#model.equip_right_hand(sword_container)
+			#weapon_state_machine.enabled = true
+	#if InputManager.is_action_just_pressed(Actions.PlayerActionButtons.Interact):
+		#if equipped_sword:
+			#model.unequip()
+			#equipped_sword = false
+			#var sword_container = model.unequip_right_hand()
+			#sword_container.visible = false
+			#add_child(sword_container)
+			#weapon_state_machine.enabled = false
+	##handle_movement_input(delta)
+	##
+	##handle_ground_movement()
+	##
+	##handle_gravity(delta)
+	#move_and_slide()

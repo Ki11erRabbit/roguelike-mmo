@@ -5,10 +5,10 @@ var grace_period: float = GRACE_TIME
 
 var attacks_enabled: bool = false
 
-func initialize(character, state_machine: WeaponStateMachine):
+func initialize(character: Character, state_machine: WeaponStateMachine):
 	super(character, state_machine)
 	character.model.animation_finished.connect(enable_attacks)
-	character.model.right_hand_slash1()
+	play_animation("slash1")
 
 func process_attack(delta: float, attack: WeaponStateMachine.AttackType, is_spinning: WeaponStateMachine.Spinning, facing_forwards: bool) -> int:
 	if not attacks_enabled:

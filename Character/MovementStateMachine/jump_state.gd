@@ -1,11 +1,11 @@
-class_name JumpState extends "res://Character/BaseCharacter/StateMachine/character_movement_state.gd"
+class_name JumpState extends "res://Character/MovementStateMachine/character_movement_state.gd"
 
 
 
-func initialize(character: Player, current_last_aim: Vector2, additional = null):
+func initialize(character: Character, current_last_aim: Vector2, additional = null):
 	super(character, current_last_aim)
 	character.model.animation_finished.connect(jumping_finished)
-	character.model.jump()
+	character.play_body_animation("jump")
 	
 
 func apply_current_state(delta: float):

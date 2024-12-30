@@ -1,4 +1,4 @@
-class_name MovingState extends "res://Character/BaseCharacter/StateMachine/character_movement_state.gd"
+class_name MovingState extends "res://Character/MovementStateMachine/character_movement_state.gd"
 
 
 
@@ -8,9 +8,9 @@ var current_moving_state = MovingStates.None
 const DIRECTION_RESTRICT = 0.9
 const LOOK_RESTRICT = 0.8
 
-func initialize(character: Player, current_last_aim: Vector2, additional = null):
+func initialize(character: Character, current_last_aim: Vector2, additional = null):
 	super(character, current_last_aim)
-	character.model.start_walking()
+	character.play_body_animation("walk")
 
 func apply_current_state(delta: float):
 	process_rotation()
@@ -21,9 +21,9 @@ func apply_current_state(delta: float):
 	
 	process_movement(self)
 	
-	var move_direction = InputManager.get_stick_vector(Actions.PlayerActionSticks.Movement)
+	var move_direction =  character.control_box.movement()
 	var normalized_move = move_direction.normalized()
-	var aim_direction = InputManager.get_stick_vector(Actions.PlayerActionSticks.Aim)
+	var aim_direction =  character.control_box.aim()
 	var normalized_aim = aim_direction.normalized()
 	
 	var new_movement_state: MovingStates = current_moving_state
@@ -124,13 +124,11 @@ func apply_current_state(delta: float):
 		current_moving_state = new_movement_state
 		match current_moving_state:
 			MovingStates.Walking:
-				character.model.start_walking()
+				character.model.play_body_animation("walk")
 			MovingStates.Running:
-				character.model.start_running()
+				character.model.play_body_animation("run")
 			MovingStates.BackStepping:
-				character.model.start_backstepping()
-			MovingStates.Walking:
-				character.model.start_walking()
+				character.model.play_body_animation("backstep")
 			MovingStates.Strafing:
 				pass
 			MovingStates.None:
@@ -142,7 +140,7 @@ func stand():
 
 
 func custom_movement():
-	var movement_stick: Vector2 = InputManager.get_stick_vector(Actions.PlayerActionSticks.Movement)
+	var movement_stick: Vector2 =  character.control_box.movement()
 	if current_moving_state == MovingStates.BackStepping or current_moving_state == MovingStates.Strafing:
 		var normalized_stick: Vector2 = movement_stick.normalized()
 		if normalized_stick.x <= 0.5 and normalized_stick.y <= 0.5:

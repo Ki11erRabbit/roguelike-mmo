@@ -1,7 +1,9 @@
 class_name SwordRightHandedState extends "res://Character/WeaponStateMachine/weapon_state.gd"
 
-func initialize(character, state_machine: WeaponStateMachine):
+func initialize(character: Character, state_machine: WeaponStateMachine):
 	super(character, state_machine)
+	weapon = "sword"
+	hand = "right"
 
 func reset():
 	character.model.right_hand_reset()

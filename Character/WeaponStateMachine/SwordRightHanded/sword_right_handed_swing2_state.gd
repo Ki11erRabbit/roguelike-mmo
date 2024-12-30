@@ -5,10 +5,10 @@ var cooldown: float = COOLDOWN_TIME
 
 var enable_cooldown: bool = false
 
-func initialize(character, state_machine: WeaponStateMachine):
+func initialize(character: Character, state_machine: WeaponStateMachine):
 	super(character, state_machine)
 	character.model.animation_finished.connect(start_cooldown)
-	character.model.right_hand_slash2()
+	play_animation("slash2")
 
 func process_attack(delta: float, _attack: WeaponStateMachine.AttackType, _is_spinning: WeaponStateMachine.Spinning, _facing_forwards: bool) -> int:
 	if not enable_cooldown:
@@ -17,7 +17,6 @@ func process_attack(delta: float, _attack: WeaponStateMachine.AttackType, _is_sp
 	if cooldown <= 0.0:
 		reset()
 	cooldown -= delta
-	
 	return 0
 
 func start_cooldown(anim_name: StringName):

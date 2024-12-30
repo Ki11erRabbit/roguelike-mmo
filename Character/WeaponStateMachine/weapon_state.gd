@@ -3,10 +3,13 @@ class_name WeaponState extends Node
 const AttackType = WeaponStateMachine.AttackType
 const Spinning = WeaponStateMachine.Spinning
 
-var character
+var character: Character
 var state_machine: WeaponStateMachine
 
-func initialize(character, state_machine: WeaponStateMachine):
+var weapon: String = ""
+var hand: String = ""
+
+func initialize(character: Character, state_machine: WeaponStateMachine):
 	self.character = character
 	self.state_machine = state_machine
 
@@ -15,6 +18,9 @@ func process_attack(delta: float, attack: WeaponStateMachine.AttackType, is_spin
 	returns: An integer indicating whether or not to block any other state_machines with a priorty
 	"""
 	return false
+
+func play_animation(anim_name: String):
+	character.play_animation(anim_name, weapon, hand)
 
 func reset():
 	pass

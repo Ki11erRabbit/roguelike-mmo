@@ -1,9 +1,9 @@
-class_name StandingState extends "res://Character/BaseCharacter/StateMachine/character_movement_state.gd"
+class_name StandingState extends "res://Character/MovementStateMachine/character_movement_state.gd"
 
 
-func initialize(character: Player, current_last_aim: Vector2, additional = null):
+func initialize(character: Character, current_last_aim: Vector2, additional = null):
 	super(character, current_last_aim)
-	character.model.start_standing()
+	character.play_body_animation("idle")
 	
 
 
@@ -13,10 +13,10 @@ func apply_current_state(delta: float):
 	var is_rotating_clockwise = pair[1]
 	if is_rotating:
 		if is_rotating_clockwise:
-			character.model.rotate_right()
+			character.model.play_body_animation("rotate_right")
 		else:
-			character.model.rotate_left()
-	
+			character.model.play_body_animation("rotate_left")
+
 	process_gravity(delta, self)
 	
 	if process_movement_buttons(self):

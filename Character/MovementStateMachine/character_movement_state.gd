@@ -1,7 +1,7 @@
 class_name CharacterMovementState extends Node
 
 const Actions = preload("res://InputManager/actions.gd")
-var character: Player
+var character: Character
 
 var last_aim: Vector2
 var initalized: bool = false
@@ -15,7 +15,7 @@ const JUMP_VELOCITY = 20
 
 var disable_gravity: bool = false
 
-func initialize(character: Player, current_last_aim: Vector2, additional = null):
+func initialize(character: Character, current_last_aim: Vector2, additional = null):
 	last_aim = current_last_aim
 	initalized = true
 	self.character = character
@@ -30,7 +30,7 @@ func process_rotation() -> Array[bool]:
 	"""
 	assert(initalized, "Initialize was not called, crashing")
 	
-	var aim_direction = InputManager.get_stick_vector(Actions.PlayerActionSticks.Aim)
+	var aim_direction = character.control_box.aim()
 	var normalized_aim = aim_direction.normalized()
 	
 	var rotating: bool = false
@@ -44,12 +44,12 @@ func process_rotation() -> Array[bool]:
 	
 	#current_aim_angle = lerp_angle(last_aim_angle, current_aim_angle, 0.1)
 	character.model.rotation.x = 0
-	character.hitbox.rotation.x = 0
+	character.collision_box.rotation.x = 0
 	character.model.rotation.z = 0
-	character.hitbox.rotation.z = 0
+	character.collision_box.rotation.z = 0
 	character.model.rotation.y = atan2(aim_direction.x, aim_direction.y)
-	character.hitbox.rotation.y = character.model.rotation.y
-	character.hitbox.rotate_x(deg_to_rad(X_ROTATION_AMOUNT))
+	character.collision_box.rotation.y = character.model.rotation.y
+	character.collision_box.rotate_x(deg_to_rad(X_ROTATION_AMOUNT))
 	character.model.rotate_x(deg_to_rad(X_ROTATION_AMOUNT))
 	
 	if (not aim_direction_was_zero) and rad_to_deg(abs(aim_direction.angle() - last_aim.angle())) < ROTATION_ANGLE_LIMIT:
@@ -63,15 +63,15 @@ func process_movement_buttons(current_state: CharacterMovementState) -> bool:
 	returns: The bool indicates whether or not the caller should stop their code from executing
 	"""
 	assert(initalized, "Initialize was not called, crashing")
-	if InputManager.is_action_just_released(Actions.PlayerActionButtons.Jump) and character.is_on_floor():
+	if character.control_box.is_action_just_released(Actions.PlayerActionButtons.Jump) and character.is_on_floor():
 		current_state.jump()
 		return true
-	elif InputManager.is_action_pressed(Actions.PlayerActionButtons.Jump):
+	elif character.control_box.is_action_pressed(Actions.PlayerActionButtons.Jump):
 		pass
 	return false
 
 func process_movement(current_state: CharacterMovementState = null):
-	var movement_stick: Vector2 = InputManager.get_stick_vector(Actions.PlayerActionSticks.Movement)
+	var movement_stick: Vector2 = character.control_box.movement()
 	if movement_stick.x != 0 or movement_stick.y != 0:
 		if current_state != null:
 			current_state.custom_movement()
@@ -106,6 +106,7 @@ func move():
 func jump():
 	character.movement_state = JumpState.new()
 	character.movement_state.initialize(character, last_aim)
+	character.jump()
 
 func jumping():
 	pass

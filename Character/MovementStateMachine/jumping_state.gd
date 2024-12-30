@@ -1,8 +1,8 @@
-class_name JumpingState extends "res://Character/BaseCharacter/StateMachine/character_movement_state.gd"
+class_name JumpingState extends "res://Character/MovementStateMachine/character_movement_state.gd"
 
 var current_delta = 0.0
 
-func initialize(character: Player, current_last_aim: Vector2, additional = null):
+func initialize(character: Character, current_last_aim: Vector2, additional = null):
 	super(character, current_last_aim)
 	
 
@@ -21,6 +21,7 @@ func in_air(delta: float):
 func falling():
 	character.movement_state = FallingState.new()
 	character.movement_state.initialize(character, last_aim, current_delta)
+	character.fall()
 
 
 # Called when the node enters the scene tree for the first time.

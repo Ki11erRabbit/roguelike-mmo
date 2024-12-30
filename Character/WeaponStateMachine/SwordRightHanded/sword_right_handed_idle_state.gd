@@ -1,9 +1,9 @@
 class_name SwordRightHandedIdleState extends "res://Character/WeaponStateMachine/SwordRightHanded/sword_right_handed_state.gd"
 
 
-func initialize(character, state_machine: WeaponStateMachine):
+func initialize(character: Character, state_machine: WeaponStateMachine):
 	super(character, state_machine)
-	character.model.right_hand_reset()
+	play_animation("idle")
 
 func process_attack(delta: float, attack: AttackType, is_spinning: Spinning, facing_forwards: bool) -> int:
 	if attack == 1:
