@@ -12,9 +12,14 @@ func initialize(model: Node3D):
 func blend_movement(vector: Vector2):
 	model.blend_movement(vector)
 
+func equip(hand: String):
+	model.equip(hand)
+
+# TODO: introduce code to figure out if weapon is two handed
 func equip_weapons(right_hand: Node3D, left_hand: Node3D):
 	if right_hand != null:
 		model.equip_right_hand(right_hand)
+		equip("right")
 	if left_hand != null:
 		model.equip_left_hand(left_hand)
 
@@ -23,6 +28,7 @@ func unequip_weapons() -> Array[Node3D]:
 		model.unequip_right_hand(),
 		model.unequip_left_hand()
 	]
+	model.unequip()
 	return weapons
 
 func play_animation(anim_name: String, weapon: String, hand: String):

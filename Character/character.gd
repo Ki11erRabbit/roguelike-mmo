@@ -12,15 +12,23 @@ var model: CharacterModel
 
 var control_box: ControlBox
 
-var collision_box: CollisionShape3D
+@onready
+var collision_box: CollisionShape3D = $CollisionShape3D
 
-func initialize(model: Node3D, collision_shape: CapsuleShape3D, box: ControlBox):
+@onready
+var right_hand = $Weapons/RightHand
+@onready
+var left_hand = $Weapons/LeftHand
+
+func initialize(model: CharacterModel, collision_shape: CapsuleShape3D, box: ControlBox):
+	"""
+	This should be called in ready_character
+	"""
 	self.model = model
 	add_child(model)
-	collision_box = CollisionShape3D.new()
-	add_child(collision_box)
 	collision_box.shape = collision_shape
 	control_box = box
+	movement_state.initialize(self, Vector2(0,0))
 
 func ground():
 	air_state = AirState.Grounded
@@ -56,22 +64,22 @@ func blend_movement(vector: Vector2):
 
 func attach_right_hand_weapon(weapon: Weapon, state_machine: WeaponStateMachine):
 	right_hand_weapon = state_machine
-	$Weapons/RightHand.add_child(weapon)
+	right_hand.add_child(weapon)
 
 func attach_left_hand_weapon(weapon: Weapon, state_machine: WeaponStateMachine):
 	left_hand_weapon = state_machine
-	$Weapons/LeftHand.add_child(weapon)
+	left_hand.add_child(weapon)
 
 func equip_weapons():
 	var right_weapon: Node3D = null
 	var left_weapon: Node3D = null
-	if $Weapons/RightHand.get_child_count() == 1:
-		right_weapon = $Weapons/RightHand.get_children().pop_back()
-		$Weapons/RightHand.remove_child(right_weapon)
+	if right_hand.get_child_count() == 1:
+		right_weapon = right_hand.get_children().pop_back()
+		right_hand.remove_child(right_weapon)
 	
-	if $Weapons/LeftHand.get_child_count() == 1:
-		left_weapon = $Weapons/LeftHand.get_children().pop_back()
-		$Weapons/LeftHand.remove_child(left_weapon)
+	if left_hand.get_child_count() == 1:
+		left_weapon = left_hand.get_children().pop_back()
+		left_hand.remove_child(left_weapon)
 	
 	model.equip_weapons(right_weapon, left_weapon)
 	weapons_equiped = true
@@ -81,9 +89,9 @@ func unequip_weapons():
 	var right_weapon: Node3D = pair[0]
 	var left_weapon: Node3D = pair[1]
 	if right_weapon != null:
-		$Weapons/RightHand.add_child(right_weapon)
+		right_hand.add_child(right_weapon)
 	if left_weapon != null:
-		$Weapons/LeftHand.add_child(left_weapon)
+		left_hand.add_child(left_weapon)
 	weapons_equiped = false
 
 func play_animation(anim_name: String, weapon: String, hand: String):
@@ -99,9 +107,12 @@ func process_character() -> bool:
 	"""
 	return false
 
+func ready_character():
+	pass
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	ready_character()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -111,12 +122,16 @@ func _process(delta: float) -> void:
 		return
 	movement_state.apply_current_state(delta)
 	if weapons_equiped:
-		right_hand_weapon.enabled = true
-		left_hand_weapon.enabled = true
-		right_hand_weapon.process_input(delta)
-		left_hand_weapon.process_input(delta)
+		if right_hand_weapon != null:
+			right_hand_weapon.enabled = true
+			right_hand_weapon.process_input(delta)
+		if left_hand_weapon != null:
+			left_hand_weapon.enabled = true
+			left_hand_weapon.process_input(delta)
 	elif right_hand_weapon != null and left_hand_weapon != null:
-		right_hand_weapon.enabled = false
-		left_hand_weapon.enabled = false
+		if right_hand_weapon != null:
+			right_hand_weapon.enabled = false
+		if left_hand_weapon != null:
+			left_hand_weapon.enabled = false
 		
 	move_and_slide()

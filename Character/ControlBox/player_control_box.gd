@@ -1,4 +1,4 @@
-class_name PLayerControlBox extends "res://Character/ControlBox/control_box.gd"
+class_name PlayerControlBox extends "res://Character/ControlBox/control_box.gd"
 
 func movement() -> Vector2:
 	return InputManager.get_stick_vector(Actions.PlayerActionSticks.Movement)

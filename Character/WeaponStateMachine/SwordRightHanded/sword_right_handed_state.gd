@@ -6,7 +6,7 @@ func initialize(character: Character, state_machine: WeaponStateMachine):
 	hand = "right"
 
 func reset():
-	character.model.right_hand_reset()
+	character.play_animation("idle", "sword", "right")
 	state_machine.state = SwordRightHandedIdleState.new()
 	state_machine.state.initialize(character, state_machine)
 

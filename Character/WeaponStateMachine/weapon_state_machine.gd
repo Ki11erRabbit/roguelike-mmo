@@ -22,7 +22,7 @@ func initialize(character: Character, handedness: HandedNess, state: WeaponState
 	self.handedness = handedness
 
 func process_input(delta: float) -> int:
-	if already_fired or not enabled or character.model.is_landing():
+	if already_fired or not enabled or character.is_landing():
 		return 0
 	
 	var attack: AttackType = AttackType.None

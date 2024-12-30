@@ -1,14 +1,8 @@
-class_name Weapon extends Node3D
-
-@onready
-var model: Node3D = $model
-
-
-var hitbox: Area3D
-
-@export
-var stats: int
-
+class_name PartialWeapon extends "res://Weapons/weapon.gd"
+"""
+This represents a weapon that is split into multiple parts. This is to allow for 
+player created weapons.
+"""
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

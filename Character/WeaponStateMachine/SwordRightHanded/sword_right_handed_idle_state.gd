@@ -37,12 +37,12 @@ func process_attack(delta: float, attack: AttackType, is_spinning: Spinning, fac
 	return 0
 
 func swing():
-	character.model.right_hand_reset()
+	character.play_animation("idle", "sword", "right")
 	state_machine.state = SwordRightHandedSwing1State.new()
 	state_machine.state.initialize(character, state_machine)
 
 func stab():
-	character.model.right_hand_reset()
+	character.play_animation("idle", "sword", "right")
 	state_machine.state = SwordRightHandedStabState.new()
 	state_machine.state.initialize(character, state_machine)
 

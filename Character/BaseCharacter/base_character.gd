@@ -44,6 +44,16 @@ func unequip():
 	$AnimationTree["parameters/RightArmOneShot/request"] = 2
 	$AnimationTree["parameters/BothArmOneShot/request"] = 2
 
+func equip(hand: String):
+	match hand:
+		"right":
+			$AnimationTree["parameters/RightArmOneShot/request"] = 1
+		"left":
+			$AnimationTree["parameters/LeftArmOneShot/request"] = 1
+		"both":
+			$AnimationTree["parameters/BothArmOneShot/request"] = 1
+			
+
 func equip_right_handed_sword():
 	$AnimationTree["parameters/RightArmOneShot/request"]= 1
 	
