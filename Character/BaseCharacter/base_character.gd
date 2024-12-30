@@ -34,6 +34,10 @@ func unequip_left_hand() -> Node3D:
 	left_hand_container.remove_child(sword_container)
 	return sword_container
 
+func blend_movement(vector: Vector2):
+	var angle = vector.angle()
+	#var rotated_vector: Vector2 = vector.rotated(-angle)
+	$AnimationTree["parameters/Body/Movement/blend_position"] = vector
 
 func unequip():
 	$AnimationTree["parameters/LeftArmOneShot/request"] = 2

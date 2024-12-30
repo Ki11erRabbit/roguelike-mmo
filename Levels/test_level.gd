@@ -35,4 +35,5 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not initialized_player:
 		character.movement_state.initialize(character, Vector2(0,0), 0.0)
+		initialized_player = true
 	pass

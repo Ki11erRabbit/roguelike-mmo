@@ -9,6 +9,9 @@ func initialize(model: Node3D):
 	self.model.animation_finished.connect(emit_animation_finished)
 	add_child(model)
 
+func blend_movement(vector: Vector2):
+	model.blend_movement(vector)
+
 func equip_weapons(right_hand: Node3D, left_hand: Node3D):
 	if right_hand != null:
 		model.equip_right_hand(right_hand)

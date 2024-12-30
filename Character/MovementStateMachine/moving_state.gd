@@ -10,7 +10,7 @@ const LOOK_RESTRICT = 0.8
 
 func initialize(character: Character, current_last_aim: Vector2, additional = null):
 	super(character, current_last_aim)
-	character.play_body_animation("walk")
+	character.play_body_animation("Movement")
 
 func apply_current_state(delta: float):
 	process_rotation()
@@ -27,6 +27,9 @@ func apply_current_state(delta: float):
 	var normalized_aim = aim_direction.normalized()
 	
 	var new_movement_state: MovingStates = current_moving_state
+	if aim_direction.x == 0 and aim_direction.y == 0:
+		aim_direction = last_aim
+		normalized_aim = last_aim.normalized()
 	
 	var movement_vec = move_direction * 100
 	#print(movement_vec)

@@ -41,6 +41,8 @@ func process_rotation() -> Array[bool]:
 	if aim_direction.x == 0 and aim_direction.y == 0:
 		aim_direction = last_aim
 		normalized_aim = last_aim.normalized()
+	#print(last_aim)
+	
 	
 	#current_aim_angle = lerp_angle(last_aim_angle, current_aim_angle, 0.1)
 	character.model.rotation.x = 0
@@ -52,9 +54,12 @@ func process_rotation() -> Array[bool]:
 	character.collision_box.rotate_x(deg_to_rad(X_ROTATION_AMOUNT))
 	character.model.rotate_x(deg_to_rad(X_ROTATION_AMOUNT))
 	
+	
 	if (not aim_direction_was_zero) and rad_to_deg(abs(aim_direction.angle() - last_aim.angle())) < ROTATION_ANGLE_LIMIT:
 		rotating = true
 	last_aim = aim_direction
+	#print(last_aim)
+	#print("")
 	
 	return [rotating, clockwise_rotation]
 

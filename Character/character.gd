@@ -51,6 +51,9 @@ func is_landing():
 			return true
 	return false
 
+func blend_movement(vector: Vector2):
+	model.blend_movement(vector)
+
 func attach_right_hand_weapon(weapon: Weapon, state_machine: WeaponStateMachine):
 	right_hand_weapon = state_machine
 	$Weapons/RightHand.add_child(weapon)
