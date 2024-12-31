@@ -3,10 +3,13 @@ class_name MovingState extends "res://Character/MovementStateMachine/character_m
 
 
 enum MovingStates { None, Walking, Running, BackStepping, Strafing }
+enum HorizontalStates { None, Left, Right }
 
-var current_moving_state = MovingStates.None
+var current_moving_state: MovingStates = MovingStates.None
+var current_horizontal_state: HorizontalStates = HorizontalStates.None
 const DIRECTION_RESTRICT = 0.9
 const LOOK_RESTRICT = 0.8
+const STRAFE_RESTRICT = 0.3
 
 func initialize(character: Character, current_last_aim: Vector2, additional = null):
 	super(character, current_last_aim)
@@ -27,6 +30,7 @@ func apply_current_state(delta: float):
 	var normalized_aim = aim_direction.normalized()
 	
 	var new_movement_state: MovingStates = current_moving_state
+	var new_horizontal_state: HorizontalStates = current_horizontal_state
 	if aim_direction.x == 0 and aim_direction.y == 0:
 		aim_direction = last_aim
 		normalized_aim = last_aim.normalized()
@@ -39,86 +43,103 @@ func apply_current_state(delta: float):
 	elif movement_vec.x != 0 or movement_vec.y != 0:
 		new_movement_state = MovingStates.Walking
 		
-	
+	# The dot product tells us how close the vectors align
+	# 1 means that they are aligned
+	# 0 means that they are perpendicular
+	# -1 means that they are in opposite directions
 	# Moving Downwards
 	if Vector2.DOWN.normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
 		#print("Down")
-		if normalized_aim.x == 0 and normalized_aim.y == 0:
-			pass
-		elif normalized_aim.dot(normalized_move) >= LOOK_RESTRICT:
-			pass
-		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
-			new_movement_state = MovingStates.BackStepping
+		new_movement_state = get_state(normalized_move, normalized_aim, new_movement_state)
+		match new_movement_state:
+			MovingStates.Strafing:
+				var dot_product: float = Vector2.RIGHT.normalized().dot(normalized_aim)
+				#print(dot_product)
+				if dot_product >= LOOK_RESTRICT:
+					new_horizontal_state = HorizontalStates.Right
+				elif dot_product <= -LOOK_RESTRICT:
+					new_horizontal_state = HorizontalStates.Left
 	# Moving Upwards
 	elif Vector2.UP.normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
 		#print("Up")
-		if normalized_aim.x == 0 and normalized_aim.y == 0:
-			pass
-		elif normalized_aim.dot(normalized_move) >= LOOK_RESTRICT:
-			pass
-			#print("forwards")
-		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
-			new_movement_state = MovingStates.BackStepping
+		new_movement_state = get_state(normalized_move, normalized_aim, new_movement_state)
+		match new_movement_state:
+			MovingStates.Strafing:
+				var dot_product: float = Vector2.RIGHT.normalized().dot(normalized_aim)
+				#print(dot_product)
+				if dot_product >= LOOK_RESTRICT:
+					new_horizontal_state = HorizontalStates.Left
+				elif dot_product <= -LOOK_RESTRICT:
+					new_horizontal_state = HorizontalStates.Right
 	# Moving to the Right
 	elif Vector2.RIGHT.normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
 		#print("Right")
-		if normalized_aim.x == 0 and normalized_aim.y == 0:
-			pass
-		elif normalized_aim.dot(normalized_move) >= LOOK_RESTRICT:
-			pass
-			#print("forwards")
-		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
-			new_movement_state = MovingStates.BackStepping
+		new_movement_state = get_state(normalized_move, normalized_aim, new_movement_state)
+		match new_movement_state:
+			MovingStates.Strafing:
+				var dot_product: float = Vector2.UP.normalized().dot(normalized_aim)
+				#print(dot_product)
+				if dot_product >= LOOK_RESTRICT:
+					new_horizontal_state = HorizontalStates.Right
+				elif dot_product <= -LOOK_RESTRICT:
+					new_horizontal_state = HorizontalStates.Left
 	# Moving to the Left
 	elif Vector2.LEFT.normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
 		#print("Left")
-		if normalized_aim.x == 0 and normalized_aim.y == 0:
-			pass
-		elif normalized_aim.dot(normalized_move) >= LOOK_RESTRICT:
-			pass
-			#print("forwards")
-		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
-			new_movement_state = MovingStates.BackStepping
+		new_movement_state = get_state(normalized_move, normalized_aim, new_movement_state)
+		match new_movement_state:
+			MovingStates.Strafing:
+				var dot_product: float = Vector2.UP.normalized().dot(normalized_aim)
+				if dot_product >= LOOK_RESTRICT:
+					new_horizontal_state = HorizontalStates.Left
+				elif dot_product <= -LOOK_RESTRICT:
+					new_horizontal_state = HorizontalStates.Right
 	# Moving to the Top Right
 	elif Vector2.RIGHT.rotated(deg_to_rad(-45)).normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
 		#print("Top Right")
-		if normalized_aim.x == 0 and normalized_aim.y == 0:
-			pass
-		elif normalized_aim.dot(normalized_move) >= LOOK_RESTRICT:
-			pass
-			#print("forwards")
-		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
-			new_movement_state = MovingStates.BackStepping
+		new_movement_state = get_state(normalized_move, normalized_aim, new_movement_state)
+		match new_movement_state:
+			MovingStates.Strafing:
+				var dot_product: float = Vector2.UP.rotated((deg_to_rad(-45))).normalized().dot(normalized_aim)
+				#print(dot_product)
+				if dot_product >= LOOK_RESTRICT:
+					new_horizontal_state = HorizontalStates.Right
+				elif dot_product <= -LOOK_RESTRICT:
+					new_horizontal_state = HorizontalStates.Left
 	# Moving to the Bottom Right
 	elif Vector2.RIGHT.rotated(deg_to_rad(45)).normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
 		#print("Bottom Right")
-		if normalized_aim.x == 0 and normalized_aim.y == 0:
-			pass
-		elif normalized_aim.dot(normalized_move) >= LOOK_RESTRICT:
-			pass
-			#print("forwards")
-		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
-			new_movement_state = MovingStates.BackStepping
+		new_movement_state = get_state(normalized_move, normalized_aim, new_movement_state)
+		match new_movement_state:
+			MovingStates.Strafing:
+				var dot_product: float = Vector2.UP.rotated((deg_to_rad(45))).normalized().dot(normalized_aim)
+				#print(dot_product)
+				if dot_product >= LOOK_RESTRICT:
+					new_horizontal_state = HorizontalStates.Right
+				elif dot_product <= -LOOK_RESTRICT:
+					new_horizontal_state = HorizontalStates.Left
 	# Moving to the Top Left
 	elif Vector2.LEFT.rotated(deg_to_rad(45)).normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
 		#print("Top Left")
-		if normalized_aim.x == 0 and normalized_aim.y == 0:
-			pass
-		elif normalized_aim.dot(normalized_move) >= LOOK_RESTRICT:
-			pass
-			#print("forwards")
-		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
-			new_movement_state = MovingStates.BackStepping
+		new_movement_state = get_state(normalized_move, normalized_aim, new_movement_state)
+		match new_movement_state:
+			MovingStates.Strafing:
+				var dot_product: float = Vector2.UP.rotated((deg_to_rad(45))).normalized().dot(normalized_aim)
+				if dot_product >= LOOK_RESTRICT:
+					new_horizontal_state = HorizontalStates.Left
+				elif dot_product <= -LOOK_RESTRICT:
+					new_horizontal_state = HorizontalStates.Right
 	# Moving to the Bottom Left
 	elif Vector2.LEFT.rotated(deg_to_rad(-45)).normalized().dot(normalized_move) >= DIRECTION_RESTRICT:
 		#print("Bottom Left")
-		if normalized_aim.x == 0 and normalized_aim.y == 0:
-			pass
-		elif normalized_aim.dot(normalized_move) >= LOOK_RESTRICT:
-			pass
-			#print("forwards")
-		elif normalized_aim.dot(normalized_move) <= LOOK_RESTRICT:
-			new_movement_state = MovingStates.BackStepping
+		new_movement_state = get_state(normalized_move, normalized_aim, new_movement_state)
+		match new_movement_state:
+			MovingStates.Strafing:
+				var dot_product: float = Vector2.UP.rotated((deg_to_rad(-45))).normalized().dot(normalized_aim)
+				if dot_product >= LOOK_RESTRICT:
+					new_horizontal_state = HorizontalStates.Left
+				elif dot_product <= -LOOK_RESTRICT:
+					new_horizontal_state = HorizontalStates.Right
 	else:
 		new_movement_state = MovingStates.None
 	
@@ -127,15 +148,40 @@ func apply_current_state(delta: float):
 		current_moving_state = new_movement_state
 		match current_moving_state:
 			MovingStates.Walking:
-				character.model.play_body_animation("walk")
+				character.play_body_animation("walk")
+				current_horizontal_state = HorizontalStates.None
 			MovingStates.Running:
-				character.model.play_body_animation("run")
+				character.play_body_animation("run")
+				current_horizontal_state = HorizontalStates.None
 			MovingStates.BackStepping:
-				character.model.play_body_animation("backstep")
+				character.play_body_animation("backstep")
+				current_horizontal_state = HorizontalStates.None
 			MovingStates.Strafing:
-				pass
+				if current_horizontal_state != new_horizontal_state:
+					current_horizontal_state = new_horizontal_state
+					match current_horizontal_state:
+						HorizontalStates.Right:
+							character.play_body_animation("side_step_right")
+						HorizontalStates.Left:
+							character.play_body_animation("side_step_left")
 			MovingStates.None:
 				stand()
+
+func get_state(normalized_move, normalized_aim, current_state: MovingStates) -> MovingStates:
+	var dot_product: float = normalized_aim.dot(normalized_move)
+	if normalized_aim.x == 0 and normalized_aim.y == 0:
+		return current_state
+	elif dot_product >= LOOK_RESTRICT:
+		# Forwards
+		return current_state
+	elif dot_product <= STRAFE_RESTRICT and dot_product >= -STRAFE_RESTRICT:
+		# Strafing
+		return MovingStates.Strafing
+	elif dot_product <= LOOK_RESTRICT:
+		# Backwards
+		return MovingStates.BackStepping
+	else:
+		return current_state
 
 func stand():
 	character.movement_state = StandingState.new()

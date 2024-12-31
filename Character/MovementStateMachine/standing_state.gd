@@ -1,5 +1,6 @@
 class_name StandingState extends "res://Character/MovementStateMachine/character_movement_state.gd"
 
+var is_rotating: bool = false
 
 func initialize(character: Character, current_last_aim: Vector2, additional = null):
 	super(character, current_last_aim)
@@ -9,13 +10,17 @@ func initialize(character: Character, current_last_aim: Vector2, additional = nu
 
 func apply_current_state(delta: float):
 	var pair: Array[bool] = process_rotation()
-	var is_rotating = pair[0]
+	var is_rotating_new = pair[0]
 	var is_rotating_clockwise = pair[1]
-	if is_rotating:
-		if is_rotating_clockwise:
-			character.model.play_body_animation("rotate_right")
+	if is_rotating_new != is_rotating:
+		is_rotating = is_rotating_new
+		if is_rotating:
+			if is_rotating_clockwise:
+				character.play_body_animation("rotate_right")
+			else:
+				character.play_body_animation("rotate_left")
 		else:
-			character.model.play_body_animation("rotate_left")
+			character.play_body_animation("idle")
 
 	process_gravity(delta, self)
 	
