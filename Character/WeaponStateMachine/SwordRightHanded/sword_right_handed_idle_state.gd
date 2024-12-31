@@ -6,20 +6,16 @@ func initialize(character: Character, state_machine: WeaponStateMachine):
 	play_animation("idle")
 
 func process_attack(delta: float, attack: AttackType, is_spinning: Spinning, facing_forwards: bool) -> int:
-	if attack == 1:
-		print("normal attack")
 	match is_spinning:
 		WeaponStateMachine.Spinning.Clockwise:
 			match attack:
 				AttackType.Normal:
-					print("spinning")
 					clockwise_spin()
 					return 10
 		WeaponStateMachine.Spinning.CounterClockwise:
 			match attack:
 				AttackType.Normal:
 					counter_clockwise_spin()
-					print("spinning")
 					return 10
 	#print("facing")
 	
@@ -31,18 +27,17 @@ func process_attack(delta: float, attack: AttackType, is_spinning: Spinning, fac
 	#print("checking attack")
 	match attack:
 		AttackType.Normal:
-			print("attacking")
 			swing()
 			return 0
 	return 0
 
 func swing():
-	character.play_animation("idle", "sword", "right")
+	#character.play_animation("idle", "sword", "right")
 	state_machine.state = SwordRightHandedSwing1State.new()
 	state_machine.state.initialize(character, state_machine)
 
 func stab():
-	character.play_animation("idle", "sword", "right")
+	#character.play_animation("idle", "sword", "right")
 	state_machine.state = SwordRightHandedStabState.new()
 	state_machine.state.initialize(character, state_machine)
 

@@ -26,16 +26,4 @@ shape = SubResource("CapsuleShape3D_5rjy0")
 transform = Transform3D(0.450231, -0.8741, 0.182319, -0.317076, -0.347387, -0.882488, 0.834719, 0.339515, -0.433561, -0.240499, -0.0996894, 0.0373949)
 visible = false
 
-[node name="test_sword" parent="WeaponContainer"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-script = null
-
 [connection signal="animation_finished" from="BaseCharacter" to="." method="_on_base_character_animation_finished"]

@@ -3,7 +3,7 @@ class_name SwordRightHandedStabState extends "res://Character/WeaponStateMachine
 func initialize(character: Character, state_machine: WeaponStateMachine):
 	super(character, state_machine)
 	character.model.animation_finished.connect(start_cooldown)
-	play_animation("slash1")
+	play_animation("thrust")
 
 func process_attack(_delta: float, _attack: WeaponStateMachine.AttackType, _is_spinning: WeaponStateMachine.Spinning, _facing_forwards: bool) -> int:
 	
