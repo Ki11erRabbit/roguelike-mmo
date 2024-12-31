@@ -10,6 +10,7 @@ func process_attack(delta: float, attack: AttackType, is_spinning: Spinning, fac
 		WeaponStateMachine.Spinning.Clockwise:
 			match attack:
 				AttackType.Normal:
+					print("spin attack")
 					clockwise_spin()
 					return 10
 		WeaponStateMachine.Spinning.CounterClockwise:
@@ -42,10 +43,12 @@ func stab():
 	state_machine.state.initialize(character, state_machine)
 
 func clockwise_spin():
-	pass
+	state_machine.state = SwordRightHandedClockwiseSpin.new()
+	state_machine.state.initialize(character, state_machine)
 
 func counter_clockwise_spin():
-	pass
+	state_machine.state = SwordRightHandedCounterClockwiseSpin.new()
+	state_machine.state.initialize(character, state_machine)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

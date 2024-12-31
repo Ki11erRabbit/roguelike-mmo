@@ -9,7 +9,7 @@ func initialize(character: Character, current_last_aim: Vector2, additional = nu
 
 
 func apply_current_state(delta: float):
-	var pair: Array[bool] = process_rotation()
+	var pair: Array[bool] = process_rotation(delta)
 	var is_rotating_new = pair[0]
 	var is_rotating_clockwise = pair[1]
 	if is_rotating_new != is_rotating:

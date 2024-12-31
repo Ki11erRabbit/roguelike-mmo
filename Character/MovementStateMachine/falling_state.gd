@@ -10,7 +10,7 @@ func initialize(character: Character, current_last_aim: Vector2, initial_delta =
 
 
 func apply_current_state(delta: float):
-	process_rotation()
+	process_rotation(delta)
 	process_movement()
 	process_gravity(delta, self)
 

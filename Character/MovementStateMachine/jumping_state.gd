@@ -8,7 +8,7 @@ func initialize(character: Character, current_last_aim: Vector2, additional = nu
 
 func apply_current_state(delta: float):
 	process_gravity(delta,self)
-	process_rotation()
+	process_rotation(delta)
 	process_movement()
 
 func in_air(delta: float):

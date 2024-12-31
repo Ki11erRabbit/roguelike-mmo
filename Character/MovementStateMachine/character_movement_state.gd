@@ -15,6 +15,7 @@ const JUMP_VELOCITY = 20
 
 var disable_gravity: bool = false
 
+
 func initialize(character: Character, current_last_aim: Vector2, additional = null):
 	last_aim = current_last_aim
 	initalized = true
@@ -24,7 +25,7 @@ func initialize(character: Character, current_last_aim: Vector2, additional = nu
 func apply_current_state(delta: float):
 	pass
 
-func process_rotation() -> Array[bool]:
+func process_rotation(delta: float) -> Array[bool]:
 	"""
 	Returns: An array that contains 2 elements, the first is if there is rotation, the second if the rotation is clockwise
 	"""
@@ -32,6 +33,7 @@ func process_rotation() -> Array[bool]:
 	
 	var aim_direction = character.control_box.aim()
 	var normalized_aim = aim_direction.normalized()
+	
 	
 	var rotating: bool = false
 	var clockwise_rotation: bool = is_rotating_clockwise(aim_direction.angle(), last_aim.angle())
@@ -43,8 +45,6 @@ func process_rotation() -> Array[bool]:
 		normalized_aim = last_aim.normalized()
 	#print(last_aim)
 	
-	
-	#current_aim_angle = lerp_angle(last_aim_angle, current_aim_angle, 0.1)
 	character.model.rotation.x = 0
 	character.collision_box.rotation.x = 0
 	character.model.rotation.z = 0
@@ -121,6 +121,16 @@ func falling():
 
 func landing():
 	pass
+
+func clockwise_spin():
+	var old_state: CharacterMovementState = character.movement_state
+	character.movement_state = ClockwiseSpin.new()
+	character.movement_state.initialize(character, last_aim, old_state)
+
+func counter_clockwise_spin():
+	var old_state: CharacterMovementState = character.movement_state
+	character.movement_state = CounterClockwiseSpin.new()
+	character.movement_state.initialize(character, last_aim, old_state)
 
 func is_rotating_clockwise(current, last) -> bool:
 	current = rad_to_deg(current)

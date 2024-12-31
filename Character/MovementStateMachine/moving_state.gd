@@ -16,7 +16,7 @@ func initialize(character: Character, current_last_aim: Vector2, additional = nu
 	character.play_body_animation("Movement")
 
 func apply_current_state(delta: float):
-	process_rotation()
+	process_rotation(delta)
 	if process_movement_buttons(self):
 		return
 		

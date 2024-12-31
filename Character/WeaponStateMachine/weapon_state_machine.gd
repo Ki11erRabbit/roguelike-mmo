@@ -14,6 +14,13 @@ var already_fired: bool = false
 var enabled: bool = false
 
 var last_angle: float = 0
+const ANGLE_THRESHOLD: float = deg_to_rad(200.00)
+var total_rotation: float
+var angle_array: Array = []
+var spin_counter: float = 0.0
+var spinning: Spinning
+var spin_mean: float
+
 
 # The state must be initialized before being passed in
 func initialize(character: Character, handedness: HandedNess, state: WeaponState):
@@ -49,8 +56,37 @@ func process_input(delta: float) -> int:
 	var current_angle: float = current_aim.angle()
 	
 	
-	var spinning: Spinning = Spinning.None
+	spinning = Spinning.None
 	# TODO: add spinning
+	
+	var angle_diff = angle_difference(last_angle, current_angle)
+	
+	if (angle_diff >= ANGLE_THRESHOLD) or (angle_diff <= -ANGLE_THRESHOLD):
+		pass
+	else:
+		#angle_array.resize(angle_array.size() + 1)
+		#print("angle diff")
+		#print(deg_to_rad(angle_diff))
+		pass
+		#angle_array.push_back(angle_diff)
+	
+	if angle_array.size() > 20:
+		spin_mean = calculate_mean(angle_array)
+		angle_array.resize(0)
+		
+	if spin_mean <= -8:
+		#print("spinning")
+		spinning = Spinning.CounterClockwise
+		
+		spin_counter += delta
+	elif spin_mean >= 8:
+		#print("spinning")
+		#print(spin_mean)
+		spinning = Spinning.Clockwise
+		spin_counter += delta
+	elif spin_counter >= 2.5:
+			spin_counter = 0.0
+	last_angle = current_angle
 		
 	var movement_angle = character.control_box.movement().angle()
 	
