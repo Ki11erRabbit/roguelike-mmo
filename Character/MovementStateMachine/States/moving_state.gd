@@ -1,4 +1,4 @@
-class_name MovingState extends "res://Character/MovementStateMachine/character_movement_state.gd"
+class_name MovingState extends "res://Character/MovementStateMachine/States/character_movement_state.gd"
 
 
 
@@ -11,29 +11,24 @@ const DIRECTION_RESTRICT = 0.9
 const LOOK_RESTRICT = 0.8
 const STRAFE_RESTRICT = 0.3
 
-func initialize(character: Character, current_last_aim: Vector2, additional = null):
-	super(character, current_last_aim)
+func initialize(character: Character, state_machine: MovementStateMachine, additional = null):
+	super(character, state_machine)
 	character.play_body_animation("Movement")
 
-func apply_current_state(delta: float):
-	process_rotation(delta)
-	if process_movement_buttons(self):
+func apply_current_state(delta: float, control_box: ControlBox, rotation_triple: Array):
+	if control_box == null:
 		return
-		
-	process_gravity(delta, self)
 	
-	process_movement(self)
-	
-	var move_direction =  character.control_box.movement()
+	var move_direction =  control_box.movement()
 	var normalized_move = move_direction.normalized()
-	var aim_direction =  character.control_box.aim()
+	var aim_direction =  control_box.aim()
 	var normalized_aim = aim_direction.normalized()
 	
 	var new_movement_state: MovingStates = current_moving_state
 	var new_horizontal_state: HorizontalStates = current_horizontal_state
 	if aim_direction.x == 0 and aim_direction.y == 0:
-		aim_direction = last_aim
-		normalized_aim = last_aim.normalized()
+		aim_direction = state_machine.last_aim
+		normalized_aim = state_machine.last_aim.normalized()
 	
 	var movement_vec = move_direction * 100
 	#print(movement_vec)
@@ -184,30 +179,32 @@ func get_state(normalized_move, normalized_aim, current_state: MovingStates) -> 
 		return current_state
 
 func stand():
-	character.movement_state = StandingState.new()
-	character.movement_state.initialize(character, last_aim)
+	state_machine.movement_state = StandingState.new()
+	state_machine.movement_state.initialize(character, state_machine)
 
+func use_custom_movement() -> bool:
+	return true
 
-func custom_movement():
-	var movement_stick: Vector2 =  character.control_box.movement()
+func custom_movement(control_box: ControlBox):
+	var movement_stick: Vector2 = control_box.movement()
 	if current_moving_state == MovingStates.BackStepping or current_moving_state == MovingStates.Strafing:
 		var normalized_stick: Vector2 = movement_stick.normalized()
 		if normalized_stick.x <= 0.5 and normalized_stick.y <= 0.5:
-			character.velocity.x = movement_stick.x * SPEED
-			character.velocity.z = movement_stick.y * SPEED
+			character.velocity.x = movement_stick.x * state_machine.SPEED
+			character.velocity.z = movement_stick.y * state_machine.SPEED
 		else:
 			# TODO: Change so that we can
 			movement_stick = movement_stick / 2
-			character.velocity.x = movement_stick.x * SPEED
-			character.velocity.z = movement_stick.y * SPEED
+			character.velocity.x = movement_stick.x * state_machine.SPEED
+			character.velocity.z = movement_stick.y *state_machine. SPEED
 	else:
-		movement_stick = movement_stick * SPEED
+		movement_stick = movement_stick * state_machine.SPEED
 		character.velocity.x = movement_stick.x
 		character.velocity.z = movement_stick.y
 
 func falling():
-	character.movement_state = FallingState.new()
-	character.movement_state.initialize(character, last_aim, 0.0)
+	state_machine.movement_state = FallingState.new()
+	state_machine.movement_state.initialize(character, state_machine, 0.0)
 
 
 # Called when the node enters the scene tree for the first time.

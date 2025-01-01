@@ -10,12 +10,16 @@ func initialize(character: Character, state_machine: WeaponStateMachine):
 	character.model.animation_finished.connect(start_cooldown)
 	character.play_body_animation("counter_clockwise_spin")
 	play_animation("spin_counter_clockwise")
+	character.movement_state_machine.disable_input = true
+	character.right_hand_weapon.enabled = false
 
 func process_attack(delta: float, _attack: WeaponStateMachine.AttackType, _is_spinning: WeaponStateMachine.Spinning, _facing_forwards: bool) -> int:
 	if not enable_cooldown:
 		return 0
 	
 	if cooldown <= 0.0:
+		character.movement_state_machine.disable_input = false
+		character.right_hand_weapon.enabled = true
 		reset()
 		character.play_body_animation("idle")
 	cooldown -= delta

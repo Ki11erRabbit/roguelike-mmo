@@ -1,21 +1,18 @@
-class_name LandingState extends "res://Character/MovementStateMachine/character_movement_state.gd"
+class_name LandingState extends "res://Character/MovementStateMachine/States/character_movement_state.gd"
 
 
-func initialize(character: Character, current_last_aim: Vector2, fall_time = null):
-	super(character, current_last_aim)
+func initialize(character: Character, state_machine: MovementStateMachine, fall_time = null):
+	super(character, state_machine)
 	character.model.animation_finished.connect(landing_finished)
 	if fall_time < 8 and fall_time > 0:
 		character.play_body_animation("short_fall_landing")
 	elif fall_time >= 8 and fall_time < 20:
 		character.play_body_animation("medium_fall_landing")
 
-func apply_current_state(delta: float):
-	
-	process_gravity(delta, self)
 
 func stand():
-	character.movement_state = StandingState.new()
-	character.movement_state.initialize(character, last_aim)
+	state_machine.movement_state = StandingState.new()
+	state_machine.movement_state.initialize(character, state_machine)
 	character.ground()
 
 func landing_finished(anim_name: StringName) -> void:

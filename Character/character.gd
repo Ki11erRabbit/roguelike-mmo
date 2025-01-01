@@ -1,6 +1,6 @@
 class_name Character extends CharacterBody3D
 
-var movement_state: CharacterMovementState = StandingState.new()
+var movement_state_machine: MovementStateMachine = MovementStateMachine.new()
 var right_hand_weapon: WeaponStateMachine
 var left_hand_weapon: WeaponStateMachine
 
@@ -28,7 +28,7 @@ func initialize(model: CharacterModel, collision_shape: CapsuleShape3D, box: Con
 	add_child(model)
 	collision_box.shape = collision_shape
 	control_box = box
-	movement_state.initialize(self, Vector2(0,0))
+	movement_state_machine.initialize(self,)
 
 func ground():
 	air_state = AirState.Grounded
@@ -120,7 +120,7 @@ func _process(delta: float) -> void:
 	
 	if process_character():
 		return
-	movement_state.apply_current_state(delta)
+	movement_state_machine.process_state(delta)
 	if weapons_equiped:
 		if right_hand_weapon != null:
 			right_hand_weapon.enabled = true

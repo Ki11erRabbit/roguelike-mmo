@@ -31,7 +31,8 @@ func process_attack(delta: float, attack: WeaponStateMachine.AttackType, is_spin
 	return 0
 
 func swing():
-	character.play_animation("idle", "sword", "right")
+	#character.play_animation("idle", "sword", "right")
+	print("swing2")
 	state_machine.state = SwordRightHandedSwing2State.new()
 	state_machine.state.initialize(character, state_machine)
 

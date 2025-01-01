@@ -22,6 +22,7 @@ var spinning: Spinning
 var spin_mean: float
 
 
+
 # The state must be initialized before being passed in
 func initialize(character: Character, handedness: HandedNess, state: WeaponState):
 	self.character = character
@@ -29,8 +30,23 @@ func initialize(character: Character, handedness: HandedNess, state: WeaponState
 	self.handedness = handedness
 
 func process_input(delta: float) -> int:
-	if already_fired or not enabled or character.is_landing():
+	if not enabled:
+		spin_counter = 0.0
+		angle_array.resize(0)
+		spinning = Spinning.None
 		return 0
+	if already_fired:
+		spin_counter = 0.0
+		angle_array.resize(0)
+		spinning = Spinning.None
+		return 0
+	if character.is_landing():
+		spin_counter = 0.0
+		angle_array.resize(0)
+		spinning = Spinning.None
+		return 0
+	
+	#print(state.get_script().resource_path)
 	
 	var attack: AttackType = AttackType.None
 	 
@@ -67,8 +83,7 @@ func process_input(delta: float) -> int:
 		#angle_array.resize(angle_array.size() + 1)
 		#print("angle diff")
 		#print(deg_to_rad(angle_diff))
-		pass
-		#angle_array.push_back(angle_diff)
+		angle_array.push_back(angle_diff)
 	
 	if angle_array.size() > 20:
 		spin_mean = calculate_mean(angle_array)
@@ -84,8 +99,8 @@ func process_input(delta: float) -> int:
 		#print(spin_mean)
 		spinning = Spinning.Clockwise
 		spin_counter += delta
-	elif spin_counter >= 2.5:
-			spin_counter = 0.0
+	elif spin_counter >= 1:
+		spin_counter = 0.0
 	last_angle = current_angle
 		
 	var movement_angle = character.control_box.movement().angle()
@@ -93,7 +108,8 @@ func process_input(delta: float) -> int:
 	# TODO: get facing to work
 	var facing_forwards: bool = abs(current_aim.normalized().dot(Vector2(1,1))) >= 0.8
 	
-	return state.process_attack(delta, attack, spinning, facing_forwards)
+	var result = state.process_attack(delta, attack, spinning, facing_forwards)
+	return result
 	
 	
 

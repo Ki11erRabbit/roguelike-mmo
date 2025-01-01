@@ -3,35 +3,28 @@ class_name CharacterMovementState extends Node
 const Actions = preload("res://InputManager/actions.gd")
 var character: Character
 
-var last_aim: Vector2
+var state_machine: MovementStateMachine
 var initalized: bool = false
-const X_ROTATION_AMOUNT: float = -15
-# Determines the angle that allows for playing the rotation animation
-const ROTATION_ANGLE_LIMIT: float = 10
-
-const SPEED = 0.5
-
-const JUMP_VELOCITY = 20
-
-var disable_gravity: bool = false
 
 
-func initialize(character: Character, current_last_aim: Vector2, additional = null):
-	last_aim = current_last_aim
+func initialize(character: Character, state_machine: MovementStateMachine, additional = null):
+	self.state_machine = state_machine
 	initalized = true
 	self.character = character
 	
 
-func apply_current_state(delta: float):
+func apply_current_state(delta: float, control_box: ControlBox, rotation_triple: Array):
 	pass
 
-func process_rotation(delta: float) -> Array[bool]:
+func process_rotation(delta: float, control_box: ControlBox, last_aim: Vector2) -> Array:
 	"""
-	Returns: An array that contains 2 elements, the first is if there is rotation, the second if the rotation is clockwise
+	Returns: An array that contains 3 elements, the first is if there is rotation, the second if the rotation is clockwise
+	and the third is a vector2 of the current aim
 	"""
-	assert(initalized, "Initialize was not called, crashing")
+	if control_box == null:
+		return [false, false, state_machine.last_aim]
 	
-	var aim_direction = character.control_box.aim()
+	var aim_direction = control_box.aim()
 	var normalized_aim = aim_direction.normalized()
 	
 	
@@ -51,46 +44,50 @@ func process_rotation(delta: float) -> Array[bool]:
 	character.collision_box.rotation.z = 0
 	character.model.rotation.y = atan2(aim_direction.x, aim_direction.y)
 	character.collision_box.rotation.y = character.model.rotation.y
-	character.collision_box.rotate_x(deg_to_rad(X_ROTATION_AMOUNT))
-	character.model.rotate_x(deg_to_rad(X_ROTATION_AMOUNT))
+	character.collision_box.rotate_x(deg_to_rad(state_machine.X_ROTATION_AMOUNT))
+	character.model.rotate_x(deg_to_rad(state_machine.X_ROTATION_AMOUNT))
 	
 	
-	if (not aim_direction_was_zero) and rad_to_deg(abs(aim_direction.angle() - last_aim.angle())) < ROTATION_ANGLE_LIMIT:
+	if (not aim_direction_was_zero) and rad_to_deg(abs(aim_direction.angle() - last_aim.angle())) < state_machine.ROTATION_ANGLE_LIMIT:
 		rotating = true
 	last_aim = aim_direction
 	#print(last_aim)
 	#print("")
 	
-	return [rotating, clockwise_rotation]
+	return [rotating, clockwise_rotation, aim_direction]
 
-func process_movement_buttons(current_state: CharacterMovementState) -> bool:
+func process_movement_buttons(delta: float, control_box: ControlBox, current_state: CharacterMovementState) -> bool:
 	"""This includes actions like jump and dash
 	returns: The bool indicates whether or not the caller should stop their code from executing
 	"""
-	assert(initalized, "Initialize was not called, crashing")
-	if character.control_box.is_action_just_released(Actions.PlayerActionButtons.Jump) and character.is_on_floor():
+	if control_box == null:
+		return false
+	if control_box.is_action_just_released(Actions.PlayerActionButtons.Jump) and character.is_on_floor():
 		current_state.jump()
 		return true
-	elif character.control_box.is_action_pressed(Actions.PlayerActionButtons.Jump):
+	elif control_box.is_action_pressed(Actions.PlayerActionButtons.Jump):
 		pass
 	return false
 
-func process_movement(current_state: CharacterMovementState = null):
-	var movement_stick: Vector2 = character.control_box.movement()
+func process_movement(delta: float, control_box: ControlBox, current_state: CharacterMovementState = null):
+	if control_box == null:
+		return
+	var movement_stick: Vector2 = control_box.movement()
 	if movement_stick.x != 0 or movement_stick.y != 0:
-		if current_state != null:
-			current_state.custom_movement()
+		if current_state.use_custom_movement():
+			current_state.custom_movement(control_box)
 		else:
-			movement_stick = movement_stick * SPEED
+			movement_stick = movement_stick * state_machine.SPEED
 			character.velocity.x = movement_stick.x
 			character.velocity.z = movement_stick.y
 
-func custom_movement():
+func use_custom_movement() -> bool:
+	return false
+
+func custom_movement(control_box: ControlBox):
 	pass
 
 func process_gravity(delta: float, current_state: CharacterMovementState):
-	if disable_gravity:
-		return
 	if not character.is_on_floor():
 		character.velocity += character.get_gravity() * delta
 		current_state.in_air(delta)
@@ -109,8 +106,8 @@ func move():
 	pass
 
 func jump():
-	character.movement_state = JumpState.new()
-	character.movement_state.initialize(character, last_aim)
+	state_machine.movement_state = JumpState.new()
+	state_machine.movement_state.initialize(character, state_machine)
 	character.jump()
 
 func jumping():
@@ -123,14 +120,15 @@ func landing():
 	pass
 
 func clockwise_spin():
-	var old_state: CharacterMovementState = character.movement_state
-	character.movement_state = ClockwiseSpin.new()
-	character.movement_state.initialize(character, last_aim, old_state)
+	print("starting spin")
+	var old_state: CharacterMovementState = state_machine.movement_state
+	state_machine.movement_state = ClockwiseSpin.new()
+	state_machine.movement_state.initialize(character, state_machine, old_state)
 
 func counter_clockwise_spin():
-	var old_state: CharacterMovementState = character.movement_state
-	character.movement_state = CounterClockwiseSpin.new()
-	character.movement_state.initialize(character, last_aim, old_state)
+	var old_state: CharacterMovementState = state_machine.movement_state
+	state_machine.movement_state = CounterClockwiseSpin.new()
+	state_machine.movement_state.initialize(character, state_machine, old_state)
 
 func is_rotating_clockwise(current, last) -> bool:
 	current = rad_to_deg(current)
