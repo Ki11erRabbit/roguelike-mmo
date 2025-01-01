@@ -43,3 +43,4 @@ func process_character():
 	if InputManager.is_action_just_pressed(Actions.PlayerActionButtons.Interact):
 		if weapons_equiped:
 			unequip_weapons()
+			should_equip = false

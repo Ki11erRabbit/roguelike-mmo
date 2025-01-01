@@ -1,7 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://b50mksrt11kpj"]
+[gd_scene load_steps=8 format=3 uid="uid://b50mksrt11kpj"]
 
 [ext_resource type="Script" path="res://Levels/test_level.gd" id="1_shaun"]
 [ext_resource type="PackedScene" uid="uid://b3gwe4unwagk6" path="res://Character/Players/ControllableCharacter.tscn" id="2_r0hl7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_duwlh"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_jf1ng"]
+sky_material = SubResource("ProceduralSkyMaterial_duwlh")
+
+[sub_resource type="Environment" id="Environment_olhia"]
+background_mode = 2
+sky = SubResource("Sky_jf1ng")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 2
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1xx45"]
 size = Vector2(1000, 1000)
@@ -11,6 +25,9 @@ data = PackedVector3Array(500, 0, 500, -500, 0, 500, 500, 0, -500, -500, 0, 500,
 
 [node name="TestLevel" type="Node"]
 script = ExtResource("1_shaun")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_olhia")
 
 [node name="Ground" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_1xx45")

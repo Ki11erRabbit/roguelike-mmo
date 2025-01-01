@@ -26,11 +26,11 @@ func process_attack(delta: float, attack: AttackType, is_spinning: Spinning, fac
 		spin_attack_cooldown -= delta
 	#print("facing")
 	
-	#if facing_forwards:
-		#match attack:
-			#AttackType.Normal:
-				#stab()
-				#return 0
+	if facing_forwards:
+		match attack:
+			AttackType.Normal:
+				stab()
+				return 0
 	#print("checking attack")
 	match attack:
 		AttackType.Normal:
