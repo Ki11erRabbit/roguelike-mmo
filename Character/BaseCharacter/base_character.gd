@@ -127,8 +127,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	print(right_arm_state_machine.get_current_node())
-	print(body_state_machine.get_current_node())
+	#print(both_arm_state_machine.get_current_node())
+	#print(body_state_machine.get_current_node())
 	standing_counter = 0
 	pass
 

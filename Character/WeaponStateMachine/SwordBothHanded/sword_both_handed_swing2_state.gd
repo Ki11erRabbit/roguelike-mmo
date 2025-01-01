@@ -1,4 +1,4 @@
-class_name SwordRightHandedSwing2State extends "res://Character/WeaponStateMachine/SwordRightHanded/sword_right_handed_state.gd"
+class_name SwordBothHandedSwing2State extends "res://Character/WeaponStateMachine/SwordBothHanded/sword_both_handed_state.gd"
 
 const COOLDOWN_TIME: float = 0.5
 var cooldown: float = COOLDOWN_TIME
@@ -10,13 +10,9 @@ func initialize(character: Character, state_machine: WeaponStateMachine):
 	character.model.animation_finished.connect(start_cooldown)
 	play_animation("slash2")
 
-func process_attack(delta: float, attack: WeaponStateMachine.AttackType, _is_spinning: WeaponStateMachine.Spinning, _facing_forwards: bool) -> int:
+func process_attack(delta: float, _attack: WeaponStateMachine.AttackType, _is_spinning: WeaponStateMachine.Spinning, _facing_forwards: bool) -> int:
 	if not enable_cooldown:
 		return 0
-	
-	match attack:
-		AttackType.Strong:
-			two_handed_switch()
 	
 	if cooldown <= 0.0:
 		reset()
@@ -25,13 +21,8 @@ func process_attack(delta: float, attack: WeaponStateMachine.AttackType, _is_spi
 
 func start_cooldown(anim_name: StringName):
 	match String(anim_name):
-		"sword_right_hand_slash2":
+		"sword_both_hand_slash2":
 			enable_cooldown = true
-
-func two_handed_switch():
-	character.switch_to_two_handed(true)
-	state_machine.state = SwordBothHandedSwing2State.new()
-	state_machine.state.initialize(character, state_machine)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

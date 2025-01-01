@@ -28,7 +28,7 @@ func initialize(model: CharacterModel, collision_shape: CapsuleShape3D, box: Con
 	add_child(model)
 	collision_box.shape = collision_shape
 	control_box = box
-	movement_state_machine.initialize(self,)
+	movement_state_machine.initialize(self)
 
 func ground():
 	air_state = AirState.Grounded
@@ -59,9 +59,6 @@ func is_landing():
 			return true
 	return false
 
-func blend_movement(vector: Vector2):
-	model.blend_movement(vector)
-
 func attach_right_hand_weapon(weapon: Weapon, state_machine: WeaponStateMachine):
 	right_hand_weapon = state_machine
 	right_hand.add_child(weapon)
@@ -69,6 +66,34 @@ func attach_right_hand_weapon(weapon: Weapon, state_machine: WeaponStateMachine)
 func attach_left_hand_weapon(weapon: Weapon, state_machine: WeaponStateMachine):
 	left_hand_weapon = state_machine
 	left_hand.add_child(weapon)
+
+func attach_two_handed_weapon(weapon: Weapon, state_machine: WeaponStateMachine):
+	right_hand_weapon = state_machine
+	left_hand_weapon = state_machine
+	right_hand.add_child(weapon)
+
+func switch_to_two_handed(right: bool):
+	unequip()
+	if right:
+		left_hand_weapon = right_hand_weapon
+	else:
+		right_hand_weapon = left_hand_weapon
+	equip("both")
+
+func switch_to_one_handed(right: bool):
+	unequip()
+	if right:
+		left_hand_weapon = null
+		equip("right")
+	else:
+		right_hand_weapon = null
+		equip("left")
+
+func unequip():
+	model.unequip()
+
+func equip(hand: String):
+	model.equip(hand)
 
 func equip_weapons():
 	var right_weapon: Node3D = null

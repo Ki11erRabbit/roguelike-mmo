@@ -12,6 +12,9 @@ func initialize(model: Node3D):
 func equip(hand: String):
 	model.equip(hand)
 
+func unequip():
+	model.unequip()
+
 # TODO: introduce code to figure out if weapon is two handed
 func equip_weapons(right_hand: Node3D, left_hand: Node3D):
 	if right_hand != null:

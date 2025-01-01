@@ -22,6 +22,8 @@ func process_attack(delta: float, attack: WeaponStateMachine.AttackType, is_spin
 func play_animation(anim_name: String):
 	character.play_animation(anim_name, weapon, hand)
 
+	
+
 func reset():
 	pass
 

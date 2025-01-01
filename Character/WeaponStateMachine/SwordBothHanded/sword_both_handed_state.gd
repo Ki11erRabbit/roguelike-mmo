@@ -1,12 +1,12 @@
-class_name SwordRightHandedState extends "res://Character/WeaponStateMachine/weapon_state.gd"
+class_name SwordBothHandedState extends "res://Character/WeaponStateMachine/weapon_state.gd"
 
 func initialize(character: Character, state_machine: WeaponStateMachine):
 	super(character, state_machine)
 	weapon = "sword"
-	hand = "right"
+	hand = "both"
 
 func reset():
-	state_machine.state = SwordRightHandedIdleState.new()
+	state_machine.state = SwordBothHandedIdleState.new()
 	state_machine.state.initialize(character, state_machine)
 
 func swing():
