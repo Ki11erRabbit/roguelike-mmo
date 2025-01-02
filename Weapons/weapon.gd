@@ -7,7 +7,7 @@ var model: Node3D = $model
 var hitbox: Area3D
 
 @export
-var stats: int
+var stats: WeaponStats
 
 
 # Called when the node enters the scene tree for the first time.

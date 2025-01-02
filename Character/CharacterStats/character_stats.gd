@@ -11,6 +11,7 @@ var health_regen_cooldown: float = 5
 var strength: int = 10
 var speed: float = 0.5
 
+var defense: int
 
 
 var right_arm_level: int = 1
@@ -34,6 +35,9 @@ func setup_new(level: int, right_level: int, left_level: int, regen_percentage: 
 	left_strength = calculator.calculate_arm_strength(left_level)
 	right_speed = calculator.calculate_arm_speed(right_level)
 	left_speed = calculator.calculate_arm_speed(left_level)
+
+func set_defense(value: int):
+	defense = value
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
