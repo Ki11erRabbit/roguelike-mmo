@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bj6c4gucyyt5u"]
+
+[sub_resource type="GDScript" id="GDScript_tc7c7"]
+script/source = "class_name WeaponStats extends Resource
+"
+
+[resource]
+resource_name = "WeaponStats"
+script = SubResource("GDScript_tc7c7")
+metadata/level = 0
+metadata/weight = 0
+metadata/durability = 0
+metadata/range = 0.0
+metadata/attack = 0
+metadata/current_durability = 0
+metadata/length = 0.0
+metadata/kind = &""
+metadata/handedness = &""

@@ -9,23 +9,23 @@ bg_color = Color(0, 0.684539, 0.701178, 1)
 layout_mode = 3
 anchors_preset = 0
 offset_left = 8.0
-offset_top = 8.0
-offset_right = 48.0
-offset_bottom = 48.0
+offset_right = 350.0
+offset_bottom = 56.0
 script = ExtResource("1_4nw4g")
 max_health = 100.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_right = 342.0
-offset_bottom = 40.0
+offset_top = 8.0
+offset_right = 349.0
+offset_bottom = 48.0
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 6.0
-offset_right = 338.0
-offset_bottom = 33.0
+offset_left = 8.0
+offset_top = 15.0
+offset_right = 342.0
+offset_bottom = 42.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_vt8r4")
 value = 100.0
 show_percentage = false

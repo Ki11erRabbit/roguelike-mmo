@@ -1,18 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://b50mksrt11kpj"]
+[gd_scene load_steps=7 format=3 uid="uid://b50mksrt11kpj"]
 
 [ext_resource type="Script" path="res://Levels/test_level.gd" id="1_shaun"]
-[ext_resource type="PackedScene" uid="uid://b3gwe4unwagk6" path="res://Character/Players/ControllableCharacter.tscn" id="2_r0hl7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_duwlh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
-[sub_resource type="Sky" id="Sky_jf1ng"]
+[sub_resource type="Sky" id="Sky_2ox1b"]
 sky_material = SubResource("ProceduralSkyMaterial_duwlh")
 
 [sub_resource type="Environment" id="Environment_olhia"]
 background_mode = 2
-sky = SubResource("Sky_jf1ng")
+sky = SubResource("Sky_2ox1b")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 tonemap_mode = 2
@@ -36,5 +35,3 @@ mesh = SubResource("PlaneMesh_1xx45")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_w0yk4")
-
-[node name="Character" parent="." instance=ExtResource("2_r0hl7")]

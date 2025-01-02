@@ -66,6 +66,8 @@ func interpret_color():
 			break
 		if index < health_color_steps.size() - 1:
 			index += 1
+	if current_step == null:
+		return
 	
 	var next_index: int = index + 1
 	if next_index >= health_color_steps.size():

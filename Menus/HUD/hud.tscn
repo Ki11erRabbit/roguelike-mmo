@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1aqmc03e1mfj"]
+[gd_scene load_steps=3 format=3 uid="uid://b1aqmc03e1mfj"]
 
+[ext_resource type="Script" path="res://Menus/HUD/hud.gd" id="1_eb3rn"]
 [ext_resource type="PackedScene" uid="uid://wy4ko02quwb5" path="res://Menus/HUD/HealthBars/player_bar.tscn" id="1_vixa1"]
 
 [node name="Hud" type="Control"]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_eb3rn")
 
 [node name="HealthBars" type="Control" parent="."]
 anchors_preset = 0
@@ -17,4 +19,3 @@ offset_bottom = 40.0
 
 [node name="PlayerBar" parent="HealthBars" instance=ExtResource("1_vixa1")]
 max_health = 0.0
-current_value = 0.0

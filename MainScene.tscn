@@ -1,0 +1,34 @@
+[gd_scene load_steps=8 format=3 uid="uid://b34q0ww4oe46"]
+
+[ext_resource type="Script" path="res://main_scene.gd" id="1_xedd3"]
+[ext_resource type="PackedScene" uid="uid://b3gwe4unwagk6" path="res://Character/Players/ControllableCharacter.tscn" id="2_65240"]
+[ext_resource type="PackedScene" uid="uid://b1aqmc03e1mfj" path="res://Menus/HUD/hud.tscn" id="3_i8r2s"]
+[ext_resource type="PackedScene" uid="uid://b50mksrt11kpj" path="res://Levels/test_level.tscn" id="4_pm7op"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_df0yd"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_jf1ng"]
+sky_material = SubResource("ProceduralSkyMaterial_df0yd")
+
+[sub_resource type="Environment" id="Environment_8hh41"]
+background_mode = 2
+sky = SubResource("Sky_jf1ng")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 2
+
+[node name="MainScene" type="Node"]
+script = ExtResource("1_xedd3")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8hh41")
+
+[node name="Hud" parent="." instance=ExtResource("3_i8r2s")]
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Character" parent="World" instance=ExtResource("2_65240")]
+
+[node name="TestLevel" parent="World" instance=ExtResource("4_pm7op")]

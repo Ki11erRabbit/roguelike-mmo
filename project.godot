@@ -20,6 +20,7 @@ run/stretch/mode="viewport"
 
 InputMapper="*res://InputManager/input_mapper.gd"
 InputManager="*res://InputManager/input_manager.gd"
+PlayerStats="*res://Utilities/player_stats.gd"
 
 [display]
 
