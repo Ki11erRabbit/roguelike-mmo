@@ -1,25 +1,25 @@
 class_name CombatCalculator extends Node
 
 
-func calculate_damage_done(weapon: WeaponStats, attacker: CharacterStats, defender: CharacterStats, handed: String) -> int:
+func calculate_damage_done(weapon: WeaponStats, attacker: CharacterStats, defender: CharacterStats) -> int:
 	var weapon_damage = weapon.attack
 	
 	var weight_modifier: float = log(weapon.weight)
-	var strength_modifier: float
-	match handed:
-		"left":
-			strength_modifier = log(attacker.left_strength) / log(10)
-		"right":
-			strength_modifier = log(attacker.right_strength) / log(10)
-		"both":
-			var strength: float = attacker.left_strength / 2 + attacker.right_strength / 2
-			strength_modifier = log(strength) / log(10)
+	#var strength_modifier: float
+	#match handed:
+		#"left":
+			#strength_modifier = log(attacker.left_strength) / log(10)
+		#"right":
+			#strength_modifier = log(attacker.right_strength) / log(10)
+		#"both":
+			#var strength: float = attacker.left_strength / 2 + attacker.right_strength / 2
+			#strength_modifier = log(strength) / log(10)
 	
-	weapon_damage *= weight_modifier * strength_modifier
+	weapon_damage *= weight_modifier #* strength_modifier
 	
 	const e_constant: float = 2.71828
 	
-	return weapon_damage - defender.defense * e_constant
+	return int(floor(weapon_damage - defender.defense * e_constant))
 
 func calculate_attack_speed_modifier(weapon: WeaponStats, attacker: CharacterStats, hand: String) -> float:
 	var weight: int = weapon.weight

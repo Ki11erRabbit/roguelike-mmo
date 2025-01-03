@@ -12,4 +12,4 @@ visible = false
 
 [node name="LeftHand" type="Node3D" parent="Weapons"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." groups=["attacking_group"]]

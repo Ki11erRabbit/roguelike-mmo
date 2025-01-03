@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnn75gbrtm1np"]
+[gd_scene load_steps=3 format=3 uid="uid://bnn75gbrtm1np"]
 
 [ext_resource type="Script" path="res://Weapons/weapon.gd" id="1_4owtx"]
 
-[node name="Weapon" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_yrq7k"]
+size = Vector3(1, 0.513672, 1)
+
+[node name="Weapon" type="Area3D" groups=["attacking_group"]]
 script = ExtResource("1_4owtx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_yrq7k")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

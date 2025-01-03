@@ -12,6 +12,9 @@ var model: CharacterModel
 
 var control_box: ControlBox
 
+@export
+var stats: CharacterStats
+
 @onready
 var collision_box: CollisionShape3D = $CollisionShape3D
 
@@ -20,11 +23,12 @@ var right_hand = $Weapons/RightHand
 @onready
 var left_hand = $Weapons/LeftHand
 
+var weapons_waiting_for_cooldown: Dictionary = {}
+
+## This should be called in ready_character
 func initialize(model: CharacterModel, collision_shape: CapsuleShape3D, box: ControlBox):
-	"""
-	This should be called in ready_character
-	"""
 	self.model = model
+	self.model.model.initialize(self)
 	add_child(model)
 	collision_box.shape = collision_shape
 	control_box = box
@@ -125,11 +129,9 @@ func play_animation(anim_name: String, weapon: String, hand: String):
 func play_body_animation(anim_name: String):
 	model.play_body_animation(anim_name)
 
+## returns: Return value is a boolean indicating whether or not to not process other character functions
+##true means to skip other character functions
 func process_character() -> bool:
-	"""
-	returns: Return value is a boolean indicating whether or not to not process other character functions
-	true means to skip other character functions
-	"""
 	return false
 
 func ready_character():
@@ -160,3 +162,20 @@ func _process(delta: float) -> void:
 			left_hand_weapon.enabled = false
 		
 	move_and_slide()
+
+## Returns null if weapon has already collided with the character
+## Returns the current character if the weapon hasn't collided yet
+func collide_weapon(weapon: Weapon) -> Character:
+	if weapon.get_id() in weapons_waiting_for_cooldown:
+		return null
+	else:
+		weapon.done_attacking.connect(clear_weapon)
+		weapons_waiting_for_cooldown[weapon.get_id()] = weapon.get_id()
+		return self
+
+func clear_weapon(weapon_id: int):
+	weapons_waiting_for_cooldown.erase(weapon_id)
+
+func take_damage(damage: int):
+	# TODO: signal to ui to take damage
+	pass

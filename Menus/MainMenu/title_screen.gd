@@ -30,7 +30,7 @@ func select_start_button():
 func activate_start_button():
 	start_button.button_pressed = true
 	pressed_time = WAIT_TIME
-	get_tree().change_scene_to_file("res://Levels/test_level.tscn")
+	get_tree().change_scene_to_file("res://MainScene.tscn")
 
 func select_settings_button():
 	current_selected_button = SelectedButton.Settings

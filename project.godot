@@ -32,6 +32,10 @@ window/stretch/mode="viewport"
 
 import/blender/enabled=false
 
+[global_group]
+
+attacking_group="The group where hitboxes of weapons and characters live."
+
 [input]
 
 left_stick_right={

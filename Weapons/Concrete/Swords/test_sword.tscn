@@ -1,21 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4ab7iv7vkm2e"]
+[gd_scene load_steps=6 format=3 uid="uid://dwdsc6p04u38x"]
 
 [ext_resource type="PackedScene" uid="uid://bk4g3abt44sfy" path="res://Weapons/whole_weapon.tscn" id="1_rhmaa"]
-[ext_resource type="Script" path="res://Weapons/Concrete/Swords/test_sword.gd" id="2_8widi"]
+[ext_resource type="Script" path="res://Weapons/weapon_stats.gd" id="2_i6kay"]
 [ext_resource type="PackedScene" uid="uid://dbgiq25575sro" path="res://Weapons/Models/test_sword.glb" id="2_xwtvc"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_at8ah"]
-size = Vector3(0.04, 1.945, 0.209)
+[sub_resource type="Resource" id="Resource_857bi"]
+script = ExtResource("2_i6kay")
+kind = &"sword"
+handedness = &"one"
+level = 1
+attack = 10
+length = 0.51
+durability = 200
+current_durability = 200
+range = 1.945
+hand_position = 0.341
 
-[node name="TestSword" instance=ExtResource("1_rhmaa")]
-script = ExtResource("2_8widi")
+[sub_resource type="BoxShape3D" id="BoxShape3D_bm3pt"]
+size = Vector3(0.04, 1, 0.209)
 
-[node name="model" parent="." index="0" instance=ExtResource("2_xwtvc")]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0, 0.341049, 0)
+[node name="Weapon" node_paths=PackedStringArray("model") instance=ExtResource("1_rhmaa")]
+model = NodePath("test_sword")
+stats = SubResource("Resource_857bi")
+collision_shape = SubResource("BoxShape3D_bm3pt")
 
-[node name="Area3D" type="Area3D" parent="model" index="1"]
-transform = Transform3D(-4.37114e-08, 0, -1, -1, -4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1.91069e-15, 0, -0.009, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="model/Area3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00915527, 0.934382, -0.000366211)
-shape = SubResource("BoxShape3D_at8ah")
+[node name="test_sword" parent="." index="1" instance=ExtResource("2_xwtvc")]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0, 0, 0)

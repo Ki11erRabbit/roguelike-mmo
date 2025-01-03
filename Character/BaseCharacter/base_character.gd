@@ -19,6 +19,11 @@ var right_hand_container: Node3D = $Skeleton/Skeleton3D/RightHandAttachment/Righ
 @onready
 var left_hand_container: Node3D = $Skeleton/Skeleton3D/LeftHandAttachment/LeftHandContainer
 
+var character: Character
+
+func initialize(character: Character):
+	self.character = character
+
 
 func equip_right_hand(weapon_container: Node3D):
 	right_hand_container.add_child(weapon_container)

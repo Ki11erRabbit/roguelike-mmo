@@ -85,7 +85,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if not current_level > 1000:
-		print(calculate_max_health(current_level))
-		current_level += 1
+	#if not current_level > 1000:
+		#print(calculate_max_health(current_level))
+		#current_level += 1
 	pass

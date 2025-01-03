@@ -20,7 +20,7 @@ func ready_character():
 	initialize(character_model, capsule_shape, box)
 	
 	var sword: Weapon = load("res://Weapons/Concrete/Swords/test_sword.tscn").instantiate()
-	
+	sword.initialize(self)
 	#sword.position = Vector3(-0.24, -0.1, 0.037)
 	#sword.rotation = Vector3(61.9, 157.2, -137.6)
 	var weapon_state_machine = WeaponStateMachine.new()
