@@ -4,18 +4,18 @@ class_name CombatCalculator extends Node
 func calculate_damage_done(weapon: WeaponStats, attacker: CharacterStats, defender: CharacterStats) -> int:
 	var weapon_damage = weapon.attack
 	
-	#print(weapon.weight)
-	#var weight_modifier: float = log(weapon.weight)
+	
+	var weight_modifier: float = log(weapon.weight)
 	var strength_modifier: float
 	match weapon.hand:
 		"left":
-			strength_modifier = log(attacker.left_strength) #/ log(10)
+			strength_modifier = 1
 		"right":
-			strength_modifier = log(attacker.right_strength) #/ log(10)
+			strength_modifier = 1
 		"both":
-			var strength: float = attacker.left_strength + attacker.right_strength
+			var strength: float = attacker.left_strength / 3 + attacker.right_strength / 3
 			strength_modifier = log(strength) #/ log(10)
-	weapon_damage *= strength_modifier #* strength_modifier
+	weapon_damage *= weight_modifier * strength_modifier
 	
 	const e_constant: float = 2.71828
 	
