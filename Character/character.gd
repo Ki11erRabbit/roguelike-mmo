@@ -90,15 +90,18 @@ func is_landing():
 func attach_right_hand_weapon(weapon: Weapon, state_machine: WeaponStateMachine):
 	right_hand_weapon = state_machine
 	right_weapon = weapon
+	weapon.stats.hand = "right"
 
 func attach_left_hand_weapon(weapon: Weapon, state_machine: WeaponStateMachine):
 	left_hand_weapon = state_machine
 	left_weapon = weapon
+	weapon.stats.hand = "left"
 
 func attach_two_handed_weapon(weapon: Weapon, state_machine: WeaponStateMachine):
 	right_hand_weapon = state_machine
 	left_hand_weapon = state_machine
 	right_weapon = weapon
+	weapon.stats.hand = "both"
 
 func switch_to_two_handed(right: bool):
 	unequip()
@@ -106,14 +109,17 @@ func switch_to_two_handed(right: bool):
 		left_hand_weapon = right_hand_weapon
 	else:
 		right_hand_weapon = left_hand_weapon
+	right_weapon.stats.hand = "both"
 	equip("both")
 
 func switch_to_one_handed(right: bool):
 	unequip()
 	if right:
+		right_weapon.stats.hand = "right"
 		left_hand_weapon = null
 		equip("right")
 	else:
+		left_weapon.stats.hand = "left"
 		right_hand_weapon = null
 		equip("left")
 

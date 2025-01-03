@@ -30,6 +30,8 @@ var range: float
 ## The offset which the main hand with be positioned on the sword
 @export
 var hand_position: float
+## The current hand this weapon is equiped with
+var hand: String
 
 func initialize(resource: Resource):
 	self.level = resource.level
