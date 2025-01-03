@@ -49,10 +49,6 @@ func _process(delta: float) -> void:
 		#sword.position = Vector3(-0.24, -0.1, 0.037)
 		#sword.rotation = Vector3(61.9, 157.2, -137.6)
 		#
-		#var weapon_state_machine = WeaponStateMachine.new()
-		#var weapon_state = SwordRightHandedIdleState.new()
-		#weapon_state.initialize(character, weapon_state_machine)
-		#weapon_state_machine.initialize(character, WeaponStateMachine.HandedNess.Right, weapon_state)
 		#
 		#character.attach_right_hand_weapon(sword, weapon_state_machine)
 	pass

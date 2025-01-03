@@ -27,7 +27,7 @@ func setup_new(level: int, right_level: int, left_level: int, regen_percentage: 
 	current_level = level
 	right_arm_level = right_level
 	left_arm_level = left_level
-	max_health = calculator.calculate_health(level)
+	max_health = calculator.calculate_max_health(level)
 	health_regen_percentage = regen_percentage
 	strength = calculator.calculate_strength(right_level, left_level)
 	speed = calculator.calculate_speed(level)

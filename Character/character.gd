@@ -15,6 +15,25 @@ var control_box: ControlBox
 @export
 var stats: CharacterStats
 
+signal health_hit_zero
+signal grace_period_ended
+
+var current_health: float = 0
+
+var regen_timer: float = 0.0
+
+var damage: float = 0
+var damage_rate: float = 80 / 60
+
+var healing: float = 0
+
+var healing_rate: float = 100 / 60
+
+@onready
+var timer: Timer = $Timer
+var started_timer: bool = false
+const GRACE_PERIOD: int = 10
+
 @onready
 var collision_box: CollisionShape3D = $CollisionShape3D
 
@@ -130,7 +149,7 @@ func play_body_animation(anim_name: String):
 	model.play_body_animation(anim_name)
 
 ## returns: Return value is a boolean indicating whether or not to not process other character functions
-##true means to skip other character functions
+## true means to skip other character functions
 func process_character() -> bool:
 	return false
 
@@ -140,10 +159,13 @@ func ready_character():
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	ready_character()
+	current_health = stats.current_health
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
+	process_health(delta)
 	
 	if process_character():
 		return
@@ -160,7 +182,8 @@ func _process(delta: float) -> void:
 			right_hand_weapon.enabled = false
 		if left_hand_weapon != null:
 			left_hand_weapon.enabled = false
-		
+	
+	print(velocity)
 	move_and_slide()
 
 ## Returns null if weapon has already collided with the character
@@ -176,6 +199,67 @@ func collide_weapon(weapon: Weapon) -> Character:
 func clear_weapon(weapon_id: int):
 	weapons_waiting_for_cooldown.erase(weapon_id)
 
-func take_damage(damage: int):
-	# TODO: signal to ui to take damage
-	pass
+func add_damage(amount: int):
+	damage += amount
+
+func add_healing(amount: int):
+	healing += amount
+
+func start_timer():
+	if not started_timer:
+		started_timer = true
+		timer.start()
+
+func reset_timer():
+	if started_timer:
+		started_timer = false
+		timer.stop()
+		timer.wait_time = GRACE_PERIOD
+
+func process_health(delta: float):
+	
+	if stats.current_health != stats.max_health and stats.current_health != 0:
+		if regen_timer >= stats.health_regen_cooldown:
+			regen_timer = 0
+			healing += stats.max_health * (stats.health_regen_percentage / 100)
+		else:
+			regen_timer += delta
+	else:
+		regen_timer = 0.0
+			
+	
+	if damage > 0:
+		if damage - damage_rate < 0:
+			current_health -= damage
+		else:
+			damage -= damage_rate
+			current_health -= damage_rate
+	
+	if damage <= 0:
+		damage = 0
+		current_health = ceil(current_health)
+	
+	if healing > 0:
+		if healing - healing_rate < 0:
+			current_health += healing
+		else:
+			healing -= healing_rate
+			current_health += healing_rate
+	
+	if healing <= 0:
+		healing = 0
+		current_health = ceil(current_health)
+	
+	if current_health <= 0 and not started_timer and healing <= 0:
+		current_health = 0
+		emit_signal("health_hit_zero")
+		start_timer()
+	elif started_timer and healing > 0:
+		reset_timer()
+	
+	if current_health >= stats.max_health:
+		current_health = stats.max_health
+	
+	stats.current_health = int(current_health)
+	# TODO: connect to bar
+	

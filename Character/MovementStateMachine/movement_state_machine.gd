@@ -9,7 +9,7 @@ const X_ROTATION_AMOUNT: float = -15
 # Determines the angle that allows for playing the rotation animation
 const ROTATION_ANGLE_LIMIT: float = 10
 
-const SPEED = 0.5
+const SPEED = 200
 
 const JUMP_VELOCITY = 20
 

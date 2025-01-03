@@ -8,6 +8,8 @@ var model: Node3D
 @export
 var stats: WeaponStats
 
+var enable_collision: bool = false
+
 @export
 var collision_shape: BoxShape3D:
 	set(value):
@@ -44,6 +46,8 @@ func get_id() -> int:
 	return get_instance_id()
 
 func _on_area_entered(area: Area3D) -> void:
+	if not enable_collision:
+		return
 	if area.is_in_group("attacking_group"):
 		var character: Character = area.owner.character.collide_weapon(self)
 		if character == null:

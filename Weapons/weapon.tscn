@@ -6,6 +6,8 @@
 size = Vector3(1, 0.513672, 1)
 
 [node name="Weapon" type="Area3D" groups=["attacking_group"]]
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_4owtx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

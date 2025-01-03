@@ -30,5 +30,7 @@ environment = SubResource("Environment_8hh41")
 [node name="World" type="Node3D" parent="."]
 
 [node name="Character" parent="World" instance=ExtResource("2_65240")]
+platform_floor_layers = 4294967295
+platform_wall_layers = 0
 
 [node name="TestLevel" parent="World" instance=ExtResource("4_pm7op")]

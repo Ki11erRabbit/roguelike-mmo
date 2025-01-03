@@ -1,8 +1,5 @@
 extends "res://Character/character.gd"
 
-const Actions = preload("res://InputManager/actions.gd")
-
-var should_equip: bool = false
 
 
 func ready_character():
@@ -18,7 +15,7 @@ func ready_character():
 	var capsule_shape = CapsuleShape3D.new()
 	capsule_shape.height = 3.5
 	
-	var box: PlayerControlBox = PlayerControlBox.new()
+	var box: ControlBox = ControlBox.new()
 	
 	initialize(character_model, capsule_shape, box)
 	
@@ -33,20 +30,5 @@ func ready_character():
 	
 	attach_right_hand_weapon(sword, weapon_state_machine)
 	
-	InputManager.start_game()
-	
-
-func process_character():
-	if should_equip:
-		equip_weapons()
-	
-	if InputManager.is_action_just_pressed(Actions.PlayerActionButtons.RightAttack):
-		if not weapons_equiped:
-			should_equip = true
-	if InputManager.is_action_just_pressed(Actions.PlayerActionButtons.Interact):
-		if weapons_equiped:
-			unequip_weapons()
-			should_equip = false
 
 	
-	return false

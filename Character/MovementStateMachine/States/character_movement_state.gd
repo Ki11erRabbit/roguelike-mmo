@@ -120,7 +120,6 @@ func landing():
 	pass
 
 func clockwise_spin():
-	print("starting spin")
 	var old_state: CharacterMovementState = state_machine.movement_state
 	state_machine.movement_state = ClockwiseSpin.new()
 	state_machine.movement_state.initialize(character, state_machine, old_state)
