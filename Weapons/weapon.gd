@@ -9,7 +9,12 @@ var model: Node3D
 @export
 var stats: WeaponStats
 
-var enable_collision: bool = false
+var enable_collision: bool = false:
+	set(value):
+		if not value:
+			attack_finished()
+		enable_collision = value
+			
 
 @export
 var collision_shape: BoxShape3D:
@@ -57,5 +62,6 @@ func _on_area_entered(area: Area3D) -> void:
 		var combat_calculator: CombatCalculator = CombatCalculator.new()
 		
 		var damage: int = combat_calculator.calculate_damage_done(self.stats, wielder.stats, character.stats)
+		print(damage)
 		
 		character.add_damage(damage)

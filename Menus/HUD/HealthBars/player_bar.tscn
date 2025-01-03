@@ -12,7 +12,6 @@ offset_left = 8.0
 offset_right = 350.0
 offset_bottom = 56.0
 script = ExtResource("1_4nw4g")
-max_health = 100.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -29,7 +28,3 @@ offset_bottom = 42.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_vt8r4")
 value = 100.0
 show_percentage = false
-
-[node name="Timer" type="Timer" parent="."]
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

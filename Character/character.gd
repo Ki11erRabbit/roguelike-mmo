@@ -41,6 +41,14 @@ var collision_box: CollisionShape3D = $CollisionShape3D
 
 var weapons_waiting_for_cooldown: Dictionary = {}
 
+var health_bar: HealthBar
+var camera: Camera3D
+
+func attach_health_bar(bar: HealthBar, camera: Camera3D) -> void:
+	health_bar = bar
+	self.camera = camera
+
+
 ## This should be called in ready_character
 func initialize(model: CharacterModel, collision_shape: CapsuleShape3D, box: ControlBox):
 	self.model = model
@@ -149,6 +157,8 @@ func _process(delta: float) -> void:
 	velocity.z = 0
 	process_health(delta)
 	
+	process_health_bar_position()
+	
 	if process_character():
 		return
 	movement_state_machine.process_state(delta)
@@ -173,8 +183,8 @@ func collide_weapon(weapon: Weapon) -> Character:
 	if weapon.get_id() in weapons_waiting_for_cooldown:
 		return null
 	else:
-		print("attacked")
-		weapon.done_attacking.connect(clear_weapon)
+		if not weapon.done_attacking.is_connected(clear_weapon):
+			weapon.done_attacking.connect(clear_weapon)
 		weapons_waiting_for_cooldown[weapon.get_id()] = weapon.get_id()
 		return self
 
@@ -219,7 +229,6 @@ func process_health(delta: float):
 	
 	if damage <= 0:
 		damage = 0
-		current_health = ceil(current_health)
 	
 	if healing > 0:
 		if healing - healing_rate < 0:
@@ -230,7 +239,6 @@ func process_health(delta: float):
 	
 	if healing <= 0:
 		healing = 0
-		current_health = ceil(current_health)
 	
 	if current_health <= 0 and not started_timer and healing <= 0:
 		current_health = 0
@@ -242,6 +250,13 @@ func process_health(delta: float):
 	if current_health >= stats.max_health:
 		current_health = stats.max_health
 	
-	stats.current_health = int(current_health)
-	# TODO: connect to bar
+	health_bar.update_current_value(current_health)
+	stats.current_health = int(ceil(current_health))
+	health_bar.interpret_color()
 	
+
+func process_health_bar_position():
+	var screen_pos = camera.unproject_position(self.global_position)
+	health_bar.global_position = screen_pos
+	health_bar.global_position.x -= health_bar.size.x / 2
+	health_bar.global_position.y -= health_bar.size.y * 4

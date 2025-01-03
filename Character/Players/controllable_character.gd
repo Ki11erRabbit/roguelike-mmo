@@ -50,3 +50,6 @@ func process_character():
 
 	
 	return false
+
+func process_health_bar_position():
+	pass
