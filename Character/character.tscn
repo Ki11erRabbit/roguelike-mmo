@@ -7,13 +7,6 @@ platform_floor_layers = 1
 platform_wall_layers = 2
 script = ExtResource("1_woq0q")
 
-[node name="Weapons" type="Node3D" parent="."]
-visible = false
-
-[node name="RightHand" type="Node3D" parent="Weapons"]
-
-[node name="LeftHand" type="Node3D" parent="Weapons"]
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." groups=["attacking_group"]]
 
 [node name="Timer" type="Timer" parent="."]

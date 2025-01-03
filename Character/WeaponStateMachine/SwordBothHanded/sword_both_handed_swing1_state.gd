@@ -11,6 +11,7 @@ func initialize(character: Character, state_machine: WeaponStateMachine):
 	super(character, state_machine)
 	character.model.animation_finished.connect(enable_attacks)
 	play_animation("slash1")
+	state_machine.weapon.enable_collision = true
 
 func process_attack(delta: float, attack: WeaponStateMachine.AttackType, is_spinning: WeaponStateMachine.Spinning, facing_forwards: bool) -> int:
 	if not attacks_enabled and stuck_time < 1:
@@ -41,6 +42,7 @@ func enable_attacks(anim_name: StringName):
 	match String(anim_name):
 		"sword_both_hand_slash1":
 			attacks_enabled = true
+			state_machine.weapon.enable_collision = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

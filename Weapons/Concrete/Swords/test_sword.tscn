@@ -10,6 +10,7 @@ kind = &"sword"
 handedness = &"one"
 level = 1
 attack = 10
+weight = 0
 length = 0.51
 durability = 200
 current_durability = 200
@@ -20,11 +21,11 @@ hand_position = 0.341
 size = Vector3(0.04, 1, 0.209)
 
 [node name="Weapon" node_paths=PackedStringArray("model") instance=ExtResource("1_rhmaa")]
-collision_layer = 1
-collision_mask = 1
 model = NodePath("test_sword")
 stats = SubResource("Resource_857bi")
 collision_shape = SubResource("BoxShape3D_bm3pt")
+
+[node name="CollisionShape3D" parent="." index="0" groups=["attacking_group"]]
 
 [node name="test_sword" parent="." index="1" instance=ExtResource("2_xwtvc")]
 transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0, 0, 0)

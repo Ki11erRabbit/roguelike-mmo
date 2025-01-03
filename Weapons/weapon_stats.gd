@@ -12,6 +12,9 @@ var level: int
 ## The base attack stat the sword has
 @export
 var attack: int
+## The weight of the weapon. 
+@export
+var weight: int
 ## The length of the area of the sword that is not the blade
 @export
 var length: float

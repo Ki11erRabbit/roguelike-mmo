@@ -15,8 +15,7 @@ func ready_character():
 	var character_model: CharacterModel = load("res://Character/CharacterModel.tscn").instantiate()
 	character_model.initialize(model_to_use)
 	
-	var capsule_shape = CapsuleShape3D.new()
-	capsule_shape.height = 3.5
+	var capsule_shape = collision_box.shape
 	
 	var box: PlayerControlBox = PlayerControlBox.new()
 	
@@ -29,7 +28,7 @@ func ready_character():
 	var weapon_state_machine = WeaponStateMachine.new()
 	var weapon_state = SwordRightHandedIdleState.new()
 	weapon_state.initialize(self, weapon_state_machine)
-	weapon_state_machine.initialize(self, WeaponStateMachine.HandedNess.Right, weapon_state)
+	weapon_state_machine.initialize(self, WeaponStateMachine.HandedNess.Right, weapon_state, sword)
 	
 	attach_right_hand_weapon(sword, weapon_state_machine)
 	
@@ -39,6 +38,7 @@ func ready_character():
 func process_character():
 	if should_equip:
 		equip_weapons()
+		should_equip = false
 	
 	if InputManager.is_action_just_pressed(Actions.PlayerActionButtons.RightAttack):
 		if not weapons_equiped:

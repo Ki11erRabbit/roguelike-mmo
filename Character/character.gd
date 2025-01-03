@@ -1,7 +1,9 @@
 class_name Character extends CharacterBody3D
 
 var movement_state_machine: MovementStateMachine = MovementStateMachine.new()
+var right_weapon: Weapon
 var right_hand_weapon: WeaponStateMachine
+var left_weapon: Weapon
 var left_hand_weapon: WeaponStateMachine
 
 var weapons_equiped: bool = false
@@ -36,11 +38,6 @@ const GRACE_PERIOD: int = 10
 
 @onready
 var collision_box: CollisionShape3D = $CollisionShape3D
-
-@onready
-var right_hand = $Weapons/RightHand
-@onready
-var left_hand = $Weapons/LeftHand
 
 var weapons_waiting_for_cooldown: Dictionary = {}
 
@@ -84,16 +81,16 @@ func is_landing():
 
 func attach_right_hand_weapon(weapon: Weapon, state_machine: WeaponStateMachine):
 	right_hand_weapon = state_machine
-	right_hand.add_child(weapon)
+	right_weapon = weapon
 
 func attach_left_hand_weapon(weapon: Weapon, state_machine: WeaponStateMachine):
 	left_hand_weapon = state_machine
-	left_hand.add_child(weapon)
+	left_weapon = weapon
 
 func attach_two_handed_weapon(weapon: Weapon, state_machine: WeaponStateMachine):
 	right_hand_weapon = state_machine
 	left_hand_weapon = state_machine
-	right_hand.add_child(weapon)
+	right_weapon = weapon
 
 func switch_to_two_handed(right: bool):
 	unequip()
@@ -119,27 +116,11 @@ func equip(hand: String):
 	model.equip(hand)
 
 func equip_weapons():
-	var right_weapon: Node3D = null
-	var left_weapon: Node3D = null
-	if right_hand.get_child_count() == 1:
-		right_weapon = right_hand.get_children().pop_back()
-		right_hand.remove_child(right_weapon)
-	
-	if left_hand.get_child_count() == 1:
-		left_weapon = left_hand.get_children().pop_back()
-		left_hand.remove_child(left_weapon)
-	
 	model.equip_weapons(right_weapon, left_weapon)
 	weapons_equiped = true
 
 func unequip_weapons():
 	var pair: Array[Node3D] = model.unequip_weapons()
-	var right_weapon: Node3D = pair[0]
-	var left_weapon: Node3D = pair[1]
-	if right_weapon != null:
-		right_hand.add_child(right_weapon)
-	if left_weapon != null:
-		left_hand.add_child(left_weapon)
 	weapons_equiped = false
 
 func play_animation(anim_name: String, weapon: String, hand: String):
@@ -164,7 +145,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
+	velocity.x = 0
+	velocity.z = 0
 	process_health(delta)
 	
 	if process_character():
@@ -183,7 +165,6 @@ func _process(delta: float) -> void:
 		if left_hand_weapon != null:
 			left_hand_weapon.enabled = false
 	
-	print(velocity)
 	move_and_slide()
 
 ## Returns null if weapon has already collided with the character
@@ -192,6 +173,7 @@ func collide_weapon(weapon: Weapon) -> Character:
 	if weapon.get_id() in weapons_waiting_for_cooldown:
 		return null
 	else:
+		print("attacked")
 		weapon.done_attacking.connect(clear_weapon)
 		weapons_waiting_for_cooldown[weapon.get_id()] = weapon.get_id()
 		return self

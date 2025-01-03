@@ -8,6 +8,7 @@ func initialize(character: Character, state_machine: WeaponStateMachine):
 func reset():
 	state_machine.state = SwordRightHandedIdleState.new()
 	state_machine.state.initialize(character, state_machine)
+	state_machine.weapon.enable_collision = false
 
 func swing():
 	pass

@@ -2,6 +2,7 @@ class_name Weapon extends Area3D
 
 signal done_attacking(weapon_id: int)
 
+
 @export
 var model: Node3D
 
@@ -57,4 +58,4 @@ func _on_area_entered(area: Area3D) -> void:
 		
 		var damage: int = combat_calculator.calculate_damage_done(self.stats, wielder.stats, character.stats)
 		
-		character.take_damage(damage)
+		character.add_damage(damage)

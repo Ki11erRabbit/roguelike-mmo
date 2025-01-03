@@ -9,6 +9,7 @@ enum Spinning { None, Clockwise, CounterClockwise }
 var character: Character
 var state: WeaponState
 var handedness: HandedNess
+var weapon: Weapon
 
 var already_fired: bool = false
 var enabled: bool = false
@@ -24,10 +25,11 @@ var spin_mean: float
 
 
 # The state must be initialized before being passed in
-func initialize(character: Character, handedness: HandedNess, state: WeaponState):
+func initialize(character: Character, handedness: HandedNess, state: WeaponState, weapon: Weapon):
 	self.character = character
 	self.state = state
 	self.handedness = handedness
+	self.weapon = weapon
 
 func process_input(delta: float) -> int:
 	if not enabled:

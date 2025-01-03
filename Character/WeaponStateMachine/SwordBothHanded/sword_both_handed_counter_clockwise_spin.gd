@@ -12,6 +12,7 @@ func initialize(character: Character, state_machine: WeaponStateMachine):
 	play_animation("spin_counter_clockwise")
 	character.movement_state_machine.disable_input = true
 	character.right_hand_weapon.enabled = false
+	state_machine.weapon.enable_collision = true
 
 func process_attack(delta: float, _attack: WeaponStateMachine.AttackType, _is_spinning: WeaponStateMachine.Spinning, _facing_forwards: bool) -> int:
 	if not enable_cooldown:
@@ -29,6 +30,7 @@ func start_cooldown(anim_name: StringName):
 	match String(anim_name):
 		"counter_clockwise_spin":
 			enable_cooldown = true
+			state_machine.weapon.enable_collision = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
