@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyrplmdn6eqdd"]
+
+[ext_resource type="Script" path="res://Character/AI/ai.gd" id="1_f2f0i"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ktdmi"]
+
+[node name="Ai" type="Area3D"]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_f2f0i")
+
+[node name="DetectionSphere" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_ktdmi")

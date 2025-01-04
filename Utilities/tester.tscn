@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwqr3rt1pr7lf"]
+
+[ext_resource type="Script" path="res://Utilities/priority_queue.gd" id="1_np78q"]
+
+[node name="Tester" type="Node"]
+script = ExtResource("1_np78q")
