@@ -26,17 +26,27 @@ func insert(item):
 	bubble_up(length)
 
 func get_min():
+	if size() == 0:
+		return null
 	return heap[1]
 
 func delete_min():
 	var item = heap[1]
+	length -= 1
 	
-	heap[1] = heap[length]
+	if length == 0:
+		return item
+	
+	heap[1] = heap.pop_back()
 	push_down(1)
 	
 	return item
 
 func get_max():
+	if size() <= 1:
+		return null
+	if size() == 2:
+		return heap[2]
 	if comparator.call(heap[2], heap[3]) < 0:
 		return heap[3]
 	else:
@@ -44,17 +54,29 @@ func get_max():
 
 func delete_max():
 	var item
+	length -= 1
 	if comparator.call(heap[2], heap[3]) < 0:
 		item = heap[3]
+		heap[3] = heap.pop_back()
 		push_down(3)
 	else:
 		item = heap[2]
+		heap[2] = heap.pop_back()
 		push_down(2)
 	
 	return item
 
+func update_key(old_value, value):
+	var index: int = 1
+	while index <= length and comparator.call(heap[index], old_value) != 0:
+		index += 1
+	if index == heap.size():
+		return
+	heap[index] = heap[1]
+	heap[1] = value
+	push_down(1)
+
 func push_down(index: int):
-	print(heap)
 	if on_min_level(index):
 		push_down_min(index)
 	else:
@@ -63,7 +85,6 @@ func push_down(index: int):
 func push_down_min(index: int):
 	if has_children(index):
 		var smallest_child: int = get_next_smallest(index)
-		print("{0} smallest_child {1}".format([index, smallest_child]))
 		if is_grandchild(smallest_child, index):
 			if comparator.call(heap[smallest_child], heap[index]) < 0:
 				swap(smallest_child, index)
@@ -77,7 +98,6 @@ func push_down_min(index: int):
 func push_down_max(index: int):
 	if has_children(index):
 		var largest_child: int = get_next_largest(index)
-		print("largest_child {0}".format([largest_child]))
 		if is_grandchild(largest_child, index):
 			if comparator.call(heap[largest_child], heap[index]) > 0:
 				swap(largest_child, index)
@@ -120,18 +140,6 @@ func swap(x: int, y: int) -> void:
 
 func on_min_level(index: int) -> bool:
 	return int(floor(log(index) / log(2))) % 2 == 0
-	#var counter: int = 0
-	#while index != 1:
-		#index = int(floor(index / 2))
-		#counter += 1
-	#
-	#print("counter")
-	#print(counter)
-	#if counter % 2 == 0:
-		#print(true)
-		#return true
-	#print(false)
-	#return false
 
 func has_children(index: int):
 	if index * 2 <= length:
@@ -225,16 +233,23 @@ func get_grandparent(index: int) -> int:
 	return int(floor(index / 4))
 
 
-func _ready():
-	var list = [8, 1, 5, 2, 7]
-	var queue = PriorityQueue.new()
-	queue.initialize(list, func (x, y): 
-		if x < y:
-			return -1
-		elif x > y:
-			return 1
-		else:
-			return 0)
-	print(queue.heap)
-	print(queue.get_min())
-	print(queue.get_max())
+#func _ready():
+	#var list = [8, 1, 5, 2, 7]
+	#var queue = PriorityQueue.new()
+	#queue.initialize(list, func (x, y): 
+		#if x < y:
+			#return -1
+		#elif x > y:
+			#return 1
+		#else:
+			#return 0)
+	#print(queue.heap)
+	#print(queue.get_min())
+	#print(queue.delete_max())
+	#print(queue.get_max())
+	#print(queue.heap)
+	#print(queue.insert(10))
+	#print(queue.get_max())
+	#print(queue.heap)
+	#print(queue.insert(-10))
+	#print(queue.get_min())

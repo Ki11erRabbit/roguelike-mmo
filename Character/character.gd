@@ -1,5 +1,7 @@
 class_name Character extends CharacterBody3D
 
+var id: int = GlobalId.get_id()
+
 var movement_state_machine: MovementStateMachine = MovementStateMachine.new()
 var right_weapon: Weapon
 var right_hand_weapon: WeaponStateMachine
@@ -12,6 +14,7 @@ var air_state: AirState = AirState.Grounded
 
 var model: CharacterModel
 
+@export
 var control_box: ControlBox
 
 @export
@@ -145,7 +148,7 @@ func play_body_animation(anim_name: String):
 
 ## returns: Return value is a boolean indicating whether or not to not process other character functions
 ## true means to skip other character functions
-func process_character() -> bool:
+func process_character(delta: float) -> bool:
 	return false
 
 func ready_character():
@@ -165,7 +168,7 @@ func _process(delta: float) -> void:
 	
 	process_health_bar_position()
 	
-	if process_character():
+	if process_character(delta):
 		return
 	movement_state_machine.process_state(delta)
 	if weapons_equiped:
@@ -183,6 +186,10 @@ func _process(delta: float) -> void:
 	
 	move_and_slide()
 
+## A function meant to be overridden to facilitate any needed additional function when a weapon collides with the character
+func weapon_collided(weapon: Weapon):
+	pass
+
 ## Returns null if weapon has already collided with the character
 ## Returns the current character if the weapon hasn't collided yet
 func collide_weapon(weapon: Weapon) -> Character:
@@ -192,6 +199,7 @@ func collide_weapon(weapon: Weapon) -> Character:
 		if not weapon.done_attacking.is_connected(clear_weapon):
 			weapon.done_attacking.connect(clear_weapon)
 		weapons_waiting_for_cooldown[weapon.get_id()] = weapon.get_id()
+		weapon_collided(weapon)
 		return self
 
 func clear_weapon(weapon_id: int):
@@ -266,3 +274,6 @@ func process_health_bar_position():
 	health_bar.global_position = screen_pos
 	health_bar.global_position.x -= health_bar.size.x / 2
 	health_bar.global_position.y -= health_bar.size.y * 4
+
+func get_id() -> int:
+	return id

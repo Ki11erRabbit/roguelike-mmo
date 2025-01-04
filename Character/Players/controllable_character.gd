@@ -35,7 +35,7 @@ func ready_character():
 	InputManager.start_game()
 	
 
-func process_character():
+func process_character(delta: float):
 	if should_equip:
 		equip_weapons()
 		should_equip = false

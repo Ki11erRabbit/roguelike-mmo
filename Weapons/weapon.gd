@@ -2,6 +2,7 @@ class_name Weapon extends Area3D
 
 signal done_attacking(weapon_id: int)
 
+var id: int = GlobalId.get_id()
 
 @export
 var model: Node3D
@@ -49,7 +50,7 @@ func attack_finished():
 	emit_signal("done_attacking", get_id())
 
 func get_id() -> int:
-	return get_instance_id()
+	return id
 
 func _on_area_entered(area: Area3D) -> void:
 	if not enable_collision:

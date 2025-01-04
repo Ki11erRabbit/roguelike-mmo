@@ -21,6 +21,7 @@ run/stretch/mode="viewport"
 InputMapper="*res://InputManager/input_mapper.gd"
 InputManager="*res://InputManager/input_manager.gd"
 PlayerStats="*res://Utilities/player_stats.gd"
+GlobalId="*res://Utilities/global_id.gd"
 
 [display]
 
@@ -35,6 +36,7 @@ import/blender/enabled=false
 [global_group]
 
 attacking_group="The group where hitboxes of weapons and characters live."
+agro_detection="This is the group for detecting if the A.I should automatically target a player."
 
 [input]
 

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cm1l1vkphqo72"]
+
+[ext_resource type="Script" path="res://Character/ControlBox/ai_control_box.gd" id="1_cmm2p"]
+
+[node name="AiControlBox" type="Node"]
+script = ExtResource("1_cmm2p")

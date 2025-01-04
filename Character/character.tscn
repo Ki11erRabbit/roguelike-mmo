@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://Character/character.gd" id="1_woq0q"]
 
-[node name="Character" type="CharacterBody3D"]
-platform_floor_layers = 1
-platform_wall_layers = 2
+[node name="Character" type="CharacterBody3D" groups=["agro_detection"]]
+collision_layer = 9
+collision_mask = 9
 script = ExtResource("1_woq0q")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." groups=["attacking_group"]]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." groups=["agro_detection"]]
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0

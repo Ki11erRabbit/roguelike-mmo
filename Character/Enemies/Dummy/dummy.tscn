@@ -1,14 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbnktb3dmfqyb"]
+[gd_scene load_steps=6 format=3 uid="uid://bbnktb3dmfqyb"]
 
 [ext_resource type="PackedScene" uid="uid://1monm1g5bx0k" path="res://Character/character.tscn" id="1_48c3p"]
 [ext_resource type="Script" path="res://Character/Enemies/Dummy/dummy.gd" id="2_6henl"]
+[ext_resource type="PackedScene" uid="uid://hlrqmhw5n1yy" path="res://Character/AI/test_ai.tscn" id="3_flcow"]
+[ext_resource type="PackedScene" uid="uid://cm1l1vkphqo72" path="res://Character/ControlBox/ai_control_box.tscn" id="4_28442"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xe85a"]
 height = 1.0
 
-[node name="Character" instance=ExtResource("1_48c3p")]
+[node name="Character" node_paths=PackedStringArray("control_box") instance=ExtResource("1_48c3p")]
 script = ExtResource("2_6henl")
+control_box = NodePath("AiControlBox")
 
 [node name="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_xe85a")
+
+[node name="TestAi" parent="." index="2" node_paths=PackedStringArray("control_box") instance=ExtResource("3_flcow")]
+radius = 4.0
+control_box = NodePath("../AiControlBox")
+
+[node name="AiControlBox" parent="." index="3" instance=ExtResource("4_28442")]

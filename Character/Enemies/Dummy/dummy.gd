@@ -16,9 +16,27 @@ func ready_character():
 	
 	var box: ControlBox = ControlBox.new()
 	
-	initialize(character_model, capsule_shape, box)
+	initialize(character_model, capsule_shape, $AiControlBox)
 	
+	var sword: Weapon = load("res://Weapons/Concrete/Swords/test_sword.tscn").instantiate()
+	sword.initialize(self)
+	#sword.position = Vector3(-0.24, -0.1, 0.037)
+	#sword.rotation = Vector3(61.9, 157.2, -137.6)
+	var weapon_state_machine = WeaponStateMachine.new()
+	var weapon_state = SwordRightHandedIdleState.new()
+	weapon_state.initialize(self, weapon_state_machine)
+	weapon_state_machine.initialize(self, WeaponStateMachine.HandedNess.Right, weapon_state, sword)
 	
+	attach_right_hand_weapon(sword, weapon_state_machine)
+	equip_weapons()
+	
+func process_character(delta: float):
+	$TestAi.process_ai(delta, self)
+	
+	return false
 	
 
 	
+func weapon_collided(weapon: Weapon):
+	$TestAi.took_damage(weapon.wielder)
+	pass
