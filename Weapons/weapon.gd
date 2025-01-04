@@ -56,6 +56,8 @@ func _on_area_entered(area: Area3D) -> void:
 	if not enable_collision:
 		return
 	if area.is_in_group("attacking_group"):
+		if area.owner == null:
+			return 
 		var character: Character = area.owner.character.collide_weapon(self)
 		if character == null:
 			return
