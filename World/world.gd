@@ -40,6 +40,8 @@ func server_peer_connected(id):
 	players[id] = character
 
 func server_peer_disconnected(id):
+	print("removing")
+	print(id)
 	$World.remove_child(players[id])
 	players.erase(id)
 
