@@ -14,25 +14,30 @@ func move_stick(stick: Actions.PlayerActionSticks, x: float, y: float):
 	match stick:
 		Actions.PlayerActionSticks.Movement:
 			current_movement_vec = Vector2(x, y)
+			rpc("move_stick", stick, x, y)
 		Actions.PlayerActionSticks.Aim:
 			current_aim_vec = Vector2(x, y)
+			rpc("move_stick", stick, x, y)
 
 @rpc("unreliable")
 func press_button(action: Actions.PlayerActionButtons):
 	buttons_pressed[action] = true
 	buttons_just_released[action] = false
+	rpc("press_button", action)
 
 @rpc("unreliable")
 func hold_down_button(action: Actions.PlayerActionButtons):
 	buttons_pressed[action] = true
 	buttons_held_down[action] = true
 	buttons_just_released[action] = false
+	rpc("hold_down_button", action)
 
 @rpc("unreliable")
 func release_button(action: Actions.PlayerActionButtons):
 	buttons_pressed[action] = false
 	buttons_held_down[action] = false
 	buttons_just_released[action] = true
+	rpc("release_button", action)
 
 func player_button_control():
 	manage_player_button(Actions.PlayerActionButtons.RightAttack)
