@@ -39,3 +39,8 @@ func is_action_just_released(action: Actions.PlayerActionButtons, cooldown = 0.0
 	var value = buttons_just_released[action]
 	buttons_just_released[action] = false
 	return value and not buttons_held_down[action]
+
+
+func tick(delta: float) -> void:
+	for i in range(0, buttons_just_released.size()):
+		buttons_just_released[i] = false

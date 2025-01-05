@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdqb0g8cpvray"]
+
+[ext_resource type="Script" path="res://ClientServer/client.gd" id="1_j1rha"]
+[ext_resource type="PackedScene" uid="uid://bueuqyp855a3" path="res://Character/ControlBox/remote_control_box.tscn" id="2_pk51t"]
+
+[node name="Client" type="Node"]
+script = ExtResource("1_j1rha")
+
+[node name="RemoteControlBox" parent="." instance=ExtResource("2_pk51t")]

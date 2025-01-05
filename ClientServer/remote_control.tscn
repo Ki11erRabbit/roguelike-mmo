@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://md5ioiskgska"]
+
+[ext_resource type="Script" path="res://ClientServer/remote_control.gd" id="1_17vyf"]
+
+[node name="RemoteControl" type="Node"]
+script = ExtResource("1_17vyf")

@@ -31,6 +31,7 @@ func select_start_button():
 
 func activate_start_button():
 	Networking.start_client()
+	get_tree().change_scene_to_file("res://MainScene.tscn")
 	#start_button.button_pressed = true
 	#pressed_time = WAIT_TIME
 	#get_tree().change_scene_to_file("res://MainScene.tscn")
@@ -52,6 +53,8 @@ func select_server_button():
 func activate_server_button():
 	server_button.button_pressed = true
 	Networking.start_server()
+	pressed_time = WAIT_TIME
+	get_tree().change_scene_to_file("res://MainScene.tscn")
 
 func select_quit_button():
 	current_selected_button = SelectedButton.Quit

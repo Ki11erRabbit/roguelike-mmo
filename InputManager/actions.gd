@@ -8,7 +8,7 @@ enum PlayerActionButtons {
 	Interact,
 	Menu, Map,
 	EmoteWindow, QuickChat
- }
+}
 enum PlayerActionSticks {
 	Movement,
 	Aim

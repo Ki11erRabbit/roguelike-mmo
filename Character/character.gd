@@ -169,7 +169,10 @@ func _process(delta: float) -> void:
 	process_health_bar_position()
 	
 	if process_character(delta):
+		control_box.tick(delta)
 		return
+	else:
+		control_box.tick(delta)
 	movement_state_machine.process_state(delta)
 	if weapons_equiped:
 		if right_hand_weapon != null:

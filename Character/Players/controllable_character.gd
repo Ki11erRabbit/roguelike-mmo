@@ -17,7 +17,8 @@ func ready_character():
 	
 	var capsule_shape = collision_box.shape
 	
-	var box: PlayerControlBox = PlayerControlBox.new()
+	#var box: PlayerControlBox = PlayerControlBox.new()
+	var box: RemoteControlBox = $RemoteControlBox
 	
 	initialize(character_model, capsule_shape, box)
 	
@@ -40,10 +41,10 @@ func process_character(delta: float):
 		equip_weapons()
 		should_equip = false
 	
-	if InputManager.is_action_just_pressed(Actions.PlayerActionButtons.RightAttack):
+	if $RemoteControl.is_action_just_pressed(Actions.PlayerActionButtons.RightAttack):
 		if not weapons_equiped:
 			should_equip = true
-	if InputManager.is_action_just_pressed(Actions.PlayerActionButtons.Interact):
+	if $RemoteControl.is_action_just_pressed(Actions.PlayerActionButtons.Interact):
 		if weapons_equiped:
 			unequip_weapons()
 			should_equip = false
