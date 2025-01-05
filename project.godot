@@ -20,8 +20,8 @@ run/stretch/mode="viewport"
 
 InputMapper="*res://InputManager/input_mapper.gd"
 InputManager="*res://InputManager/input_manager.gd"
-PlayerStats="*res://Utilities/player_stats.gd"
 GlobalId="*res://Utilities/global_id.gd"
+Networking="*res://ClientServer/networking.gd"
 
 [display]
 

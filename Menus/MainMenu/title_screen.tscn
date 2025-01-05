@@ -29,6 +29,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Settings"
 
+[node name="Server" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Server"
+
 [node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
@@ -40,6 +45,9 @@ text = "Quit"
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Settings" to="." method="select_settings_button"]
 [connection signal="mouse_exited" from="CenterContainer/VBoxContainer/Settings" to="." method="deselect_buttons"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Settings" to="." method="activate_settings_button"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Server" to="." method="select_server_button"]
+[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/Server" to="." method="deselect_buttons"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Server" to="." method="activate_server_button"]
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Quit" to="." method="select_quit_button"]
 [connection signal="mouse_exited" from="CenterContainer/VBoxContainer/Quit" to="." method="deselect_buttons"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="activate_quit_button"]
