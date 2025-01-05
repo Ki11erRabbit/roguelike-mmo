@@ -27,8 +27,23 @@ func set_peer_id(id):
 	character.set_multiplayer_authority(id)
 	$World.add_child(character)
 	character.name = "{0}".format([id])
+	players[id] = character
 	
+@rpc("call_remote")
+func add_players(ids: Array):
+	for id in ids:
+		if peer_id == id or id in players:
+			return
+		var character = load("res://Character/Players/ControllableCharacter.tscn").instantiate()
+		character.set_multiplayer_authority(id)
+		$World.add_child(character)
+		character.name = "{0}".format([id])
+		players[id] = character
 
+@rpc("call_remote")
+func remove_player(id):
+	$World.remove_child(players[id])
+	players.erase(id)
 
 func server_peer_connected(id):
 	print(id)
@@ -38,12 +53,14 @@ func server_peer_connected(id):
 	$World.add_child(character)
 	character.name = "{0}".format([id])
 	players[id] = character
+	rpc("add_players", players.keys())
 
 func server_peer_disconnected(id):
 	print("removing")
 	print(id)
 	$World.remove_child(players[id])
 	players.erase(id)
+	rpc("remove_player", id)
 
 func client_peer_connected():
 	pass
