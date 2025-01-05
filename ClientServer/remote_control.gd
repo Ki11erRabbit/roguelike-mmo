@@ -79,10 +79,7 @@ func manage_player_stick(stick) -> void:
 func _physics_process(delta: float) -> void:
 	for i in range(0, buttons_just_released.size()):
 		buttons_just_released[i] = false
-	if Networking.is_server():
-		if Networking.players.size() == 0:
-			return
-		set_multiplayer_authority(Networking.players.keys()[0])
+	if ClientServerState.is_server():
 		return
 	player_button_control()
 

@@ -188,6 +188,12 @@ func _process(delta: float) -> void:
 			left_hand_weapon.enabled = false
 	
 	move_and_slide()
+	rpc("update_position", position.x, position.y, position.z)
+	
+## Called by the server to sync server position with client position
+@rpc("call_remote", "unreliable")
+func update_position(x: float, y: float, z: float):
+	position = Vector3(x, y, z)
 
 ## A function meant to be overridden to facilitate any needed additional function when a weapon collides with the character
 func weapon_collided(weapon: Weapon):
@@ -226,6 +232,8 @@ func reset_timer():
 		timer.wait_time = GRACE_PERIOD
 
 func process_health(delta: float):
+	if health_bar == null:
+		return
 	
 	if stats.current_health != stats.max_health and stats.current_health != 0:
 		if regen_timer >= stats.health_regen_cooldown:

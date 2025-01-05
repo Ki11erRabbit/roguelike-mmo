@@ -21,7 +21,8 @@ run/stretch/mode="viewport"
 InputMapper="*res://InputManager/input_mapper.gd"
 InputManager="*res://InputManager/input_manager.gd"
 GlobalId="*res://Utilities/global_id.gd"
-Networking="*res://ClientServer/networking.gd"
+Networking="res://ClientServer/networking.gd"
+ClientServerState="*res://ClientServer/client_server_state.gd"
 
 [display]
 
