@@ -4,8 +4,12 @@ const Actions = preload("res://InputManager/actions.gd")
 
 var should_equip: bool = false
 
+var remote_updater: RemoteUpdater
 
 func ready_character():
+	if remote_updater != null:
+		remote_updater.character = self
+		add_child(remote_updater)
 	
 	stats = CharacterStats.new()
 	stats.setup_new(1, 1, 1, 5, HumanCalculator.new())
@@ -48,23 +52,8 @@ func process_character(delta: float):
 
 func post_move_and_slide(delta: float) -> void:
 	if not is_multiplayer_authority():
-		rpc("rpc_position_update", position)
+		remote_updater.rpc("rpc_position_update", position)
 	pass
-
-@rpc("any_peer")
-func rpc_position_update(pos: Vector3) -> void:
-	position = pos
-
-@rpc("any_peer")
-func rpc_equip_weapons():
-	if not weapons_equiped:
-			should_equip = true
-
-@rpc("any_peer")
-func rpc_unequip_weapons():
-	if weapons_equiped:
-			unequip_weapons()
-			should_equip = false
 
 func process_health_bar_position():
 	pass

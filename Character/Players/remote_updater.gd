@@ -3,11 +3,17 @@ class_name RemoteUpdater extends Node
 var character: Character
 # TODO: add rpc methods that then call methods on their character parent that sets certain values
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+@rpc
+func rpc_position_update(pos: Vector3) -> void:
+	character.set_position(pos)
 
+@rpc
+func rpc_equip_weapons():
+	if not character.weapons_equiped:
+		character.should_equip = true
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+@rpc
+func rpc_unequip_weapons():
+	if character.weapons_equiped:
+		character.unequip_weapons()
+		character.should_equip = false

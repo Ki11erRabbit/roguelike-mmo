@@ -4,8 +4,17 @@ const Actions = preload("res://InputManager/actions.gd")
 
 var should_equip: bool = false
 
+var remote_updater: RemoteUpdater
+
 
 func ready_character():
+	if remote_updater != null:
+		# TODO: check to see if this jank is needed
+		var camera = get_child(3)
+		remove_child($Camera3D)
+		remote_updater.character = self
+		add_child(remote_updater)
+		add_child(camera)
 	
 	stats = CharacterStats.new()
 	stats.setup_new(1, 1, 1, 5, HumanCalculator.new())
@@ -58,21 +67,6 @@ func process_character(delta: float):
 func post_move_and_slide(delta: float) -> void:
 	pass
 
-@rpc
-func rpc_position_update(pos: Vector3) -> void:
-	position = pos
-	print(position)
-
-@rpc
-func rpc_equip_weapons():
-	if not weapons_equiped:
-		should_equip = true
-
-@rpc
-func rpc_unequip_weapons():
-	if weapons_equiped:
-		unequip_weapons()
-		should_equip = false
 
 func process_health_bar_position():
 	pass
