@@ -3,6 +3,7 @@ extends Area3D
 @onready
 var detection_sphere: CollisionShape3D = $DetectionSphere
 
+
 @export
 var radius: float:
 	set(value):
@@ -78,6 +79,8 @@ func _on_area_exited(area: Area3D) -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if not body.is_in_group("agro_detection"):
 		return
+	if owner == body:
+		return
 	print("collision")
 	var character: Character = body
 	var target: AITarget = AITarget.new()
@@ -88,6 +91,8 @@ func _on_body_entered(body: Node3D) -> void:
 
 func _on_body_exited(body: Node3D) -> void:
 	if not body.is_in_group("agro_detection"):
+		return
+	if owner == body:
 		return
 	var character: Character = body
 	in_range.erase(character.get_id())

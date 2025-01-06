@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmfpsgmclmuys"]
+[gd_scene load_steps=7 format=3 uid="uid://dmfpsgmclmuys"]
 
 [ext_resource type="Script" path="res://World/world.gd" id="1_k5b58"]
 [ext_resource type="PackedScene" uid="uid://b50mksrt11kpj" path="res://Levels/test_level.tscn" id="2_leb6t"]
+[ext_resource type="PackedScene" uid="uid://bbnktb3dmfqyb" path="res://Character/Enemies/Dummy/dummy.tscn" id="3_f16cr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_q0056"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -26,3 +27,6 @@ environment = SubResource("Environment_l5201")
 [node name="World" type="Node3D" parent="."]
 
 [node name="TestLevel" parent="World" instance=ExtResource("2_leb6t")]
+
+[node name="Character" parent="World" instance=ExtResource("3_f16cr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)

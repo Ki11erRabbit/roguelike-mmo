@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b3gwe4unwagk6"]
+[gd_scene load_steps=5 format=3 uid="uid://b3gwe4unwagk6"]
 
 [ext_resource type="PackedScene" uid="uid://1monm1g5bx0k" path="res://Character/character.tscn" id="1_b5s2b"]
 [ext_resource type="Script" path="res://Character/Players/controllable_character.gd" id="2_bqtj1"]
 [ext_resource type="PackedScene" uid="uid://bueuqyp855a3" path="res://Character/ControlBox/remote_control_box.tscn" id="3_w6ivr"]
-[ext_resource type="PackedScene" uid="uid://md5ioiskgska" path="res://ClientServer/remote_control.tscn" id="4_ukcrf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iriju"]
 height = 1.0
@@ -15,12 +14,4 @@ script = ExtResource("2_bqtj1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_iriju")
 
-[node name="Camera3D" type="Camera3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 9.405, 0)
-
-[node name="SideCamera" type="Camera3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.562156, 5.18668)
-
-[node name="RemoteControlBox" parent="." index="4" instance=ExtResource("3_w6ivr")]
-
-[node name="RemoteControl" parent="." index="5" instance=ExtResource("4_ukcrf")]
+[node name="RemoteControlBox" parent="." index="2" instance=ExtResource("3_w6ivr")]

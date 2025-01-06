@@ -1,4 +1,4 @@
-extends "res://Character/character.gd"
+class_name PlayerControlledCharacter extends "res://Character/character.gd"
 
 const Actions = preload("res://InputManager/actions.gd")
 
@@ -33,6 +33,7 @@ func ready_character():
 	
 	attach_right_hand_weapon(sword, weapon_state_machine)
 	
+	InputManager.start_game()
 	
 
 func process_character(delta: float):

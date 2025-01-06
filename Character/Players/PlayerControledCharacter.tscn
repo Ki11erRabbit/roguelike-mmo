@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkcoleaoncmby"]
+
+[ext_resource type="PackedScene" uid="uid://b3gwe4unwagk6" path="res://Character/Players/ControllableCharacter.tscn" id="1_5mtk1"]
+[ext_resource type="Script" path="res://Character/Players/player_controled_character.gd" id="2_l40mv"]
+
+[node name="Character" instance=ExtResource("1_5mtk1")]
+script = ExtResource("2_l40mv")
+
+[node name="Camera3D" type="Camera3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 9.4, 0)

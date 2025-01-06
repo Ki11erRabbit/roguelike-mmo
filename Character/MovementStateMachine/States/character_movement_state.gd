@@ -15,12 +15,9 @@ func initialize(character: Character, state_machine: MovementStateMachine, addit
 
 func apply_current_state(delta: float, control_box: ControlBox, rotation_triple: Array):
 	pass
-
+## Returns: An array that contains 3 elements, the first is if there is rotation, the second if the rotation is clockwise
+## and the third is a vector2 of the current aim
 func process_rotation(delta: float, control_box: ControlBox, last_aim: Vector2) -> Array:
-	"""
-	Returns: An array that contains 3 elements, the first is if there is rotation, the second if the rotation is clockwise
-	and the third is a vector2 of the current aim
-	"""
 	if control_box == null:
 		return [false, false, state_machine.last_aim]
 	
@@ -106,6 +103,7 @@ func move():
 	pass
 
 func jump():
+	print("jumping")
 	state_machine.movement_state = JumpState.new()
 	state_machine.movement_state.initialize(character, state_machine)
 	character.jump()

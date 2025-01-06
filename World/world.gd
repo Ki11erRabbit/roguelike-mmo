@@ -13,18 +13,21 @@ func start_server():
 	multiplayer.peer_disconnected.connect(server_peer_disconnected)
 	print("Server started")
 
-func start_client(address = "127.0.0.1"):
+func start_client(address = "192.168.254.190"):
 	peer.create_client(address, PORT)
 	multiplayer.multiplayer_peer = peer
 	multiplayer.connected_to_server.connect(client_peer_connected)
 	multiplayer.server_disconnected.connect(client_peer_disconnected)
+	print(get_multiplayer_authority())
 
 
 @rpc("call_remote")
 func set_peer_id(id):
+	print(get_multiplayer_authority())
 	peer_id = id
-	var character = load("res://Character/Players/ControllableCharacter.tscn").instantiate()
+	var character = load("res://Character/Players/PlayerControledCharacter.tscn").instantiate()
 	character.set_multiplayer_authority(id)
+	character.set_multiplayer_authority(1, false)
 	$World.add_child(character)
 	character.name = "{0}".format([id])
 	players[id] = character
@@ -36,6 +39,7 @@ func add_players(ids: Array):
 			return
 		var character = load("res://Character/Players/ControllableCharacter.tscn").instantiate()
 		character.set_multiplayer_authority(id)
+		character.set_multiplayer_authority(1, false)
 		$World.add_child(character)
 		character.name = "{0}".format([id])
 		players[id] = character
@@ -50,6 +54,7 @@ func server_peer_connected(id):
 	rpc("set_peer_id", id)
 	var character = load("res://Character/Players/ControllableCharacter.tscn").instantiate()
 	character.set_multiplayer_authority(id)
+	character.set_multiplayer_authority(1, false)
 	$World.add_child(character)
 	character.name = "{0}".format([id])
 	players[id] = character
@@ -71,5 +76,9 @@ func client_peer_disconnected():
 func _ready() -> void:
 	if ClientServerState.is_server():
 		start_server()
+		var camera = Camera3D.new()
+		$World.add_child(camera)
+		camera.rotation_degrees.x = -90
+		camera.position.y = 9.4
 	elif ClientServerState.is_client():
 		start_client()
