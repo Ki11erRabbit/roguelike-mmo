@@ -2,6 +2,7 @@ class_name Character extends CharacterBody3D
 
 var id: int = GlobalId.get_id()
 var last_position: Vector3 = position
+var player_id: int
 
 var movement_state_machine: MovementStateMachine = MovementStateMachine.new()
 var right_weapon: Weapon
@@ -189,17 +190,11 @@ func _process(delta: float) -> void:
 			left_hand_weapon.enabled = false
 	
 	move_and_slide()
-	if is_multiplayer_authority():
-		# We are the server
-		if position != last_position:
-			last_position = position
-			rpc("update_position", position.x, position.y, position.z)
+	post_move_and_slide(delta)
 	
-## Called by the server to sync server position with client position
-@rpc("call_remote", "unreliable")
-func update_position(x: float, y: float, z: float):
-	position = Vector3(x, y, z)
-	#print(position)
+
+func post_move_and_slide(delta: float) -> void:
+	pass
 
 ## A function meant to be overridden to facilitate any needed additional function when a weapon collides with the character
 func weapon_collided(weapon: Weapon):

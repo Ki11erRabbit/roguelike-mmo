@@ -35,4 +35,5 @@ func is_action_just_released(action: Actions.PlayerActionButtons, cooldown = 0.0
 	return InputManager.is_action_just_released(action, cooldown)
 
 func tick(delta: float) -> void:
+	remote_control.tick(delta)
 	pass

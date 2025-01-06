@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkcoleaoncmby"]
+[gd_scene load_steps=4 format=3 uid="uid://ffsyrv4pymyl"]
 
-[ext_resource type="PackedScene" uid="uid://b3gwe4unwagk6" path="res://Character/Players/ControllableCharacter.tscn" id="1_5mtk1"]
+[ext_resource type="PackedScene" uid="uid://1monm1g5bx0k" path="res://Character/character.tscn" id="1_yqer5"]
 [ext_resource type="Script" path="res://Character/Players/player_controled_character.gd" id="2_l40mv"]
+[ext_resource type="PackedScene" uid="uid://bueuqyp855a3" path="res://Character/ControlBox/remote_control_box.tscn" id="3_1wugs"]
 
-[node name="Character" instance=ExtResource("1_5mtk1")]
+[node name="Character" instance=ExtResource("1_yqer5")]
 script = ExtResource("2_l40mv")
+
+[node name="RemoteControlBox" parent="." index="2" instance=ExtResource("3_1wugs")]
 
 [node name="Camera3D" type="Camera3D" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 9.4, 0)

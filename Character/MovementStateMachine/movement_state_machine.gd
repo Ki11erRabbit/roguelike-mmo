@@ -11,7 +11,7 @@ const ROTATION_ANGLE_LIMIT: float = 10
 
 const SPEED = 5
 
-const JUMP_VELOCITY = 20
+const JUMP_VELOCITY = 10
 
 var disable_input: bool = false
 var disable_rotation: bool = false

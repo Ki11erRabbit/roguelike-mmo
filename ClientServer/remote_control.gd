@@ -16,6 +16,7 @@ var last_stick: Array = [null, null]
 func move_stick(stick: Actions.PlayerActionSticks, x: float, y: float):
 	if is_multiplayer_authority():
 		print("multiplayer Authority")
+		return
 	match stick:
 		Actions.PlayerActionSticks.Movement:
 			current_movement_vec = Vector2(x, y)
@@ -26,12 +27,18 @@ func move_stick(stick: Actions.PlayerActionSticks, x: float, y: float):
 
 @rpc("unreliable")
 func press_button(action: Actions.PlayerActionButtons):
+	if is_multiplayer_authority():
+		print("multiplayer Authority")
+		return
 	buttons_pressed[action] = true
 	buttons_just_released[action] = false
 	#rpc("press_button", action)
 
 @rpc("unreliable")
 func hold_down_button(action: Actions.PlayerActionButtons):
+	if is_multiplayer_authority():
+		print("multiplayer Authority")
+		return
 	buttons_pressed[action] = true
 	buttons_held_down[action] = true
 	buttons_just_released[action] = false
@@ -39,6 +46,9 @@ func hold_down_button(action: Actions.PlayerActionButtons):
 
 @rpc("unreliable")
 func release_button(action: Actions.PlayerActionButtons):
+	if is_multiplayer_authority():
+		print("multiplayer Authority")
+		return
 	buttons_pressed[action] = false
 	buttons_held_down[action] = false
 	buttons_just_released[action] = true
@@ -88,12 +98,14 @@ func manage_player_stick(stick) -> void:
 	last_stick[stick] = stick_vec
 	rpc("move_stick", stick, stick_vec.x, stick_vec.y)
 
-func _physics_process(delta: float) -> void:
-	#print(get_multiplayer_authority())
-	for i in range(0, buttons_just_released.size()):
-		buttons_just_released[i] = false
+
+
+func tick(delta: float) -> void:
+	
 	if not is_multiplayer_authority():
-		# if we are the server we do not poll for button presses
+		# we are the server, we do not poll for button presses
+		for i in range(0, buttons_just_released.size()):
+			buttons_just_released[i] = false
 		#print(get_multiplayer_authority())
 		return
 	player_button_control()

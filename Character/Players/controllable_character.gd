@@ -32,25 +32,39 @@ func ready_character():
 	weapon_state_machine.initialize(self, WeaponStateMachine.HandedNess.Right, weapon_state, sword)
 	
 	attach_right_hand_weapon(sword, weapon_state_machine)
-	
-	
 
 func process_character(delta: float):
 	if should_equip:
 		equip_weapons()
 		should_equip = false
-	
-	
-	if control_box.is_action_just_pressed(Actions.PlayerActionButtons.RightAttack):
-		if not weapons_equiped:
+	#if control_box.is_action_just_pressed(Actions.PlayerActionButtons.RightAttack):
+		#if not weapons_equiped:
+			#should_equip = true
+	#if control_box.is_action_just_pressed(Actions.PlayerActionButtons.Interact):
+		#if weapons_equiped:
+			#unequip_weapons()
+			#should_equip = false
+	return false
+
+func post_move_and_slide(delta: float) -> void:
+	if not is_multiplayer_authority():
+		rpc("rpc_position_update", position)
+	pass
+
+@rpc("any_peer")
+func rpc_position_update(pos: Vector3) -> void:
+	position = pos
+
+@rpc("any_peer")
+func rpc_equip_weapons():
+	if not weapons_equiped:
 			should_equip = true
-	if control_box.is_action_just_pressed(Actions.PlayerActionButtons.Interact):
-		if weapons_equiped:
+
+@rpc("any_peer")
+func rpc_unequip_weapons():
+	if weapons_equiped:
 			unequip_weapons()
 			should_equip = false
-
-	
-	return false
 
 func process_health_bar_position():
 	pass

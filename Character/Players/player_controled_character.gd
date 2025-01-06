@@ -34,7 +34,9 @@ func ready_character():
 	attach_right_hand_weapon(sword, weapon_state_machine)
 	
 	InputManager.start_game()
-	
+
+func remove_camera():
+	remove_child($Camera3D)
 
 func process_character(delta: float):
 	if should_equip:
@@ -45,13 +47,32 @@ func process_character(delta: float):
 	if control_box.is_action_just_pressed(Actions.PlayerActionButtons.RightAttack):
 		if not weapons_equiped:
 			should_equip = true
+			rpc("rpc_equip_weapons")
 	if control_box.is_action_just_pressed(Actions.PlayerActionButtons.Interact):
 		if weapons_equiped:
 			unequip_weapons()
 			should_equip = false
-
-	
+			rpc("rpc_unequip_weapons")
 	return false
+
+func post_move_and_slide(delta: float) -> void:
+	pass
+
+@rpc
+func rpc_position_update(pos: Vector3) -> void:
+	position = pos
+	print(position)
+
+@rpc
+func rpc_equip_weapons():
+	if not weapons_equiped:
+		should_equip = true
+
+@rpc
+func rpc_unequip_weapons():
+	if weapons_equiped:
+		unequip_weapons()
+		should_equip = false
 
 func process_health_bar_position():
 	pass

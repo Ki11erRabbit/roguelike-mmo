@@ -12,8 +12,9 @@ func start_server():
 	multiplayer.peer_connected.connect(server_peer_connected)
 	multiplayer.peer_disconnected.connect(server_peer_disconnected)
 	print("Server started")
+	InputManager.disable_input()
 
-func start_client(address = "192.168.254.190"):
+func start_client(address = "127.0.0.1"):
 	peer.create_client(address, PORT)
 	multiplayer.multiplayer_peer = peer
 	multiplayer.connected_to_server.connect(client_peer_connected)
@@ -27,10 +28,11 @@ func set_peer_id(id):
 	peer_id = id
 	var character = load("res://Character/Players/PlayerControledCharacter.tscn").instantiate()
 	character.set_multiplayer_authority(id)
-	character.set_multiplayer_authority(1, false)
-	$World.add_child(character)
+	character.player_id = id
 	character.name = "{0}".format([id])
 	players[id] = character
+	ClientServerState.peer_id = id
+	$World.add_child(character)
 	
 @rpc("call_remote")
 func add_players(ids: Array):
@@ -38,11 +40,11 @@ func add_players(ids: Array):
 		if peer_id == id or id in players:
 			return
 		var character = load("res://Character/Players/ControllableCharacter.tscn").instantiate()
-		character.set_multiplayer_authority(id)
-		character.set_multiplayer_authority(1, false)
-		$World.add_child(character)
+		character.player_id = id
+		#character.set_multiplayer_authority(id)
 		character.name = "{0}".format([id])
 		players[id] = character
+		$World.add_child(character)
 
 @rpc("call_remote")
 func remove_player(id):
@@ -53,12 +55,12 @@ func server_peer_connected(id):
 	print(id)
 	rpc("set_peer_id", id)
 	var character = load("res://Character/Players/ControllableCharacter.tscn").instantiate()
+	character.player_id = id
 	character.set_multiplayer_authority(id)
-	character.set_multiplayer_authority(1, false)
-	$World.add_child(character)
 	character.name = "{0}".format([id])
 	players[id] = character
 	rpc("add_players", players.keys())
+	$World.add_child(character)
 
 func server_peer_disconnected(id):
 	print("removing")

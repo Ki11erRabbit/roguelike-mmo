@@ -4,6 +4,7 @@ extends Node
 enum IsServer { Uninit, Server, Client }
 
 var server_state: IsServer = IsServer.Uninit
+var peer_id: int
 
 func become_server() -> void:
 	server_state = IsServer.Server
