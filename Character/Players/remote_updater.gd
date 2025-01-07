@@ -5,7 +5,8 @@ var character: Character
 
 @rpc
 func rpc_position_update(pos: Vector3) -> void:
-	character.set_position(pos)
+	#character.set_position(pos)
+	pass
 
 @rpc
 func rpc_equip_weapons():
