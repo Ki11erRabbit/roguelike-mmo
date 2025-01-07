@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhg1skn68wya6"]
+
+[ext_resource type="PackedScene" uid="uid://ujunq8yy26y6" path="res://Character/Players/PlayerRemoteUpdater/player_remote_updater.tscn" id="1_vxdqo"]
+[ext_resource type="Script" path="res://Character/Players/PlayerRemoteUpdater/player_client_updater.gd" id="2_xahns"]
+
+[node name="PlayerRemoteUpdater" instance=ExtResource("1_vxdqo")]
+script = ExtResource("2_xahns")

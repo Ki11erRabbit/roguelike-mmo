@@ -4,6 +4,13 @@ var id: int = GlobalId.get_id()
 var last_position: Vector3 = position
 var player_id: int
 
+var client_updater: PlayerClientUpdater:
+	set(value):
+		value.character = self
+		client_updater = value
+		add_child(value)
+var server_updater: PlayerServerUpdater
+
 var movement_state_machine: MovementStateMachine = MovementStateMachine.new()
 var right_weapon: Weapon
 var right_hand_weapon: WeaponStateMachine
@@ -158,6 +165,9 @@ func ready_character():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if server_updater != null:
+		server_updater.character = self
+		add_child(server_updater)
 	ready_character()
 	current_health = stats.current_health
 

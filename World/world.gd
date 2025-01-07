@@ -26,11 +26,14 @@ func start_client(address = "127.0.0.1"):
 func set_peer_id(id):
 	print(get_multiplayer_authority())
 	peer_id = id
-	var character = load("res://Character/Players/PlayerControledCharacter.tscn").instantiate()
+	var character: Character = load("res://Character/Players/PlayerControledCharacter.tscn").instantiate()
+	var client_updater = load("res://Character/Players/PlayerRemoteUpdater/player_client_updater.tscn").instantiate()
+	client_updater.name = "ClientUpdater"
+	character.client_updater = client_updater
 	character.set_multiplayer_authority(id)
-	var remote_updater = RemoteUpdater.new()
-	remote_updater.name = "RemoteUpdater"
-	character.remote_updater = remote_updater
+	var server_updater = load("res://Character/Players/PlayerRemoteUpdater/player_server_updater.tscn").instantiate()
+	server_updater.name = "ServerUpdater"
+	character.server_updater = server_updater
 	character.player_id = id
 	character.name = "{0}".format([id])
 	players[id] = character
@@ -42,12 +45,15 @@ func add_players(ids: Array):
 	for id in ids:
 		if peer_id == id or id in players:
 			return
-		var character = load("res://Character/Players/ControllableCharacter.tscn").instantiate()
+		var character = load("res://Character/Players/server_controled_character.tscn").instantiate()
 		character.player_id = id
-		var remote_updater = RemoteUpdater.new()
-		remote_updater.name = "RemoteUpdater"
-		character.remote_updater = remote_updater
-		#character.set_multiplayer_authority(id)
+		var client_updater = load("res://Character/Players/PlayerRemoteUpdater/player_client_updater.tscn").instantiate()
+		client_updater.name = "ClientUpdater"
+		character.client_updater = client_updater
+		character.set_multiplayer_authority(id)
+		var server_updater = load("res://Character/Players/PlayerRemoteUpdater/player_server_updater.tscn").instantiate()
+		server_updater.name = "ServerUpdater"
+		character.server_updater = server_updater
 		character.name = "{0}".format([id])
 		players[id] = character
 		$World.add_child(character)
@@ -62,10 +68,13 @@ func server_peer_connected(id):
 	rpc("set_peer_id", id)
 	var character = load("res://Character/Players/ControllableCharacter.tscn").instantiate()
 	character.player_id = id
+	var client_updater = load("res://Character/Players/PlayerRemoteUpdater/player_client_updater.tscn").instantiate()
+	client_updater.name = "ClientUpdater"
+	character.client_updater = client_updater
 	character.set_multiplayer_authority(id)
-	var remote_updater = RemoteUpdater.new()
-	remote_updater.name = "RemoteUpdater"
-	character.remote_updater = remote_updater
+	var server_updater = load("res://Character/Players/PlayerRemoteUpdater/player_server_updater.tscn").instantiate()
+	server_updater.name = "ServerUpdater"
+	character.server_updater = server_updater
 	character.name = "{0}".format([id])
 	players[id] = character
 	rpc("add_players", players.keys())

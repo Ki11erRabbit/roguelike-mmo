@@ -4,12 +4,8 @@ const Actions = preload("res://InputManager/actions.gd")
 
 var should_equip: bool = false
 
-var remote_updater: RemoteUpdater
-
 func ready_character():
-	if remote_updater != null:
-		remote_updater.character = self
-		add_child(remote_updater)
+	
 	
 	stats = CharacterStats.new()
 	stats.setup_new(1, 1, 1, 5, HumanCalculator.new())
@@ -51,8 +47,6 @@ func process_character(delta: float):
 	return false
 
 func post_move_and_slide(delta: float) -> void:
-	if not is_multiplayer_authority():
-		remote_updater.rpc("rpc_position_update", position)
 	pass
 
 func process_health_bar_position():

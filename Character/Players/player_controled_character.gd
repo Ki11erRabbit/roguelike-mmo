@@ -4,17 +4,8 @@ const Actions = preload("res://InputManager/actions.gd")
 
 var should_equip: bool = false
 
-var remote_updater: RemoteUpdater
-
 
 func ready_character():
-	if remote_updater != null:
-		# TODO: check to see if this jank is needed
-		var camera = get_child(3)
-		remove_child($Camera3D)
-		remote_updater.character = self
-		add_child(remote_updater)
-		add_child(camera)
 	
 	stats = CharacterStats.new()
 	stats.setup_new(1, 1, 1, 5, HumanCalculator.new())
@@ -56,12 +47,12 @@ func process_character(delta: float):
 	if control_box.is_action_just_pressed(Actions.PlayerActionButtons.RightAttack):
 		if not weapons_equiped:
 			should_equip = true
-			rpc("rpc_equip_weapons")
+			client_updater.equip_weapons()
 	if control_box.is_action_just_pressed(Actions.PlayerActionButtons.Interact):
 		if weapons_equiped:
 			unequip_weapons()
 			should_equip = false
-			rpc("rpc_unequip_weapons")
+			server_updater.unequip_weapons()
 	return false
 
 func post_move_and_slide(delta: float) -> void:

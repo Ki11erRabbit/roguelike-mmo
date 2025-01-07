@@ -7,7 +7,7 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iriju"]
 height = 1.0
 
-[node name="Character" instance=ExtResource("1_b5s2b")]
+[node name="ControllableCharacter" instance=ExtResource("1_b5s2b")]
 script = ExtResource("2_bqtj1")
 
 [node name="CollisionShape3D" parent="." index="0"]

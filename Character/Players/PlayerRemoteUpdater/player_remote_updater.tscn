@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ujunq8yy26y6"]
+
+[ext_resource type="Script" path="res://Character/Players/PlayerRemoteUpdater/player_remote_updater.gd" id="1_y0egg"]
+
+[node name="PlayerRemoteUpdater" type="Node"]
+script = ExtResource("1_y0egg")
