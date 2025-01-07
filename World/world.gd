@@ -13,6 +13,7 @@ func start_server():
 	multiplayer.peer_disconnected.connect(server_peer_disconnected)
 	print("Server started")
 	InputManager.disable_input()
+	$Timer.start()
 
 func start_client(address = "127.0.0.1"):
 	peer.create_client(address, PORT)
@@ -102,3 +103,14 @@ func _ready() -> void:
 		camera.position.y = 9.4
 	elif ClientServerState.is_client():
 		start_client()
+
+
+func _on_timer_timeout() -> void:
+	rpc("add_enemy", false)
+	add_enemy(true)
+
+@rpc
+func add_enemy(server: bool):
+	var character = load("res://Character/Enemies/Dummy/dummy.tscn").instantiate()
+	character.on_server = server
+	$World.add_child(character)

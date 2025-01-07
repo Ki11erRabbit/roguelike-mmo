@@ -1,6 +1,6 @@
 extends "res://Character/character.gd"
 
-
+var on_server: bool = false
 
 func ready_character():
 	
@@ -14,9 +14,10 @@ func ready_character():
 	
 	var capsule_shape = collision_box.shape
 	
-	var box: ControlBox = ControlBox.new()
+	var box: ControlBox = $AiControlBox
+	$TestAi.initialize(on_server)
 	
-	initialize(character_model, capsule_shape, $AiControlBox)
+	initialize(character_model, capsule_shape, box)
 	
 	var sword: Weapon = load("res://Weapons/Concrete/Swords/test_sword.tscn").instantiate()
 	sword.initialize(self)

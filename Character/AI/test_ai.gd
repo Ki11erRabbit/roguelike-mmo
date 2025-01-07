@@ -6,7 +6,10 @@ const MAX_ATTACK_TIME: float = 1.0
 var attack_time: float = MAX_ATTACK_TIME
 var attacking: bool = false
 
-func process_ai(delta: float, character: Character) -> void:
+func initialize(on_server: bool):
+	super(on_server)
+
+func control_ai(delta: float, character: Character) -> void:
 	if attack_time != MAX_ATTACK_TIME:
 		attack_time -= delta
 	if attack_time <= 0.0:
@@ -17,11 +20,12 @@ func process_ai(delta: float, character: Character) -> void:
 		return
 	else:
 		attacking = false
-		control_box.release_button(Actions.PlayerActionButtons.RightAttack)
+		control_box.release_button(Actions.PlayerActionButtons.RightAttack, on_server)
 	var target: AITarget = get_next_target()
 	if target == null:
 		reset_aim_vec()
 		reset_movement_vec()
+		reset_buttons()
 		return
 	
 	var target_character: Character = target.target
@@ -41,10 +45,10 @@ func process_ai(delta: float, character: Character) -> void:
 		print("attacking")
 		attacking = true
 		attack_time -= delta
-		control_box.press_button(Actions.PlayerActionButtons.RightAttack)
+		control_box.press_button(Actions.PlayerActionButtons.RightAttack, on_server)
 		reset_movement_vec()
 	
-	control_box.current_movement_vec = Vector2(normalized_diff.x, normalized_diff.z)
+	control_box.set_movement_stick(Vector2(normalized_diff.x, normalized_diff.z), on_server) 
 	
 	var target_point: Vector2 = Vector2(target_position.x, target_position.z)
 	var character_point: Vector2 = Vector2(character_position.x, character_position.z)
@@ -53,10 +57,13 @@ func process_ai(delta: float, character: Character) -> void:
 	
 	var aim_vec: Vector2 = Vector2.UP.rotated(angle)
 	
-	control_box.current_aim_vec = aim_vec
+	control_box.set_aim_stick(aim_vec, on_server)
 
 func reset_movement_vec():
-	control_box.current_movement_vec = Vector2(0,0)
+	control_box.set_movement_stick(Vector2(0, 0), on_server) 
 
 func reset_aim_vec():
-	control_box.current_aim_vec = Vector2(0,0)
+	control_box.set_aim_stick(Vector2(0,0), on_server)
+
+func reset_buttons():
+	control_box.reset_buttons(on_server)

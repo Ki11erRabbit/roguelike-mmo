@@ -15,7 +15,6 @@ var last_stick: Array = [null, null]
 @rpc("unreliable")
 func move_stick(stick: Actions.PlayerActionSticks, x: float, y: float):
 	if is_multiplayer_authority():
-		print("multiplayer Authority")
 		return
 	match stick:
 		Actions.PlayerActionSticks.Movement:
@@ -28,7 +27,6 @@ func move_stick(stick: Actions.PlayerActionSticks, x: float, y: float):
 @rpc("unreliable")
 func press_button(action: Actions.PlayerActionButtons):
 	if is_multiplayer_authority():
-		print("multiplayer Authority")
 		return
 	buttons_pressed[action] = true
 	buttons_just_released[action] = false
@@ -37,7 +35,6 @@ func press_button(action: Actions.PlayerActionButtons):
 @rpc("unreliable")
 func hold_down_button(action: Actions.PlayerActionButtons):
 	if is_multiplayer_authority():
-		print("multiplayer Authority")
 		return
 	buttons_pressed[action] = true
 	buttons_held_down[action] = true
@@ -47,7 +44,6 @@ func hold_down_button(action: Actions.PlayerActionButtons):
 @rpc("unreliable")
 func release_button(action: Actions.PlayerActionButtons):
 	if is_multiplayer_authority():
-		print("multiplayer Authority")
 		return
 	buttons_pressed[action] = false
 	buttons_held_down[action] = false

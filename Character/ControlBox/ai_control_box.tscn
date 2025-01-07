@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cm1l1vkphqo72"]
+[gd_scene load_steps=3 format=3 uid="uid://cm1l1vkphqo72"]
 
 [ext_resource type="Script" path="res://Character/ControlBox/ai_control_box.gd" id="1_cmm2p"]
+[ext_resource type="PackedScene" uid="uid://md5ioiskgska" path="res://ClientServer/remote_control.tscn" id="2_72xqw"]
 
 [node name="AiControlBox" type="Node"]
 script = ExtResource("1_cmm2p")
+
+[node name="RemoteControl" parent="." instance=ExtResource("2_72xqw")]

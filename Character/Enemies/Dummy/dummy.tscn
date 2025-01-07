@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bbnktb3dmfqyb"]
+[gd_scene load_steps=6 format=3 uid="uid://bbnktb3dmfqyb"]
 
 [ext_resource type="PackedScene" uid="uid://1monm1g5bx0k" path="res://Character/character.tscn" id="1_48c3p"]
 [ext_resource type="Script" path="res://Character/Enemies/Dummy/dummy.gd" id="2_6henl"]
@@ -7,11 +7,6 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xe85a"]
 height = 1.0
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_r8dht"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
 
 [node name="Character" node_paths=PackedStringArray("control_box") instance=ExtResource("1_48c3p")]
 script = ExtResource("2_6henl")
@@ -26,6 +21,3 @@ radius = 4.0
 control_box = NodePath("../AiControlBox")
 
 [node name="AiControlBox" parent="." index="3" instance=ExtResource("4_28442")]
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="4"]
-replication_config = SubResource("SceneReplicationConfig_r8dht")

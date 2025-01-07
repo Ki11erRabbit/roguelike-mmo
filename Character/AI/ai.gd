@@ -1,5 +1,6 @@
 extends Area3D
 
+var on_server: bool
 @onready
 var detection_sphere: CollisionShape3D = $DetectionSphere
 
@@ -24,9 +25,17 @@ var agro_priority: int = 0:
 @export
 var control_box: AIControlBox
 
+func initialize(on_server: bool):
+	self.on_server = on_server
+
+func control_ai(delta: float, character: Character) -> void:
+	pass
+
 ## character is the character the ai is connected to
 func process_ai(delta: float, character: Character) -> void:
-	pass
+	if not on_server:
+		return
+	control_ai(delta, character)
 
 func get_next_target() -> AITarget:
 	var min: AITarget = targets.get_min()
