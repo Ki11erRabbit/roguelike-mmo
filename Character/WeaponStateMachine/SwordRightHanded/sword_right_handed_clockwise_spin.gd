@@ -32,6 +32,7 @@ func start_cooldown(anim_name: StringName):
 		"clockwise_spin":
 			enable_cooldown = true
 			state_machine.weapon.enable_collision = false
+			character.model.animation_finished.disconnect(start_cooldown)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

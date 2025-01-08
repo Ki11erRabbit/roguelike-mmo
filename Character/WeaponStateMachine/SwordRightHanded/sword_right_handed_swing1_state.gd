@@ -29,6 +29,7 @@ func process_attack(delta: float, attack: WeaponStateMachine.AttackType, is_spin
 	return null
 
 func swing():
+	print("swing 2")
 	state_machine.state = SwordRightHandedSwing2State.new()
 	state_machine.state.initialize(character, state_machine)
 
@@ -37,6 +38,7 @@ func enable_attacks(anim_name: StringName):
 		"sword_right_hand_slash1":
 			attacks_enabled = true
 			state_machine.weapon.enable_collision = false
+			character.model.animation_finished.disconnect(enable_attacks)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

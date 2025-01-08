@@ -76,7 +76,6 @@ func process_input(delta: float) -> WeaponAction:
 	
 	
 	spinning = Spinning.None
-	# TODO: add spinning
 	
 	var angle_diff = angle_difference(last_angle, current_angle)
 	
@@ -108,7 +107,6 @@ func process_input(delta: float) -> WeaponAction:
 		
 	var movement_angle = character.control_box.movement().angle()
 	
-	# TODO: get facing to work
 	var facing_forwards: bool = abs(current_aim.normalized().dot(Vector2(1,1))) >= 0.8
 	
 	var result = state.process_attack(delta, attack, spinning, facing_forwards)

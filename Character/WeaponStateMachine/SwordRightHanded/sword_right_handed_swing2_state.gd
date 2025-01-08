@@ -30,6 +30,7 @@ func start_cooldown(anim_name: StringName):
 		"sword_right_hand_slash2":
 			enable_cooldown = true
 			state_machine.weapon.enable_collision = false
+			character.model.animation_finished.disconnect(start_cooldown)
 
 func two_handed_switch():
 	# TODO: check if we can do this

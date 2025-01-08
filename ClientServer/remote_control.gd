@@ -120,8 +120,4 @@ func is_action_just_pressed(action: Actions.PlayerActionButtons, cooldown = 0.0)
 func is_action_just_released(action: Actions.PlayerActionButtons, cooldown = 0.0) -> bool:
 	var value = buttons_pressed[action]
 	#print(released_time[action])
-	if released_time[action] <= 0.1:
-		print("just released")
-	else:
-		print("not just released")
 	return not value and released_time[action] <= 0.1

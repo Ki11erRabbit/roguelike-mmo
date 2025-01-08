@@ -92,3 +92,4 @@ func tick(delta: float) -> void:
 			pressed_time[i] += delta
 		elif not buttons_pressed[i]:
 			released_time[i] += delta
+			

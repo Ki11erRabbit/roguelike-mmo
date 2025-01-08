@@ -21,10 +21,10 @@ func control_ai(delta: float, character: Character) -> void:
 		print(release_time)
 		print(delta)
 		
-		control_box.release_button(Actions.PlayerActionButtons.RightAttack, on_server)
-		release_time = BUTTON_RELEASE_TIME
 		reset_aim_vec()
 		reset_movement_vec()
+		control_box.release_button(Actions.PlayerActionButtons.RightAttack, on_server)
+		release_time = BUTTON_RELEASE_TIME
 	if attack_time <= 0.0:
 		attack_time = MAX_ATTACK_TIME
 	elif attack_time != MAX_ATTACK_TIME:
