@@ -9,6 +9,8 @@ func reset():
 	state_machine.state = SwordBothHandedIdleState.new()
 	state_machine.state.initialize(character, state_machine)
 	state_machine.weapon.enable_collision = false
+	weapon_action.set_priority(0)
+	return weapon_action
 
 func swing():
 	pass

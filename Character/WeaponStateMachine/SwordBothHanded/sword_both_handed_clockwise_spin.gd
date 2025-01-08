@@ -8,23 +8,24 @@ var enable_cooldown: bool = false
 func initialize(character: Character, state_machine: WeaponStateMachine):
 	super(character, state_machine)
 	character.model.animation_finished.connect(start_cooldown)
-	character.play_body_animation("clockwise_spin")
+	play_body_animation("clockwise_spin")
 	play_animation("spin_clockwise")
 	character.movement_state_machine.disable_input = true
 	character.right_hand_weapon.enabled = false
 	state_machine.weapon.enable_collision = true
 
-func process_attack(delta: float, _attack: WeaponStateMachine.AttackType, _is_spinning: WeaponStateMachine.Spinning, _facing_forwards: bool) -> int:
+func process_attack(delta: float, _attack: WeaponStateMachine.AttackType, _is_spinning: WeaponStateMachine.Spinning, _facing_forwards: bool) -> WeaponAction:
 	if not enable_cooldown:
 		enable_cooldown = true
-		return 0
+		return null
 	
 	if cooldown <= 0.0:
 		character.movement_state_machine.disable_input = false
 		character.right_hand_weapon.enabled = true
-		reset()
+		play_body_animation("idle")
+		return reset()
 	cooldown -= delta
-	return 0
+	return null
 
 func start_cooldown(anim_name: StringName):
 	match String(anim_name):

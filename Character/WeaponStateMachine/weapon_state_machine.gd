@@ -22,6 +22,7 @@ var spin_counter: float = 0.0
 var spinning: Spinning
 var spin_mean: float
 
+var weapon_action: WeaponAction
 
 
 # The state must be initialized before being passed in
@@ -31,22 +32,22 @@ func initialize(character: Character, handedness: HandedNess, state: WeaponState
 	self.handedness = handedness
 	self.weapon = weapon
 
-func process_input(delta: float) -> int:
+func process_input(delta: float) -> WeaponAction:
 	if not enabled:
 		spin_counter = 0.0
 		angle_array.resize(0)
 		spinning = Spinning.None
-		return 0
+		return null
 	if already_fired:
 		spin_counter = 0.0
 		angle_array.resize(0)
 		spinning = Spinning.None
-		return 0
+		return null
 	if character.is_landing():
 		spin_counter = 0.0
 		angle_array.resize(0)
 		spinning = Spinning.None
-		return 0
+		return null
 	
 	#print(state.get_script().resource_path)
 	

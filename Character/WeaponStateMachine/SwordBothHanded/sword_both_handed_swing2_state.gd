@@ -11,14 +11,14 @@ func initialize(character: Character, state_machine: WeaponStateMachine):
 	play_animation("slash2")
 	state_machine.weapon.enable_collision = true
 
-func process_attack(delta: float, _attack: WeaponStateMachine.AttackType, _is_spinning: WeaponStateMachine.Spinning, _facing_forwards: bool) -> int:
+func process_attack(delta: float, _attack: WeaponStateMachine.AttackType, _is_spinning: WeaponStateMachine.Spinning, _facing_forwards: bool) -> WeaponAction:
 	if not enable_cooldown:
-		return 0
+		return null
 	
 	if cooldown <= 0.0:
-		reset()
+		return reset()
 	cooldown -= delta
-	return 0
+	return null
 
 func start_cooldown(anim_name: StringName):
 	match String(anim_name):

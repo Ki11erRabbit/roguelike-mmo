@@ -9,19 +9,21 @@ func initialize(character: Character, state_machine: WeaponStateMachine):
 	play_animation("idle")
 	spin_attack_cooldown = SPIN_ATTACK_COOLDOWN
 
-func process_attack(delta: float, attack: AttackType, is_spinning: Spinning, facing_forwards: bool) -> int:
+func process_attack(delta: float, attack: AttackType, is_spinning: Spinning, facing_forwards: bool) -> WeaponAction:
 	if spin_attack_cooldown <= 0:
 		match is_spinning:
 			WeaponStateMachine.Spinning.Clockwise:
 				match attack:
 					AttackType.Normal:
 						clockwise_spin()
-						return 10
+						weapon_action.set_priority(10)
+						return weapon_action
 			WeaponStateMachine.Spinning.CounterClockwise:
 				match attack:
 					AttackType.Normal:
 						counter_clockwise_spin()
-						return 10
+						weapon_action.set_priority(10)
+						return weapon_action
 	else:
 		spin_attack_cooldown -= delta
 	#print("facing")
@@ -30,13 +32,15 @@ func process_attack(delta: float, attack: AttackType, is_spinning: Spinning, fac
 		match attack:
 			AttackType.Normal:
 				stab()
-				return 0
+				weapon_action.set_priority(0)
+				return weapon_action
 	#print("checking attack")
 	match attack:
 		AttackType.Normal:
 			swing()
-			return 0
-	return 0
+			weapon_action.set_priority(0)
+			return weapon_action
+	return null
 
 func swing():
 	#character.play_animation("idle", "sword", "right")

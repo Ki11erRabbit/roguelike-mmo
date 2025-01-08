@@ -11,23 +11,22 @@ func initialize(character: Character, state_machine: WeaponStateMachine):
 	play_animation("slash1")
 	state_machine.weapon.enable_collision = true
 
-func process_attack(delta: float, attack: WeaponStateMachine.AttackType, is_spinning: WeaponStateMachine.Spinning, facing_forwards: bool) -> int:
+func process_attack(delta: float, attack: WeaponStateMachine.AttackType, is_spinning: WeaponStateMachine.Spinning, facing_forwards: bool) -> WeaponAction:
 	if not attacks_enabled:
-		return 0
+		return null
 	grace_period -= delta
 	if grace_period <= 0.0:
-		reset()
-		return 0
+		return reset()
 	else:
 		grace_period -= delta
 	
 	match attack:
 		AttackType.Normal:
 			swing()
-			return 0
-			pass
+			weapon_action.set_priority(0)
+			return weapon_action
 		
-	return 0
+	return null
 
 func swing():
 	state_machine.state = SwordRightHandedSwing2State.new()

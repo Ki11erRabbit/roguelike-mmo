@@ -9,19 +9,25 @@ var state_machine: WeaponStateMachine
 var weapon: String = ""
 var hand: String = ""
 
+var weapon_action:
+	get():
+		return self.state_machine.weapon_action
+
 func initialize(character: Character, state_machine: WeaponStateMachine):
 	self.character = character
 	self.state_machine = state_machine
+	self.state_machine.weapon_action = WeaponAction.new()
+	self.state_machine.weapon_action.initialize(character)
 
-func process_attack(delta: float, attack: WeaponStateMachine.AttackType, is_spinning: WeaponStateMachine.Spinning, facing_forwards: bool) -> int:
-	"""
-	returns: An integer indicating whether or not to block any other state_machines with a priorty
-	"""
-	return false
+## returns: An integer indicating whether or not to block any other state_machines with a priorty
+func process_attack(delta: float, attack: WeaponStateMachine.AttackType, is_spinning: WeaponStateMachine.Spinning, facing_forwards: bool) -> WeaponAction:
+	return null
 
 func play_animation(anim_name: String):
-	character.play_animation(anim_name, weapon, hand)
+	self.state_machine.weapon_action.set_animation(anim_name, weapon, hand)
 
+func play_body_animation(anim_name: String):
+	self.state_machine.weapon_action.set_body_animation(anim_name)
 	
 
 func reset():

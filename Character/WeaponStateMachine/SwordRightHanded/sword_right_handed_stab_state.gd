@@ -6,9 +6,9 @@ func initialize(character: Character, state_machine: WeaponStateMachine):
 	play_animation("thrust")
 	state_machine.weapon.enable_collision = true
 
-func process_attack(_delta: float, _attack: WeaponStateMachine.AttackType, _is_spinning: WeaponStateMachine.Spinning, _facing_forwards: bool) -> int:
+func process_attack(_delta: float, _attack: WeaponStateMachine.AttackType, _is_spinning: WeaponStateMachine.Spinning, _facing_forwards: bool) -> WeaponAction:
 	
-	return 0
+	return null
 
 func start_cooldown(anim_name: StringName):
 	match String(anim_name):

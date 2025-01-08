@@ -191,12 +191,31 @@ func _physics_process(delta: float) -> void:
 		control_box.tick(delta)
 	movement_state_machine.process_state(delta)
 	if weapons_equiped:
+		var right_action: WeaponAction = null
+		var left_action: WeaponAction = null
 		if right_hand_weapon != null:
 			right_hand_weapon.enabled = true
-			right_hand_weapon.process_input(delta)
+			right_action = right_hand_weapon.process_input(delta)
 		if left_hand_weapon != null:
 			left_hand_weapon.enabled = true
-			left_hand_weapon.process_input(delta)
+			left_action = left_hand_weapon.process_input(delta)
+		
+		var right_priority: int = -1
+		var left_priority: int = -1
+		
+		if right_action != null:
+			right_priority = right_action.priority
+		if left_action != null:
+			left_priority = left_action.priority
+		
+		if right_priority > left_priority:
+			right_action.perform_action()
+		elif left_priority > right_priority:
+			left_action.perform_action()
+		elif right_priority != -1 and left_priority != -1:
+			right_action.perform_action()
+			left_action.perform_action()
+		
 	elif right_hand_weapon != null and left_hand_weapon != null:
 		if right_hand_weapon != null:
 			right_hand_weapon.enabled = false
