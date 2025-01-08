@@ -2,7 +2,7 @@ class_name TestAi extends "res://Character/AI/ai.gd"
 
 const Actions = preload("res://InputManager/actions.gd")
 
-const MAX_ATTACK_TIME: float = 1.0
+const MAX_ATTACK_TIME: float = 1.5
 var attack_time: float = MAX_ATTACK_TIME
 var attacking: bool = false
 

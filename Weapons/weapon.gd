@@ -39,6 +39,8 @@ func initialize(wielder: Character):
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	model.position.y += stats.hand_position
+	if ClientServerState.is_client():
+		$CollisionShape3D.disabled = true
 	pass # Replace with function body.
 
 
@@ -60,11 +62,11 @@ func _on_area_entered(area: Area3D) -> void:
 			return 
 		var character: Character = area.owner.character.collide_weapon(self)
 		if character == null:
+			print("character is null")
 			return
 		
 		var combat_calculator: CombatCalculator = CombatCalculator.new()
 		
 		var damage: int = combat_calculator.calculate_damage_done(self.stats, wielder.stats, character.stats)
-		print(damage)
 		
 		character.add_damage(damage)

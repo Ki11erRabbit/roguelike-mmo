@@ -2,7 +2,7 @@ class_name Character extends CharacterBody3D
 
 var id: int = GlobalId.get_id()
 var last_position: Vector3 = position
-var player_id: int
+var player_id: int = 1
 
 var client_updater: PlayerClientUpdater:
 	set(value):
@@ -170,10 +170,14 @@ func _ready() -> void:
 		add_child(server_updater)
 	ready_character()
 	current_health = stats.current_health
+	if health_bar != null:
+		health_bar.update_current_value(current_health)
+		health_bar.update_max_health(stats.max_health)
+		health_bar.interpret_color()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	velocity.x = 0
 	velocity.z = 0
 	process_health(delta)
@@ -227,8 +231,16 @@ func clear_weapon(weapon_id: int):
 
 func add_damage(amount: int):
 	damage += amount
+	server_updater.send_damage(amount)
+
+func recv_damage(amount: int):
+	damage += amount
 
 func add_healing(amount: int):
+	healing += amount
+	server_updater.send_healing(amount)
+
+func recv_healing(amount: int):
 	healing += amount
 
 func start_timer():
@@ -243,8 +255,6 @@ func reset_timer():
 		timer.wait_time = GRACE_PERIOD
 
 func process_health(delta: float):
-	if health_bar == null:
-		return
 	
 	if stats.current_health != stats.max_health and stats.current_health != 0:
 		if regen_timer >= stats.health_regen_cooldown:
@@ -262,6 +272,7 @@ func process_health(delta: float):
 		else:
 			damage -= damage_rate
 			current_health -= damage_rate
+			#print(damage_rate)
 	
 	if damage <= 0:
 		damage = 0
@@ -286,8 +297,10 @@ func process_health(delta: float):
 	if current_health >= stats.max_health:
 		current_health = stats.max_health
 	
-	health_bar.update_current_value(current_health)
 	stats.current_health = int(ceil(current_health))
+	if health_bar == null:
+		return
+	health_bar.update_current_value(current_health)
 	health_bar.interpret_color()
 	
 

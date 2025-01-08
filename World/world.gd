@@ -39,6 +39,9 @@ func set_peer_id(id):
 	character.name = "{0}".format([id])
 	players[id] = character
 	ClientServerState.peer_id = id
+	var hud = load("res://Menus/HUD/hud.tscn").instantiate()
+	add_child(hud)
+	character.health_bar = hud.player_bar
 	$World.add_child(character)
 	
 @rpc("call_remote")
@@ -113,4 +116,10 @@ func _on_timer_timeout() -> void:
 func add_enemy(server: bool):
 	var character = load("res://Character/Enemies/Dummy/dummy.tscn").instantiate()
 	character.on_server = server
+	var client_updater = load("res://Character/Players/PlayerRemoteUpdater/player_client_updater.tscn").instantiate()
+	client_updater.name = "ClientUpdater"
+	character.client_updater = client_updater
+	var server_updater = load("res://Character/Players/PlayerRemoteUpdater/player_server_updater.tscn").instantiate()
+	server_updater.name = "ServerUpdater"
+	character.server_updater = server_updater
 	$World.add_child(character)
