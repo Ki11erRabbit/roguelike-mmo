@@ -6,9 +6,8 @@ var current_movement_vec: Vector2 = Vector2(0, 0)
 var current_aim_vec: Vector2 = Vector2(0, 0)
 
 var buttons_pressed: Array = range(0, Actions.PlayerActionButtons.QuickChat + 1).map(func(x): return false)
-var buttons_held_down: Array = range(0, Actions.PlayerActionButtons.QuickChat + 1).map(func(x): return false)
-var buttons_just_released: Array = range(0, Actions.PlayerActionButtons.QuickChat + 1).map(func(x): return false)
-var released_again: Array = range(0, Actions.PlayerActionButtons.QuickChat + 1).map(func(x): return true)
+var pressed_time: Array = range(0, Actions.PlayerActionButtons.QuickChat + 1).map(func(x): return 1.0)
+var released_time: Array = range(0, Actions.PlayerActionButtons.QuickChat + 1).map(func(x): return 1.0)
 
 var last_stick: Array = [null, null]
 
@@ -29,25 +28,15 @@ func press_button(action: Actions.PlayerActionButtons):
 	if is_multiplayer_authority():
 		return
 	buttons_pressed[action] = true
-	buttons_just_released[action] = false
+	pressed_time[action] = 0.0
 	#rpc("press_button", action)
-
-@rpc("unreliable")
-func hold_down_button(action: Actions.PlayerActionButtons):
-	if is_multiplayer_authority():
-		return
-	buttons_pressed[action] = true
-	buttons_held_down[action] = true
-	buttons_just_released[action] = false
-	#rpc("hold_down_button", action)
 
 @rpc("unreliable")
 func release_button(action: Actions.PlayerActionButtons):
 	if is_multiplayer_authority():
 		return
 	buttons_pressed[action] = false
-	buttons_held_down[action] = false
-	buttons_just_released[action] = true
+	released_time[action] = 0.0
 	#rpc("release_button", action)
 
 func player_button_control():
@@ -74,40 +63,44 @@ func player_button_control():
 
 func manage_player_button(button) -> void:
 	if InputManager.is_action_pressed(button):
-		released_again[button] = false
-		if buttons_pressed[button]:
-			if not buttons_held_down[button]:
-				buttons_held_down[button] = true
-				rpc("hold_down_button", button)
-		else:
+		if buttons_pressed[button] == false:
+			buttons_pressed[button] = true
 			rpc("press_button", button)
 	else:
-		if not released_again[button]:
-			released_again[button] = true
+		if buttons_pressed[button] == true:
+			buttons_pressed[button] = false
+			released_time[button] = 0.0
 			rpc("release_button", button)
 
 func manage_player_stick(stick) -> void:
 	var stick_vec = InputManager.get_stick_vector(stick)
 	
-	if stick_vec == last_stick[stick]:
-		return
+	if last_stick[stick] != null:
+		var stick_diff = last_stick[stick] - stick_vec
+		stick_diff.x = abs(stick_diff.x)
+		stick_diff.y = abs(stick_diff.y)
+		if stick_diff.x < 0.0001 and stick_diff.y < 0.0001:
+			return
 	last_stick[stick] = stick_vec
 	rpc("move_stick", stick, stick_vec.x, stick_vec.y)
 
 
 
 func tick(delta: float) -> void:
-	
 	if not is_multiplayer_authority():
 		# we are the server, we do not poll for button presses
-		for i in range(0, buttons_just_released.size()):
-			buttons_just_released[i] = false
+		for i in range(0, buttons_pressed.size()):
+			if buttons_pressed[i]:
+				pressed_time[i] += delta
+			elif not buttons_pressed[i]:
+				released_time[i] += delta
 		#print(get_multiplayer_authority())
 		return
 	player_button_control()
 
 func _ready() -> void:
-	InputManager.start_game()
+	if not is_multiplayer_authority():
+		InputManager.start_game()
 
 
 func movement() -> Vector2:
@@ -118,13 +111,17 @@ func aim() -> Vector2:
 
 func is_action_pressed(action: Actions.PlayerActionButtons, cooldown = 0.0) -> bool:
 	var value = buttons_pressed[action]
-	return value and buttons_held_down[action]
+	return value
 
 func is_action_just_pressed(action: Actions.PlayerActionButtons, cooldown = 0.0) -> bool:
 	var value = buttons_pressed[action]
-	return value and not buttons_held_down[action]
+	return value and pressed_time[action] <= 0.1
 
 func is_action_just_released(action: Actions.PlayerActionButtons, cooldown = 0.0) -> bool:
-	var value = buttons_just_released[action]
-	var released = buttons_just_released[action]
-	return value and released and not buttons_held_down[action]
+	var value = buttons_pressed[action]
+	#print(released_time[action])
+	if released_time[action] <= 0.1:
+		print("just released")
+	else:
+		print("not just released")
+	return not value and released_time[action] <= 0.1

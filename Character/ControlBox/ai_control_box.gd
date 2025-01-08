@@ -3,29 +3,38 @@ class_name AIControlBox extends "res://Character/ControlBox/control_box.gd"
 var current_movement_vec: Vector2 = Vector2(0, 0)
 var current_aim_vec: Vector2 = Vector2(0, 0)
 
-var buttons_pressed: Array = range(0, Actions.PlayerActionButtons.QuickChat + 1).map(func(x): return false)
-var buttons_held_down: Array = range(0, Actions.PlayerActionButtons.QuickChat + 1).map(func(x): return false)
-var buttons_just_released: Array = range(0, Actions.PlayerActionButtons.QuickChat + 1).map(func(x): return false)
 
-@rpc("unreliable", "call_remote")
+var buttons_pressed: Array = range(0, Actions.PlayerActionButtons.QuickChat + 1).map(func(x): return false)
+var pressed_time: Array = range(0, Actions.PlayerActionButtons.QuickChat + 1).map(func(x): return 1.0)
+var released_time: Array = range(0, Actions.PlayerActionButtons.QuickChat + 1).map(func(x): return 1.0)
+
+var last_stick: Array = [null, null]
+
+@rpc("unreliable")
 func rpc_move_stick(stick: Actions.PlayerActionSticks, x: float, y: float):
+	if is_multiplayer_authority():
+		return
 	match stick:
 		Actions.PlayerActionSticks.Movement:
 			current_movement_vec = Vector2(x, y)
+			#rpc("move_stick", stick, x, y)
 		Actions.PlayerActionSticks.Aim:
 			current_aim_vec = Vector2(x, y)
+			#rpc("move_stick", stick, x, y)
 
-@rpc("unreliable", "call_remote")
+@rpc("unreliable")
 func rpc_press_button(action: Actions.PlayerActionButtons):
+	if is_multiplayer_authority():
+		return
 	press_button(action)
+	#rpc("press_button", action)
 
-@rpc("unreliable", "call_remote")
-func rpc_hold_down_button(action: Actions.PlayerActionButtons):
-	hold_down_button(action)
-
-@rpc("unreliable", "call_remote")
+@rpc("unreliable")
 func rpc_release_button(action: Actions.PlayerActionButtons):
+	if is_multiplayer_authority():
+		return
 	release_button(action)
+	#rpc("release_button", action)
 
 func set_movement_stick(value: Vector2, rpc: bool = false):
 	if rpc:	
@@ -39,30 +48,20 @@ func set_aim_stick(value: Vector2, rpc: bool = false):
 
 func press_button(action: Actions.PlayerActionButtons, rpc: bool = false):
 	buttons_pressed[action] = true
-	buttons_just_released[action] = false
+	pressed_time[action] = 0.0
 	if rpc:	
 		rpc("rpc_press_button", action)
 
-func hold_down_button(action: Actions.PlayerActionButtons, rpc: bool = false):
-	buttons_pressed[action] = true
-	buttons_held_down[action] = true
-	buttons_just_released[action] = false
-	if rpc:	
-		rpc("hold_down_button", action)
-
 func release_button(action: Actions.PlayerActionButtons, rpc: bool = false):
 	buttons_pressed[action] = false
-	buttons_held_down[action] = false
-	buttons_just_released[action] = true
-	if rpc:	
-		rpc("release_button", action)
+	released_time[action] = 0.0
+	if rpc:
+		rpc("rpc_release_button", action)
 
 @rpc
 func reset_buttons(rpc: bool = false):
-	for i in range(0, buttons_just_released.size()):
+	for i in range(0, buttons_pressed.size()):
 		buttons_pressed[i] = false
-		buttons_held_down[i] = false
-		buttons_just_released[i] = false
 	
 	if rpc:
 		rpc("reset_buttons", false)
@@ -75,18 +74,21 @@ func aim() -> Vector2:
 
 func is_action_pressed(action: Actions.PlayerActionButtons, cooldown = 0.0) -> bool:
 	var value = buttons_pressed[action]
-	return value and buttons_held_down[action]
+	return value
 
 func is_action_just_pressed(action: Actions.PlayerActionButtons, cooldown = 0.0) -> bool:
 	var value = buttons_pressed[action]
-	return value and not buttons_held_down[action]
+	return value and pressed_time[action] <= 0.1
 
 func is_action_just_released(action: Actions.PlayerActionButtons, cooldown = 0.0) -> bool:
-	var value = buttons_just_released[action]
-	var released = buttons_just_released[action]
-	return value and released and not buttons_held_down[action]
+	var value = buttons_pressed[action]
+	#print(released_time[action])
+	return not value and released_time[action] <= 0.1
 
 
 func tick(delta: float) -> void:
-	for i in range(0, buttons_just_released.size()):
-		buttons_just_released[i] = false
+	for i in range(0, buttons_pressed.size()):
+		if buttons_pressed[i]:
+			pressed_time[i] += delta
+		elif not buttons_pressed[i]:
+			released_time[i] += delta

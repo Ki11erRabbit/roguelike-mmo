@@ -53,13 +53,14 @@ func process_rotation(delta: float, control_box: ControlBox, last_aim: Vector2) 
 	
 	return [rotating, clockwise_rotation, aim_direction]
 
+## This includes actions like jump and dash
+## returns: The bool indicates whether or not the caller should stop their code from executing
 func process_movement_buttons(delta: float, control_box: ControlBox, current_state: CharacterMovementState) -> bool:
-	"""This includes actions like jump and dash
-	returns: The bool indicates whether or not the caller should stop their code from executing
-	"""
 	if control_box == null:
 		return false
 	if control_box.is_action_just_released(Actions.PlayerActionButtons.Jump) and character.is_on_floor():
+		if character.is_jumping():
+			return false
 		current_state.jump()
 		return true
 	elif control_box.is_action_pressed(Actions.PlayerActionButtons.Jump):

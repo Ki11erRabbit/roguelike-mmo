@@ -2,6 +2,8 @@ class_name TestAi extends "res://Character/AI/ai.gd"
 
 const Actions = preload("res://InputManager/actions.gd")
 
+const BUTTON_RELEASE_TIME: float = 0.001
+var release_time: float = BUTTON_RELEASE_TIME
 const MAX_ATTACK_TIME: float = 1.5
 var attack_time: float = MAX_ATTACK_TIME
 var attacking: bool = false
@@ -12,15 +14,24 @@ func initialize(on_server: bool):
 func control_ai(delta: float, character: Character) -> void:
 	if attack_time != MAX_ATTACK_TIME:
 		attack_time -= delta
+	if release_time != BUTTON_RELEASE_TIME:
+		release_time -= delta
+	if release_time <= 0.0:
+		print("releasing button")
+		print(release_time)
+		print(delta)
+		
+		control_box.release_button(Actions.PlayerActionButtons.RightAttack, on_server)
+		release_time = BUTTON_RELEASE_TIME
+		reset_aim_vec()
+		reset_movement_vec()
 	if attack_time <= 0.0:
 		attack_time = MAX_ATTACK_TIME
 	elif attack_time != MAX_ATTACK_TIME:
-		reset_aim_vec()
-		reset_movement_vec()
 		return
 	else:
 		attacking = false
-		control_box.release_button(Actions.PlayerActionButtons.RightAttack, on_server)
+		pass
 	var target: AITarget = get_next_target()
 	if target == null:
 		reset_aim_vec()
@@ -45,6 +56,7 @@ func control_ai(delta: float, character: Character) -> void:
 		print("attacking")
 		attacking = true
 		attack_time -= delta
+		release_time -= delta
 		control_box.press_button(Actions.PlayerActionButtons.RightAttack, on_server)
 		reset_movement_vec()
 	

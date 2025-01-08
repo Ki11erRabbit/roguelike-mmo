@@ -187,8 +187,6 @@ func _physics_process(delta: float) -> void:
 	if process_character(delta):
 		control_box.tick(delta)
 		return
-	else:
-		control_box.tick(delta)
 	movement_state_machine.process_state(delta)
 	if weapons_equiped:
 		var right_action: WeaponAction = null
@@ -224,6 +222,7 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	post_move_and_slide(delta)
+	control_box.tick(delta)
 	
 
 func post_move_and_slide(delta: float) -> void:
