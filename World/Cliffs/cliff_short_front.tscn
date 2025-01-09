@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt2layvdxlla2"]
+
+[ext_resource type="PackedScene" uid="uid://c1r72jy4gospj" path="res://World/Cliffs/Exported/Cliff_Short_Front.glb" id="1_hs20e"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8o4up"]
+points = PackedVector3Array(-0.5, 0.492, 3.202, 0.5, 0.492, 3.202, -0.5, -0.492, 3.028, 0.5, -0.492, 3.028, 0.5, 0.492, -0.413, -0.5, 0.492, -0.413, 0.5, -0.492, -0.587, -0.5, -0.492, -0.587)
+
+[node name="Cliff_Short_Front" instance=ExtResource("1_hs20e")]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.5, 0)
+shape = SubResource("ConvexPolygonShape3D_8o4up")
