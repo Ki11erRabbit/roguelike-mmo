@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dmfpsgmclmuys"]
 
 [ext_resource type="Script" path="res://World/world.gd" id="1_k5b58"]
-[ext_resource type="PackedScene" uid="uid://b50mksrt11kpj" path="res://Levels/test_level.tscn" id="2_leb6t"]
+[ext_resource type="PackedScene" uid="uid://cox5ewa0f27fv" path="res://World/Level/level.tscn" id="2_cv1fv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_q0056"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -25,7 +25,7 @@ environment = SubResource("Environment_l5201")
 
 [node name="World" type="Node3D" parent="."]
 
-[node name="TestLevel" parent="World" instance=ExtResource("2_leb6t")]
+[node name="Level" parent="World" instance=ExtResource("2_cv1fv")]
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0

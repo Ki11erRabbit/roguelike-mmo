@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://clcdy4gd7vwg"]
+
+[ext_resource type="Script" path="res://World/Chunk/chunk.gd" id="1_c48ra"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nhvsh"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_2ox1b"]
+sky_material = SubResource("ProceduralSkyMaterial_nhvsh")
+
+[sub_resource type="Environment" id="Environment_20t74"]
+background_mode = 2
+sky = SubResource("Sky_2ox1b")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 2
+
+[node name="Chunk" type="Node3D"]
+script = ExtResource("1_c48ra")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_20t74")
