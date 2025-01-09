@@ -104,7 +104,6 @@ func move():
 	pass
 
 func jump():
-	print("jumping")
 	state_machine.movement_state = JumpState.new()
 	state_machine.movement_state.initialize(character, state_machine)
 	character.jump()

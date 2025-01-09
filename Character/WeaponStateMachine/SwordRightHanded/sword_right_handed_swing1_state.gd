@@ -29,7 +29,6 @@ func process_attack(delta: float, attack: WeaponStateMachine.AttackType, is_spin
 	return null
 
 func swing():
-	print("swing 2")
 	state_machine.state = SwordRightHandedSwing2State.new()
 	state_machine.state.initialize(character, state_machine)
 

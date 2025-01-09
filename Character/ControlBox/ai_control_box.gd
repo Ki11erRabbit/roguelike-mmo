@@ -37,13 +37,11 @@ func rpc_release_button(action: Actions.PlayerActionButtons):
 	#rpc("release_button", action)
 
 func set_movement_stick(value: Vector2, rpc: bool = false):
-	print("setting move")
 	if rpc:	
 		rpc("rpc_move_stick", Actions.PlayerActionSticks.Movement, value.x, value.y)
 	current_movement_vec = value
 
 func set_aim_stick(value: Vector2, rpc: bool = false):
-	print("setting aim")
 	if rpc:	
 		rpc("rpc_move_stick", Actions.PlayerActionSticks.Aim, value.x, value.y)
 	current_aim_vec = value

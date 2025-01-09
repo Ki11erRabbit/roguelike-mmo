@@ -14,7 +14,6 @@ func start_cooldown(anim_name: StringName):
 	match String(anim_name):
 		"sword_right_hand_thrust":
 			character.model.animation_finished.disconnect(start_cooldown)
-			print("reset")
 			reset()
 
 # Called when the node enters the scene tree for the first time.
