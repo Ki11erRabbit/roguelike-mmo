@@ -16,6 +16,7 @@ func ready_character():
 	
 	var box: ControlBox = $AiControlBox
 	$TestAi.initialize(on_server)
+	$TestAi.control_box = box
 	
 	initialize(character_model, capsule_shape, box)
 	

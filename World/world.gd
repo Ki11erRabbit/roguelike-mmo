@@ -43,6 +43,8 @@ func set_peer_id(id):
 	add_child(hud)
 	character.health_bar = hud.player_bar
 	$World.add_child(character)
+	character.position.x = 1
+	character.position.y = 1
 	
 @rpc("call_remote")
 func add_players(ids: Array):
@@ -83,6 +85,8 @@ func server_peer_connected(id):
 	players[id] = character
 	rpc("add_players", players.keys())
 	$World.add_child(character)
+	character.position.x = 1
+	character.position.y = 1
 
 func server_peer_disconnected(id):
 	print("removing")

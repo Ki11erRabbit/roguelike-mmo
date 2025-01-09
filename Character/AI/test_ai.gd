@@ -28,6 +28,9 @@ func control_ai(delta: float, character: Character) -> void:
 	if attack_time <= 0.0:
 		attack_time = MAX_ATTACK_TIME
 	elif attack_time != MAX_ATTACK_TIME:
+		reset_aim_vec()
+		reset_movement_vec()
+		print(control_box.current_movement_vec)
 		return
 	else:
 		attacking = false
@@ -57,6 +60,7 @@ func control_ai(delta: float, character: Character) -> void:
 		attacking = true
 		attack_time -= delta
 		release_time -= delta
+		reset_aim_vec()
 		control_box.press_button(Actions.PlayerActionButtons.RightAttack, on_server)
 		reset_movement_vec()
 	
