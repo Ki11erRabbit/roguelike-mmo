@@ -1,27 +1,62 @@
 extends Node3D
 
+@export
+var noise: FastNoiseLite
+
+
 const GroundNormal = preload("res://World/Ground/ground_normal.tscn")
 const CliffFront = preload("res://World/Cliffs/cliff_short_front.tscn")
 
 const CHUNK_SIZE = 32
-const CLIFF_LIMIT = 0.3
+enum GridValue { 
+	BottomlessPit = 0,
+	Ground = 1, Hill = 3, ShortCliff = 5, TallCliff = 7,
+	CliffCorner = 8,
+	River = 16, RiverEdge = 32, Lake = 64, LakeEdge = 128,
+	Barrier = 256,
+}
 
-func generate_chunk(noise):
-	
-	var cells = []
+var grid: Array[GridValue]
+
+func get_tall_cliff_limit() -> float:
+	return 0.5
+
+func get_short_cliff_limit() -> float:
+	return 0.3
+
+func get_hill_limit() -> float:
+	return 0.1
+
+func get_ground_limit() -> float:
+	return 0
+
+
+func generate_chunk(cliff_noise):
+	grid = []
+	grid.resize(32 * 32)
+	generate_hills_and_mountains(cliff_noise)
+
+func generate_hills_and_mountains(noise) -> void:
 	for x in CHUNK_SIZE:
 		for y in CHUNK_SIZE:
 			var out = noise.get_noise_2d(position.x + x, position.z + y)
 			
-			var node
-			if out < CLIFF_LIMIT:
-				node = GroundNormal.instantiate()
+			if out < get_ground_limit():
+				grid[x * y] = GridValue.BottomlessPit
+			if out < get_hill_limit():
+				grid[x * y] = GridValue.Ground
+			if out < get_short_cliff_limit():
+				grid[x * y] = GridValue.Hill
+			elif out < get_tall_cliff_limit():
+				grid[x * y] = GridValue.ShortCliff
 			else:
-				node = CliffFront.instantiate()
-			
-			add_child(node)
-			node.position.x = 0.5 + x
-			node.position.z = 0.5 + y
+				grid[x * y] = GridValue.TallCliff
+
+func set_grid(x: int, y: int, value: GridValue) -> void:
+	grid[x * y] = value
+
+func update_grid(x: int, y: int, value: GridValue) -> void:
+	grid[x * y] |= value
 
 #func _ready() -> void:
 	#var noise = FastNoiseLite.new()
