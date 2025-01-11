@@ -7,7 +7,7 @@ var noise: FastNoiseLite
 const GroundNormal = preload("res://World/Ground/ground_normal.tscn")
 const CliffFront = preload("res://World/Cliffs/cliff_short_front.tscn")
 
-const CHUNK_SIZE = 32
+const CHUNK_SIZE = 8
 enum GridValue { 
 	BottomlessPit = 0,
 	Ground = 1, Hill = 3, ShortCliff = 5, TallCliff = 7,
@@ -42,21 +42,31 @@ func generate_hills_and_mountains(noise) -> void:
 			var out = noise.get_noise_2d(position.x + x, position.z + y)
 			
 			if out < get_ground_limit():
-				grid[x * y] = GridValue.BottomlessPit
+				grid[x + y] = GridValue.BottomlessPit
 			if out < get_hill_limit():
-				grid[x * y] = GridValue.Ground
+				grid[x + y] = GridValue.Ground
 			if out < get_short_cliff_limit():
-				grid[x * y] = GridValue.Hill
+				grid[x + y] = GridValue.Hill
 			elif out < get_tall_cliff_limit():
-				grid[x * y] = GridValue.ShortCliff
+				grid[x + y] = GridValue.ShortCliff
 			else:
-				grid[x * y] = GridValue.TallCliff
+				grid[x + y] = GridValue.TallCliff
 
 func set_grid(x: int, y: int, value: GridValue) -> void:
-	grid[x * y] = value
+	grid[x * CHUNK_SIZE + y] = value
 
 func update_grid(x: int, y: int, value: GridValue) -> void:
-	grid[x * y] |= value
+	grid[x * CHUNK_SIZE + y] |= value
+
+func row_to_string(row: int) -> String:
+	var output = ""
+	for i in range(row * CHUNK_SIZE, (row + 1) * CHUNK_SIZE):
+		var flag: int = grid[i] & GridValue.River
+		if flag != 0:
+			output += "r"
+		else:
+			output += "0"
+	return output
 
 #func _ready() -> void:
 	#var noise = FastNoiseLite.new()
