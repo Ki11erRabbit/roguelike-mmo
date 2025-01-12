@@ -50,15 +50,15 @@ func generate_hills_and_mountains(noise) -> void:
 				grid[x * CHUNK_SIZE + y] = GridValue.ShortCliff
 			else:
 				grid[x * CHUNK_SIZE + y] = GridValue.TallCliff
-	print(grid)
+	#print(grid)
 
 func set_grid(x: int, y: int, value: GridValue) -> void:
 	assert(x != CHUNK_SIZE, "x is equal to chunk size")
-	grid[x * CHUNK_SIZE + y] = value
+	grid[x + y * CHUNK_SIZE] = value
 
 func update_grid(x: int, y: int, value: GridValue) -> void:
 	assert(x != CHUNK_SIZE, "x is equal to chunk size")
-	grid[x * CHUNK_SIZE + y] |= value
+	grid[x + y * CHUNK_SIZE] |= value
 
 func row_to_string(row: int) -> String:
 	var output = ""

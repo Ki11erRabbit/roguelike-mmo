@@ -3,7 +3,7 @@ class_name Level extends Node
 const Chunk = preload("res://World/Chunk/chunk.tscn")
 const ChunkS = preload("res://World/Chunk/chunk.gd")
 
-var diameter: int = 2
+var diameter: int = 32
 var chunk_size: int = 0
 var positions = []
 
@@ -22,7 +22,7 @@ func generate_level(seed: int) -> void:
 			chunk.generate_chunk(noise)
 	
 	print("generating rivers")
-	generate_rivers(seed, 1, 20, 50, 20)
+	generate_rivers(seed, 4, 20, 50, 20)
 	print_rows()
 	for child in get_children():
 		#print("placing world meshes")
@@ -40,14 +40,16 @@ func generate_rivers(seed: int, river_count: int, min_distance: int, max_distanc
 		var y: int = rng.randi_range(0, diameter * chunk_size -1)
 		
 		var max_junctions: int = rng.randi_range(2, total_junctions)
-		var points: Array[Vector2i] = [Vector2i(x, y)]
-		var direction: JunctionDirection = river_reach_end(min_distance, max_distance, int(ceil(max_junctions / 2)), -1, rng, points)
+		var points1: Array[Vector2i] = [Vector2i(x, y)]
+		var points2: Array[Vector2i] = [Vector2i(x, y)]
+		var direction: JunctionDirection = river_reach_end(min_distance, max_distance, int(ceil(max_junctions / 2)), -1, rng, points1)
 		
-		river_reach_end(min_distance, max_distance, int(ceil(max_junctions / 2)), direction, rng, points, 0)
+		river_reach_end(min_distance, max_distance, int(ceil(max_junctions / 2)), direction, rng, points2, 0)
 		
-		print(points)
+		#print(points1)
+		#print(points2)
 		
-		for point in points:
+		for point in points1 + points2:
 			update_grid(point.x, point.y, ChunkS.GridValue.River)
 
 
@@ -60,12 +62,16 @@ func river_reach_end(min_distance: int, max_distance: int, junctions: int, last_
 		match last_direction:
 			JunctionDirection.Up:
 				y_factor = -1
+				#print("Up")
 			JunctionDirection.Down:
 				y_factor = 1
+				#print("Down")
 			JunctionDirection.Left:
 				x_factor = -1
+				#print("Left")
 			JunctionDirection.Right:
 				x_factor = 1
+				#print("Right")
 		assert(x_factor != 0 or y_factor != 0, "x or y factor should not be zero")
 		while true:
 			#print("trying to reach end")
@@ -85,16 +91,16 @@ func river_reach_end(min_distance: int, max_distance: int, junctions: int, last_
 	match direction:
 		JunctionDirection.Up:
 			y_factor = -1
-			print("Up")
+			#print("Up")
 		JunctionDirection.Down:
 			y_factor = 1
-			print("Down")
+			#print("Down")
 		JunctionDirection.Left:
 			x_factor = -1
-			print("Left")
+			#print("Left")
 		JunctionDirection.Right:
 			x_factor = 1
-			print("Right")
+			#print("Right")
 	assert(x_factor != 0 or y_factor != 0, "x or y factor should not be zero")
 	if index == -1:
 		index = points.size() - 1
