@@ -24,6 +24,9 @@ func generate_level(seed: int) -> void:
 	print("generating rivers")
 	generate_rivers(seed, 2, 20, 200, 20)
 	print_rows()
+	for child in get_children():
+		print("placing world meshes")
+		child.place_world_meshes()
 
 enum JunctionDirection { Up, Down, Left, Right }
 
@@ -33,8 +36,8 @@ func generate_rivers(seed: int, river_count: int, min_distance: int, max_distanc
 	
 	while river_count != 0:
 		river_count -= 1
-		var x: int = rng.randi_range(0, diameter * chunk_size)
-		var y: int = rng.randi_range(0, diameter * chunk_size)
+		var x: int = rng.randi_range(0, diameter * chunk_size -1)
+		var y: int = rng.randi_range(0, diameter * chunk_size -1)
 		
 		var max_junctions: int = rng.randi_range(2, total_junctions)
 		var points: Array[Vector2i] = [Vector2i(x, y)]
@@ -112,24 +115,26 @@ func point_not_valid(point: Vector2i) -> bool:
 		return true
 	var x_count: int = 0
 	var y_count: int = 0
-	while x > chunk_size:
+	while x >= chunk_size:
 		x -= chunk_size
 		x_count += 1
-	while y > chunk_size:
+	while y >= chunk_size:
 		y -= chunk_size
 		y_count += 1
 	
 	if x_count >= diameter or y_count >= diameter:
+		return true
+	if x == chunk_size or y == chunk_size:
 		return true
 	return false
 
 func set_grid(x: int, y: int, value: ChunkS.GridValue) -> void:
 	var x_count: int = 0
 	var y_count: int = 0
-	while x > chunk_size:
+	while x >= chunk_size:
 		x -= chunk_size
 		x_count += 1
-	while y > chunk_size:
+	while y >= chunk_size:
 		y -= chunk_size
 		y_count += 1
 	
@@ -140,10 +145,10 @@ func update_grid(x: int, y: int, value: ChunkS.GridValue) -> void:
 	#print("old y: {0}".format([y]))
 	var x_count: int = 0
 	var y_count: int = 0
-	while x > chunk_size:
+	while x >= chunk_size:
 		x -= chunk_size
 		x_count += 1
-	while y > chunk_size:
+	while y >= chunk_size:
 		y -= chunk_size
 		y_count += 1
 	
@@ -165,4 +170,4 @@ func print_rows():
 			print(row)
 
 func _ready() -> void:
-	generate_level(10)
+	generate_level(100)

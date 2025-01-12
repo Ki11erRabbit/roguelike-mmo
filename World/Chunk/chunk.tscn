@@ -1,14 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://clcdy4gd7vwg"]
+[gd_scene load_steps=2 format=3 uid="uid://clcdy4gd7vwg"]
 
 [ext_resource type="Script" path="res://World/Chunk/chunk.gd" id="1_c48ra"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ow1au"]
-noise_type = 2
-frequency = 0.008
-fractal_type = 2
-fractal_weighted_strength = 1.0
-fractal_ping_pong_strength = 1.0
-
 [node name="Chunk" type="Node3D"]
 script = ExtResource("1_c48ra")
-noise = SubResource("FastNoiseLite_ow1au")

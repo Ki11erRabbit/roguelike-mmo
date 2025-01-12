@@ -1,7 +1,5 @@
 extends Node3D
 
-@export
-var noise: FastNoiseLite
 
 
 const GroundNormal = preload("res://World/Ground/ground_normal.tscn")
@@ -33,29 +31,33 @@ func get_ground_limit() -> float:
 
 func generate_chunk(cliff_noise):
 	grid = []
-	grid.resize(32 * 32)
+	grid.resize(CHUNK_SIZE ** 2)
 	generate_hills_and_mountains(cliff_noise)
+
 
 func generate_hills_and_mountains(noise) -> void:
 	for x in CHUNK_SIZE:
 		for y in CHUNK_SIZE:
-			var out = noise.get_noise_2d(position.x + x, position.z + y)
-			
+			var out = noise.get_noise_2d((position.x + x) * CHUNK_SIZE, position.z + y)
+			#print(out)
 			if out < get_ground_limit():
-				grid[x + y] = GridValue.BottomlessPit
+				grid[x * CHUNK_SIZE + y] = GridValue.BottomlessPit
 			if out < get_hill_limit():
-				grid[x + y] = GridValue.Ground
+				grid[x * CHUNK_SIZE + y] = GridValue.Ground
 			if out < get_short_cliff_limit():
-				grid[x + y] = GridValue.Hill
+				grid[x * CHUNK_SIZE + y] = GridValue.Hill
 			elif out < get_tall_cliff_limit():
-				grid[x + y] = GridValue.ShortCliff
+				grid[x * CHUNK_SIZE + y] = GridValue.ShortCliff
 			else:
-				grid[x + y] = GridValue.TallCliff
+				grid[x * CHUNK_SIZE + y] = GridValue.TallCliff
+	print(grid)
 
 func set_grid(x: int, y: int, value: GridValue) -> void:
+	assert(x != CHUNK_SIZE, "x is equal to chunk size")
 	grid[x * CHUNK_SIZE + y] = value
 
 func update_grid(x: int, y: int, value: GridValue) -> void:
+	assert(x != CHUNK_SIZE, "x is equal to chunk size")
 	grid[x * CHUNK_SIZE + y] |= value
 
 func row_to_string(row: int) -> String:
@@ -67,6 +69,27 @@ func row_to_string(row: int) -> String:
 		else:
 			output += "0"
 	return output
+
+
+func place_world_meshes():
+	for x in CHUNK_SIZE:
+		for y in CHUNK_SIZE:
+			var node
+			if GridValue.TallCliff == grid[x * CHUNK_SIZE + y] & GridValue.TallCliff:
+				node = CliffFront.instantiate()
+			elif GridValue.ShortCliff == (grid[x * CHUNK_SIZE + y] & GridValue.ShortCliff):
+				node = CliffFront.instantiate()
+			elif GridValue.Hill == grid[x * CHUNK_SIZE + y] & GridValue.Hill:
+				node = GroundNormal.instantiate()
+			elif GridValue.Ground == (grid[x * CHUNK_SIZE + y] & GridValue.Ground):
+				node = GroundNormal.instantiate()
+			
+			
+			
+			add_child(node)
+			node.position.x = 0.5 + x
+			node.position.z = 0.5 + y
+				
 
 #func _ready() -> void:
 	#var noise = FastNoiseLite.new()
