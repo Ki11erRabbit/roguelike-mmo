@@ -62,6 +62,8 @@ func update_grid(x: int, y: int, value: GridValue) -> void:
 
 func row_to_string(row: int) -> String:
 	var output = ""
+	#print(row)
+	#print(position)
 	for i in range(row * CHUNK_SIZE, (row + 1) * CHUNK_SIZE):
 		var flag: int = grid[i] & GridValue.River
 		if flag != 0:

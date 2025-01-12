@@ -3,7 +3,7 @@ class_name Level extends Node
 const Chunk = preload("res://World/Chunk/chunk.tscn")
 const ChunkS = preload("res://World/Chunk/chunk.gd")
 
-var diameter: int = 4
+var diameter: int = 2
 var chunk_size: int = 0
 var positions = []
 
@@ -22,10 +22,10 @@ func generate_level(seed: int) -> void:
 			chunk.generate_chunk(noise)
 	
 	print("generating rivers")
-	generate_rivers(seed, 2, 20, 200, 20)
+	generate_rivers(seed, 0, 20, 50, 20)
 	print_rows()
 	for child in get_children():
-		print("placing world meshes")
+		#print("placing world meshes")
 		child.place_world_meshes()
 
 enum JunctionDirection { Up, Down, Left, Right }
@@ -79,19 +79,22 @@ func river_reach_end(min_distance: int, max_distance: int, junctions: int, last_
 	var direction: JunctionDirection = -1
 	while direction == last_direction or direction == -1:
 		direction = rng.randi_range(JunctionDirection.Up, JunctionDirection.Right)
-	
 	var distance: int = rng.randi_range(min_distance, max_distance)
 	var x_factor: int = 0
 	var y_factor: int = 0
 	match direction:
 		JunctionDirection.Up:
 			y_factor = -1
+			print("Up")
 		JunctionDirection.Down:
 			y_factor = 1
+			print("Down")
 		JunctionDirection.Left:
 			x_factor = -1
+			print("Left")
 		JunctionDirection.Right:
 			x_factor = 1
+			print("Right")
 	assert(x_factor != 0 or y_factor != 0, "x or y factor should not be zero")
 	if index == -1:
 		index = points.size() - 1
@@ -138,7 +141,7 @@ func set_grid(x: int, y: int, value: ChunkS.GridValue) -> void:
 		y -= chunk_size
 		y_count += 1
 	
-	get_child(x_count * diameter + y_count).set_grid(x, y, value)
+	get_child(x_count + y_count * diameter).set_grid(x, y, value)
 
 func update_grid(x: int, y: int, value: ChunkS.GridValue) -> void:
 	#print("old x: {0}".format([x]))
@@ -156,18 +159,28 @@ func update_grid(x: int, y: int, value: ChunkS.GridValue) -> void:
 	#print("new y: {0}".format([y]))
 	#print("x_count: {0}".format([x_count * diameter]))
 	#print("y_count: {0}".format([y_count]))
-	get_child(x_count * diameter + y_count).update_grid(x, y, value)
+	get_child(x_count + y_count * diameter).update_grid(x, y, value)
 
 func print_rows():
 	print("Printing Rows")
-	for i in chunk_size:
-		for j in diameter:
+	
+	for y in diameter:
+		for r in chunk_size:
 			var row: String = ""
-			for k in diameter:
-				#print("j + k: {0}".format([k + j]))
-				#print("i: {0}".format([i]))
-				row += get_child(j * diameter + k).row_to_string(i)
+			for x in range(0, diameter):
+				#print(y * diameter + x)
+				#print(r)
+				row +=get_child(y * diameter + x).row_to_string(r)
 			print(row)
+	
+	#for r in chunk_size:
+		#for x in diameter:
+			#var row: String = ""
+			#for y in range(1, diameter):
+				##print("j + k: {0}".format([k + j]))
+				##print("i: {0}".format([i]))
+				#row += get_child(x * diameter + y).row_to_string(r)
+			#print(row)
 
-func _ready() -> void:
-	generate_level(100)
+#func _ready() -> void:
+	#generate_level(100)
