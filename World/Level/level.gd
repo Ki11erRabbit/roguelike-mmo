@@ -39,7 +39,7 @@ func generate_rivers(seed: int, river_count: int, min_distance: int, max_distanc
 		var max_junctions: int = rng.randi_range(2, total_junctions)
 		var points: Array[Vector2i] = [Vector2i(x, y)]
 		var direction: JunctionDirection = river_reach_end(min_distance, max_distance, int(ceil(max_junctions / 2)), -1, rng, points)
-		print("completed first half")
+		
 		river_reach_end(min_distance, max_distance, int(ceil(max_junctions / 2)), direction, rng, points, 0)
 		
 		print(points)
@@ -68,7 +68,6 @@ func river_reach_end(min_distance: int, max_distance: int, junctions: int, last_
 			#print("trying to reach end")
 			var last_position: Vector2i = points[points.size() - 1]
 			var new_point: Vector2i = Vector2i(last_position.x + x_factor, last_position.y + y_factor)
-			print(new_point)
 			if point_not_valid(new_point):
 				# We have reached the end
 				return last_direction
@@ -92,13 +91,11 @@ func river_reach_end(min_distance: int, max_distance: int, junctions: int, last_
 			x_factor = 1
 	assert(x_factor != 0 or y_factor != 0, "x or y factor should not be zero")
 	if index == -1:
-		print("setting index to size - 1")
 		index = points.size() - 1
 	while distance != 0:
 		distance -= 1
 		var last_position: Vector2i = points[index]
 		var new_point: Vector2i = Vector2i(last_position.x + x_factor, last_position.y + y_factor)
-		print(new_point)
 		if point_not_valid(new_point):
 			# We have reached the end
 			return direction
