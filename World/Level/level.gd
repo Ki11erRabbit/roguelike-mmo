@@ -22,7 +22,7 @@ func generate_level(seed: int) -> void:
 			chunk.generate_chunk(noise)
 	
 	print("generating rivers")
-	generate_rivers(seed, 0, 20, 50, 20)
+	generate_rivers(seed, 1, 20, 50, 20)
 	print_rows()
 	for child in get_children():
 		#print("placing world meshes")
