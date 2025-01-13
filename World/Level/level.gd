@@ -22,7 +22,7 @@ func generate_level(seed: int) -> void:
 			chunk.generate_chunk(noise)
 	
 	print("generating rivers")
-	generate_rivers(seed, 4, 20, 50, 20)
+	generate_rivers(seed, 10, 20, 50, 20, 2, 5)
 	print_rows()
 	for child in get_children():
 		#print("placing world meshes")
@@ -30,7 +30,7 @@ func generate_level(seed: int) -> void:
 
 enum JunctionDirection { Up, Down, Left, Right }
 
-func generate_rivers(seed: int, river_count: int, min_distance: int, max_distance: int, total_junctions: int) -> void:
+func generate_rivers(seed: int, river_count: int, min_distance: int, max_distance: int, total_junctions: int, min_radius: int, max_radius: int) -> void:
 	var rng = RandomNumberGenerator.new()
 	rng.seed = seed
 	
@@ -49,10 +49,9 @@ func generate_rivers(seed: int, river_count: int, min_distance: int, max_distanc
 		#print(points1)
 		#print(points2)
 		
+		widen_river(min_radius, max_radius, points1 + points2, rng)
 		for point in points1 + points2:
 			update_grid(point.x, point.y, ChunkS.GridValue.River)
-
-
 
 func river_reach_end(min_distance: int, max_distance: int, junctions: int, last_direction: JunctionDirection, rng: RandomNumberGenerator, points: Array[Vector2i], index: int = -1) -> JunctionDirection:
 	if junctions == 0:
@@ -116,6 +115,21 @@ func river_reach_end(min_distance: int, max_distance: int, junctions: int, last_
 	
 	river_reach_end(min_distance, max_distance, junctions - 1, direction, rng, points)
 	return direction
+
+func widen_river(min_radius: int, max_radius: int, points: Array[Vector2i], rng: RandomNumberGenerator):
+	var middle_radius: int = rng.randi_range(min_radius, max_radius)
+	for point in points:
+		var radius: int = rng.randi_range(middle_radius, max_radius)
+		for x in range(-radius, radius + 1):
+			for y in range(-radius, radius + 1):
+				var coords: Vector2i = Vector2i(x, y)
+				if coords.length() <= radius:
+					var pos: Vector2i = Vector2i(point.x + coords.x, point.y + coords.y)
+					if point_not_valid(pos):
+						continue
+					update_grid(pos.x, pos.y, ChunkS.GridValue.River)
+						
+
 
 func point_not_valid(point: Vector2i) -> bool:
 	var x: int = point.x

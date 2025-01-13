@@ -8,9 +8,9 @@ const CliffFront = preload("res://World/Cliffs/cliff_short_front.tscn")
 const CHUNK_SIZE = 8
 enum GridValue { 
 	BottomlessPit = 0,
-	Ground = 1, Hill = 3, ShortCliff = 5, TallCliff = 7,
+	Ground = 1, Hill = 3, ShortCliff = 5, TallCliff = 7, # Overlaps due to them being mutrualy exclusive
 	CliffCorner = 8,
-	River = 16, RiverEdge = 32, Lake = 64, LakeEdge = 128,
+	River = 16, RiverEdge = 32, Lake = 80, LakeEdge = 160, # Overlaps due to them being mutrualy exclusive
 	Barrier = 256,
 }
 
